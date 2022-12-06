@@ -11,6 +11,7 @@ public class KhachHang {
 	private String NNMK;
 	private int IsVeify;
 	private int Role;
+	
 	public int getMaKH() {
 		return MaKH;
 	}
