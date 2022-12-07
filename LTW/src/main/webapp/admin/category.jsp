@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>New Product</title>
+    <title>Category</title>
 
     <!-- Custom fonts for this template -->
     <link href="${root}plugins/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -70,12 +70,14 @@
                                     </thead>
                                     
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>  
-                                            <td>Xoá</td>                                         
-                                            <td>Xoá</td>
+                                    <c:forEach var="o" items="${listdm}">
+                                    	 <tr>
+                                            <td>${o.maDM}</td>
+                                            <td>${o.tenDM }</td>  
+                                            <td>${o.isDeleted}</td>                                         
+                                            <td><a href="addcategory?maDM=${o.maDM}&action=delete" style="color: red;">Xoá</td>
                                         </tr>
+                                    </c:forEach>
                                         
                                     </tbody>
                                 </table>

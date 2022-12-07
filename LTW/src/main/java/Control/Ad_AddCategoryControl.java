@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.DanhMucDAO;
-import DAO.SanPhamDAO;
 import Model.DanhMuc;
-import Model.SanPham;
 
-@WebServlet(urlPatterns = {"/admin/category"})
-public class Ad_CategoryControl extends HttpServlet{
+@WebServlet(urlPatterns = {"/admin/addcategory"})
+public class Ad_AddCategoryControl extends HttpServlet{
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -25,7 +24,7 @@ public class Ad_CategoryControl extends HttpServlet{
         String action = request.getParameter("action");     
         String maDM = request.getParameter("maDM");
         DanhMucDAO dmdao= new DanhMucDAO();
-          
+        
         if (action == null) {
             action = "";
         }
@@ -33,14 +32,12 @@ public class Ad_CategoryControl extends HttpServlet{
             dmdao.deletecategory(maDM);
             response.sendRedirect("http://localhost:8080/LTW/admin/category");
         }
-        List<DanhMuc> listdm = dmdao.getallcategory();
-        
-        request.setAttribute("listdm", listdm);
-        request.getRequestDispatcher("/admin/category.jsp").forward(request, response);
+    
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 }

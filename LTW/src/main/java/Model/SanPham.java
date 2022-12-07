@@ -29,6 +29,9 @@ public class SanPham {
 		SoLuongDaBan = soLuongDaBan;
 		MaShop = maShop;
 	}
+	public SanPham(int soLuong) {
+		SoLuong=soLuong;
+	}
 	public SanPham() {
 		super();
 		// TODO Auto-generated constructor stub
