@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>All Product</title>
+    <title>Add Category</title>
 
     <!-- Custom fonts for this template -->
     <link href="${root}plugins/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -49,54 +49,37 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Danh sách tất cả sản phẩm</h1>
-                    
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                        	<th>Mã sản phẩm</th>
-                                            <th>Tên sản phẩm</th>
-                                            <th>Mã Shop</th>
-                                            <th>Giá bán</th>
-                                            <th>Danh mục</th>
-                                            <th>Số lượng</th>
-                                            <th>Số lượng đã bán</th>
-                                            <th>Xoá</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                    <tbody>
-                                    <c:forEach var="o" items="${listsp}">
-                                    	<tr>
-                                            <td>${o.maSP}</td>
-                                            <td>${o.tenSP}</td>
-                                            <td>${o.maShop}</td>
-                                            <td>${o.giaBanThuong}</td>
-                                            <td>${o.maDM }</td>
-                                            <td>${o.soLuong}</td>
-                                            <td>${o.soLuongDaBan}</td>
-                                            <td ><a href="deleteproduce?maSP=${o.maSP}&action=deletesp" style="color: red;">Xoá</td>
-                                        </tr>
-                                    </c:forEach>
-                                        
-                                        
-                                    </tbody>
-                                </table>
+                    <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Thêm danh mục mới</h3>
                             </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form action="addcategory" method="post">
+                                <div class="card-body">                                  
+                                    <div class="form-group">
+                                        <label for="exampleInputName1">Tên danh mục</label>
+                                        <input type="text" class="form-control" id="exampleInputName1" name="tenDM"
+                                               />
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    <input type="hidden" value="0" name="maDM">
+                                    <button type="submit" class="btn btn-primary">Thêm</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
                 </div>
-                <!-- /.container-fluid -->
-
             </div>
-            <!-- End of Main Content -->
+            <!-- /.container-fluid -->
+        </section>    <!-- /.content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">

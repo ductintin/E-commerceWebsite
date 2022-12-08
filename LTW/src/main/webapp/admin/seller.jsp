@@ -69,27 +69,19 @@
                                             
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                        	<th>Mã Shop</th>
-                                            <th>Tên Shop</th>
-                                            <th>Người đăng ký</th>
-                                            <th>Phone</th>
-                                            <th>Email</th>
-                                            <th>Địa chỉ</th>
-                                            
-                                        </tr>
-                                    </tfoot>
+                                    
                                     <tbody>
+                                    <c:forEach var="o" items="${listshop}">
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                         
+                                            <td>${o.maShop}</td>
+                                            <td>${o.tenShop}</td>
+                                            <td>${o.maSeller }</td>
+                                            <td>${o.phoneShop}</td>
+                                            <td>${o.emailShop}</td>
+                                            <td>${o.diaChiShop}</td>
                                         </tr>
-                                        
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

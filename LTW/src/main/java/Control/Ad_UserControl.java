@@ -1,12 +1,17 @@
 package Control;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import DAO.KhachHangDAO;
+import Model.KhachHang;
+import Model.Shop;
 
 @WebServlet(urlPatterns = {"/admin/user"})
 public class Ad_UserControl extends HttpServlet{
@@ -16,6 +21,10 @@ public class Ad_UserControl extends HttpServlet{
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         
+        KhachHangDAO khdao=new KhachHangDAO();
+        List<KhachHang> listkh=khdao.listuser();
+        
+        request.setAttribute("listkh", listkh);
         request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
 	}
 

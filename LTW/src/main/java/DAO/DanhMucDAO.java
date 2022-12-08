@@ -47,6 +47,18 @@ public class DanhMucDAO {
         } catch (Exception e) {
         }
     }
+    public void createcategory(String tenDM)
+    {
+    	String query = "insert into DanhMuc(TenDM,isDeleted) Values(?,0);";
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, tenDM);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
     public static void main(String[] args) {
         DanhMucDAO sanPhamDAO = new DanhMucDAO();
         List<DanhMuc> list = sanPhamDAO.getallcategory();

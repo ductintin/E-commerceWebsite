@@ -62,24 +62,24 @@
                                         <tr>
                                         	<th>Mã đơn hàng</th>
                                             <th>Mã khách hàng</th>
-                                            <th>Mã Shop</th>
                                             <th>Tổng tiền</th>
                                             <th>Thời gian</th>
                                             <th>Tình trạng</th>
-                                            
+                                            <th>Xoá</th>
                                         </tr>
                                     </thead>
                                     
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                            
+                                       <c:forEach var="o" items="${listdh}">
+                                    	<tr>
+                                            <td>${o.maDH}</td>
+                                            <td>${o.maKH}</td>
+                                            <td>${o.tongTien}</td>
+                                            <td>${o.thoiGian }</td>
+                                            <td>${o.maTrangThai}</td>
+                                            <td ><a href="allorder?maDH=${o.maDH}&action=deletedh" style="color: red;">Xoá</td>
                                         </tr>
+                                    </c:forEach>
                                         
                                     </tbody>
                                 </table>

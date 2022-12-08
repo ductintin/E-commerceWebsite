@@ -67,26 +67,18 @@
                                             <th>Địa chỉ</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Mã khách hàng</th>
-                                            <th>Tên khách hàng</th>
-                                            <th>Phone</th>
-                                            <th>Email</th>
-                                            <th>Địa chỉ</th>
-                                            
-                                        </tr>
-                                    </tfoot>
+                               
                                     <tbody>
+                                    <c:forEach var="o" items="${listkh}">
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
+                                            <td>${o.maKH }</td>
+                                            <td>${o.tenKH }</td>
+                                            <td>${o.phone }</td>
+                                            <td>${o.email }</td>
+                                            <td>${o.diaChi }</td>
                                             
                                         </tr>
-                                        
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

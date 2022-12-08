@@ -51,8 +51,7 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Danh sách các danh mục</h1>
-                    <p class="mb-4"> <a target="_blank"
-                            href="https://datatables.net">Thêm danh mục mới</a>.</p>
+                    <p class="mb-4"> <a href="addcategory">Thêm danh mục mới</a>.</p>
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">

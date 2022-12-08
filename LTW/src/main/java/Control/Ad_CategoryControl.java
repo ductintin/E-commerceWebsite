@@ -33,7 +33,8 @@ public class Ad_CategoryControl extends HttpServlet{
             dmdao.deletecategory(maDM);
             response.sendRedirect("http://localhost:8080/LTW/admin/category");
         }
-        List<DanhMuc> listdm = dmdao.getallcategory();
+        
+        List<DanhMuc> listdm =dmdao.getallcategory();
         
         request.setAttribute("listdm", listdm);
         request.getRequestDispatcher("/admin/category.jsp").forward(request, response);

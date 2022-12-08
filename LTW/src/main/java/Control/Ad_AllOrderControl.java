@@ -1,12 +1,18 @@
 package Control;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import DAO.DonHangDAO;
+import DAO.SanPhamDAO;
+import Model.DonHang;
+import Model.SanPham;
 
 @WebServlet(urlPatterns = {"/admin/allorder"})
 public class Ad_AllOrderControl extends HttpServlet{
@@ -16,6 +22,20 @@ public class Ad_AllOrderControl extends HttpServlet{
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         
+        String action = request.getParameter("action");            
+        String maDH = request.getParameter("maDH");       
+        DonHangDAO dhdao=new DonHangDAO();
+            
+        if (action == null) {
+            action = "";
+        }
+        if (action.equals("deletedh")) { 
+            dhdao.deleteorder(maDH);
+         //   response.sendRedirect("http://localhost:8080/LTW/admin/allproduce");
+        }      
+        List<DonHang> listdh = dhdao.listallorder();
+        
+        request.setAttribute("listdh", listdh);
         request.getRequestDispatcher("/admin/allorder.jsp").forward(request, response);
 	}
 

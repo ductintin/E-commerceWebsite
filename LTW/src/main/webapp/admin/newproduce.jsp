@@ -62,7 +62,7 @@
                                         <tr>
                                         	<th>Mã sản phẩm</th>
                                             <th>Tên sản phẩm</th>
-                                            <th>Tên Shop</th>
+                                            <th>Mã Shop</th>
                                             <th>Giá bán</th>
                                             <th>Danh mục</th>
                                             <th>Số lượng</th>
@@ -72,16 +72,19 @@
                                     </thead>
                                     
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>Xoá</td>
+                                        <c:forEach var="o" items="${listsp}">
+                                    	<tr>
+                                            <td>${o.maSP}</td>
+                                            <td>${o.tenSP}</td>
+                                            <td>${o.maShop}</td>
+                                            <td>${o.giaBanThuong}</td>
+                                            <td>${o.maDM }</td>
+                                            <td>${o.soLuong}</td>
+                                            <td>${o.soLuongDaBan}</td>
+                                            <td ><a href="deleteproduce?maSP=${o.maSP}&action=deletesp" style="color: red;">Xoá</td>
                                         </tr>
+                                    </c:forEach>
+                                        
                                         
                                     </tbody>
                                 </table>
