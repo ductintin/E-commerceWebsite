@@ -8,9 +8,15 @@ public class KhachHang {
 	private String Phone;
 	private String DiaChi;
 	private String MK;
-	private String NNMK;
-	private int IsVeify;
 	private int Role;
+	private int IsDeleted;
+	
+	public int getIsDeleted() {
+		return IsDeleted;
+	}
+	public void setIsDeleted(int isDeleted) {
+		IsDeleted = isDeleted;
+	}
 	public int getMaKH() {
 		return MaKH;
 	}
@@ -30,8 +36,7 @@ public class KhachHang {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public KhachHang(int maKH, String tenKH, String tenTK, String email, String phone, String diaChi, String mK,
-			String nNMK, int isVeify, int role) {
+	public KhachHang(int maKH, String tenKH, String tenTK, String email, String phone, String diaChi, String mK, int role, int isDelete) {
 		super();
 		MaKH = maKH;
 		TenKH = tenKH;
@@ -40,9 +45,8 @@ public class KhachHang {
 		Phone = phone;
 		DiaChi = diaChi;
 		MK = mK;
-		NNMK = nNMK;
-		IsVeify = isVeify;
 		Role = role;
+		IsDeleted = isDelete;
 	}
 	public void setTenTK(String tenTK) {
 		TenTK = tenTK;
@@ -71,18 +75,6 @@ public class KhachHang {
 	public void setMK(String mK) {
 		MK = mK;
 	}
-	public String getNNMK() {
-		return NNMK;
-	}
-	public void setNNMK(String nNMK) {
-		NNMK = nNMK;
-	}
-	public int getIsVeify() {
-		return IsVeify;
-	}
-	public void setIsVeify(int isVeify) {
-		IsVeify = isVeify;
-	}
 	public int getRole() {
 		return Role;
 	}
@@ -92,8 +84,8 @@ public class KhachHang {
 	@Override
 	public String toString() {
 		return "KhachHang [MaKH=" + MaKH + ", TenKH=" + TenKH + ", TenTK=" + TenTK + ", Email=" + Email + ", Phone="
-				+ Phone + ", DiaChi=" + DiaChi + ", MK=" + MK + ", NNMK=" + NNMK + ", IsVeify=" + IsVeify + ", Role="
-				+ Role + "]";
+				+ Phone + ", DiaChi=" + DiaChi + ", MK=" + MK + ", Role="
+				+ Role + ", IsDeleted=" + IsDeleted + "]";
 	}
 	
 }
