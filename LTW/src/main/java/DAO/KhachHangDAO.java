@@ -3,6 +3,8 @@ package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+import java.util.ArrayList;
 
 import Connection.ConnectJDBC;
 import Model.KhachHang;
@@ -35,9 +37,8 @@ public class KhachHangDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getString(8),
-                        rs.getInt(9),
-                        rs.getInt(10));
+                        rs.getInt(8),
+                        rs.getInt(9));
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -46,7 +47,7 @@ public class KhachHangDAO {
         return null;
     }
     
-    public KhachHang create(KhachHang KH) {
+    public KhachHang createVendor(KhachHang KH) {
     	
     	try {
     		conn = new ConnectJDBC().getConnection();
@@ -64,14 +65,68 @@ public class KhachHangDAO {
              ps.setString(4, KH.getEmail());
              ps.setString(5, KH.getPhone());
              ps.setString(6, KH.getDiaChi());
-             ps.setString(7, KH.getNNMK());
-             ps.setInt(8, KH.getIsVeify());
-             ps.setInt(9, KH.getRole());
+             ps.setInt(7, KH.getRole());
+             ps.setInt(8, KH.getIsDeleted());
              ps.executeUpdate();
     		
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+    	
+    	return null;
+    }
+    
+    public List<KhachHang> listVendor()
+    {
+    	String query = "select * from KhachHang where Role=3";
+        List<KhachHang> list = new ArrayList<>();
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new KhachHang(rs.getInt(1),
+	                    rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),	                    
+                        rs.getInt(8),
+                        rs.getInt(9)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return list;
+    
+    }
+    
+    public KhachHang findVendorByAccountName(String accountName) {
+    	try {
+    		conn = new ConnectJDBC().getConnection();
+    		String sql = "Select * from KhachHang where Role = 3 and TenTK = ?";
+    		ps = conn.prepareStatement(sql);
+    		ps.setString(1, accountName);
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	return new KhachHang(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9));
+            }
+    	}catch(Exception e) {
+    		
+    	}
     	
     	return null;
     }

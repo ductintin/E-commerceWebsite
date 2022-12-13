@@ -9,7 +9,7 @@
 <head>
   <meta charset="UTF-8">
   <title>CodePen - Sliding Sign In Sign Up Page</title>
-    <link rel="stylesheet" href="<c:url value='/views/guest/css/signup.css'/>">
+    <link rel="stylesheet" href="<c:url value='/views/vendor/css/login.css'/>">
 
 </head>
 <body>
@@ -21,7 +21,7 @@
 
 
 <div class="container" id="container">
-        <div class="form-container sign-up-container">
+       <!--  <div class="form-container sign-up-container">
             <form role="form" action="signup" method="POST">
                 <h1>Create Account</h1>
                 
@@ -36,31 +36,34 @@
                 <input type="text" name = "DiaChi" placeholder="Địa chỉ" />
                 <button type = "submit" value ="Đăng ký">Sign Up</button>
             </form>
-        </div>
+        </div> -->
         
         <!-- Form đăng nhập -->
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form role="form" action="login" method="POST">
                 <h1>Sign in</h1>
                 
                 <span>or use your account</span>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="text" id="accountName" name="TenTK" placeholder="Tên tài khoản" />
+                <input type="password" id="password" name="MK" placeholder="Mật khẩu" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" required/>
+                <span>${msg }</span>
                 <a href="#">Forgot your password?</a>
                 <button>Sign In</button>
             </form>
         </div>
+        
+        
         <div class="overlay-container">
             <div class="overlay">
-                <div class="overlay-panel overlay-left">
+                <!-- <div class="overlay-panel overlay-left">
                     <h1>Welcome Back!</h1>
                     <p>To keep connected with us please login with your personal info</p>
                     <button class="ghost" id="signIn">Sign In</button>
-                </div>
+                </div> -->
                 <div class="overlay-panel overlay-right">
                     <h1>Hello, Friend!</h1>
                     <p>Enter your personal details and start journey with us</p>
-                    <button class="ghost" id="signUp">Sign Up</button>
+                    <a href="<c:url value='/vendor/signup'/>"><button class="ghost" id="signUp" > Sign Up</button></a>
                 </div>
             </div>
         </div>
@@ -77,7 +80,7 @@
 		</div>
 	</div>
 <!-- partial -->
-    <script src="<c:url value='/views/guest/js/signup.js'/>"></script>
+    <script src="<c:url value='/views/vendor/js/login.js'/>"></script>
 
 </body>
 </html>

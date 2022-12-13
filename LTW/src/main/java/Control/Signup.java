@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import DAO.KhachHangDAO;
 import Model.KhachHang;
 
-@WebServlet(urlPatterns = {"/guest/signup", "/login"})
+@WebServlet(urlPatterns = {"/vendor/signup"})
 public class Signup extends HttpServlet{
 	
 	
@@ -27,7 +27,7 @@ public class Signup extends HttpServlet{
 		// TODO Auto-generated method stub
         
         
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/views/guest/signup.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/views/vendor/signup.jsp");
 		dispatcher.forward(req, resp);
         
 	}
@@ -54,23 +54,31 @@ public class Signup extends HttpServlet{
         System.out.print(phone);
         KhachHangDAO KHDao = new KhachHangDAO();
         KhachHang KH = new KhachHang();
+        String msg = "";
         try {
-        	
-        	
-        	KH.setTenKH(accountName);
-        	KH.setTenTK(userName);
+        	String destPage = "/views/vendor/signup.jsp";	
+        	KH.setTenKH(userName);
+        	KH.setTenTK(accountName);
         	KH.setEmail(email);
         	KH.setDiaChi(address);
         	KH.setMK(password);
-        	KH.setNNMK(null);
         	KH.setPhone(phone);
-        	KH.setIsVeify(1);
-        	KH.setRole(2);
+        	KH.setRole(3);
+        	KH.setIsDeleted(0);
         	
-        	KHDao.create(KH);
+        	if(KHDao.findVendorByAccountName(accountName)== null) {
+        		destPage = "/views/vendor/login.jsp";
+        		KHDao.createVendor(KH);
+        	}
+        	else {
+        		msg = "Tài khoản đã tồn tại";
+        		req.setAttribute("msg", msg);
+        		
+        	}       	
+        	RequestDispatcher dispatcher = req.getRequestDispatcher(destPage);
+    		dispatcher.forward(req, resp);
+        	System.out.print(msg);
         	
-        	resp.sendRedirect(req.getContextPath()+"/login");
-        	      	
         }catch(Exception e) {
         	e.printStackTrace();
         }       
