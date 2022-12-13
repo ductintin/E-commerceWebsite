@@ -57,7 +57,7 @@ public class KhachHangDAO {
 			 * BCrypt.hashpw("", BCrypt.gensalt(4)) + "@" + email[1]); return KH;
 			 */
     		
-    		String query = "Insert into KhachHang values(?,?,?,?,?,?,?,?,?)";
+    		String query = "Insert into KhachHang values(?,?,?,?,?,?,?,?)";
     		 ps = conn.prepareStatement(query);
     		 ps.setString(1, KH.getTenKH());
              ps.setString(2, KH.getTenTK());
