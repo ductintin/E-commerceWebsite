@@ -71,7 +71,7 @@
                                     <tbody>
                                     <c:forEach var="o" items="${listdm}">
                                     	 <tr>
-                                            <td>${o.maDM}</td>
+                                            <td> <a href="categorydetail?maDM=${o.maDM}">${o.maDM}</a></td>
                                             <td>${o.tenDM }</td>  
                                             <td>${o.isDeleted}</td>                                         
                                             <td><a href="addcategory?maDM=${o.maDM}&action=delete" style="color: red;">Xoá</td>

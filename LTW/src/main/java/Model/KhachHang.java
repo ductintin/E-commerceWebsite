@@ -8,10 +8,8 @@ public class KhachHang {
 	private String Email;
 	private String Phone;
 	private String DiaChi;
-	private String NNMK;
-	private int IsVeify;
+	private int isDelete;
 	private int Role;
-	
 	public int getMaKH() {
 		return MaKH;
 	}
@@ -27,27 +25,14 @@ public class KhachHang {
 	public String getTenTK() {
 		return TenTK;
 	}
-	public KhachHang() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public KhachHang(int maKH, String tenKH, String tenTK, String mK, String email, String phone, String diaChi,
-			String nNMK, int isVeify, int role) {
-		super();
-		MaKH = maKH;
-		TenKH = tenKH;
-		TenTK = tenTK;
-		MK = mK;
-		Email = email;
-		Phone = phone;
-		DiaChi = diaChi;
-		NNMK = nNMK;
-		IsVeify = isVeify;
-		Role = role;
-	}
 	public void setTenTK(String tenTK) {
 		TenTK = tenTK;
+	}
+	public String getMK() {
+		return MK;
+	}
+	public void setMK(String mK) {
+		MK = mK;
 	}
 	public String getEmail() {
 		return Email;
@@ -67,23 +52,11 @@ public class KhachHang {
 	public void setDiaChi(String diaChi) {
 		DiaChi = diaChi;
 	}
-	public String getMK() {
-		return MK;
+	public int getIsDelete() {
+		return isDelete;
 	}
-	public void setMK(String mK) {
-		MK = mK;
-	}
-	public String getNNMK() {
-		return NNMK;
-	}
-	public void setNNMK(String nNMK) {
-		NNMK = nNMK;
-	}
-	public int getIsVeify() {
-		return IsVeify;
-	}
-	public void setIsVeify(int isVeify) {
-		IsVeify = isVeify;
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
 	}
 	public int getRole() {
 		return Role;
@@ -91,13 +64,28 @@ public class KhachHang {
 	public void setRole(int role) {
 		Role = role;
 	}
+	public KhachHang() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public KhachHang(int maKH, String tenKH, String tenTK, String mK, String email, String phone, String diaChi,
+			int isDelete, int role) {
+		super();
+		MaKH = maKH;
+		TenKH = tenKH;
+		TenTK = tenTK;
+		MK = mK;
+		Email = email;
+		Phone = phone;
+		DiaChi = diaChi;
+		this.isDelete = isDelete;
+		Role = role;
+	}
 	@Override
 	public String toString() {
 		return "KhachHang [MaKH=" + MaKH + ", TenKH=" + TenKH + ", TenTK=" + TenTK + ", MK=" + MK + ", Email=" + Email
-				+ ", Phone=" + Phone + ", DiaChi=" + DiaChi + ", NNMK=" + NNMK + ", IsVeify=" + IsVeify + ", Role="
-				+ Role + "]";
+				+ ", Phone=" + Phone + ", DiaChi=" + DiaChi + ", isDelete=" + isDelete + ", Role=" + Role + "]";
 	}
+	
 
-	
-	
 }

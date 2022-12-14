@@ -8,18 +8,7 @@ public class DonHang {
     int TongTien;
     Date ThoiGian;
     int MaTrangThai;
-	public DonHang(int maDH, int maKH, int tongTien, Date thoiGian, int maTrangThai) {
-		super();
-		MaDH = maDH;
-		MaKH = maKH;
-		TongTien = tongTien;
-		ThoiGian = thoiGian;
-		MaTrangThai = maTrangThai;
-	}
-	public DonHang() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    int isDelete;
 	public int getMaDH() {
 		return MaDH;
 	}
@@ -50,10 +39,29 @@ public class DonHang {
 	public void setMaTrangThai(int maTrangThai) {
 		MaTrangThai = maTrangThai;
 	}
+	public int getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
+	}
+	public DonHang() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public DonHang(int maDH, int maKH, int tongTien, Date thoiGian, int maTrangThai, int isDelete) {
+		super();
+		MaDH = maDH;
+		MaKH = maKH;
+		TongTien = tongTien;
+		ThoiGian = thoiGian;
+		MaTrangThai = maTrangThai;
+		this.isDelete = isDelete;
+	}
 	@Override
 	public String toString() {
 		return "DonHang [MaDH=" + MaDH + ", MaKH=" + MaKH + ", TongTien=" + TongTien + ", ThoiGian=" + ThoiGian
-				+ ", MaTrangThai=" + MaTrangThai + "]";
+				+ ", MaTrangThai=" + MaTrangThai + ", isDelete=" + isDelete + "]";
 	}
-    
+	
 }

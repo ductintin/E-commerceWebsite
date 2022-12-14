@@ -9,32 +9,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.KhachHangDAO;
-import Model.KhachHang;
-import Model.Shop;
+import DAO.DanhMucDAO;
+import DAO.SanPhamDAO;
+import Model.DanhMuc;
+import Model.SanPham;
 
-@WebServlet(urlPatterns = {"/admin/user"})
-public class Ad_UserControl extends HttpServlet{
+@WebServlet(urlPatterns = {"/admin/categorydetail"})
+public class Ad_CategoryDetailControl extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        KhachHangDAO khdao =new KhachHangDAO();
-        String action = request.getParameter("action");     
-        String maKH = request.getParameter("maKH");
         
-        if (action == null) {
-            action = "";
-        }
-        if (action.equals("deletekh")) { 
-        	khdao.deleteuser(maKH);
- 
-        }           
-        List<KhachHang> listkh=khdao.listuser();
+        String maDM= request.getParameter("maDM");
+        SanPhamDAO spdao=new SanPhamDAO();
+        List<SanPham> listsp=spdao.listproducebymaDM(maDM);
+        DanhMucDAO dmdao=new DanhMucDAO();
+        String tenDM=dmdao.gettenDMbymaDM(maDM);
         
-        request.setAttribute("listkh", listkh);
-        request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
+        request.setAttribute("listsp", listsp);
+        request.setAttribute("tenDM", tenDM);
+        request.getRequestDispatcher("/admin/categorydetail.jsp").forward(request, response);
 	}
 
 	@Override

@@ -36,6 +36,25 @@ public class DanhMucDAO {
 
         return list;
     }
+    public String gettenDMbymaDM(String maDM)
+    {
+    	String query = "select TenDM from DanhMuc where MaDM = ?";
+    	String tenDM = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query); 
+            ps.setString(1, maDM);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                 tenDM=rs.getString(1);
+            			
+            }
+            return tenDM;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return tenDM;
+    }
     public void deletecategory(String maDM)
     {
     	String query = "UPDATE DanhMuc set isDeleted= 1 where MaDM = ?";
@@ -61,9 +80,11 @@ public class DanhMucDAO {
     
     public static void main(String[] args) {
         DanhMucDAO sanPhamDAO = new DanhMucDAO();
-        List<DanhMuc> list = sanPhamDAO.getallcategory();
-        for (DanhMuc o : list) {
-            System.out.println(o);
-        }
+//        List<DanhMuc> list = sanPhamDAO.getallcategory();
+//        for (DanhMuc o : list) {
+//            System.out.println(o);
+//        }
+        String tenDM=sanPhamDAO.gettenDMbymaDM("1");
+        System.out.println(tenDM);
     }
 }

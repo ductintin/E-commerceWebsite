@@ -30,14 +30,38 @@ public class DonHangDAO {
                 		 rs.getInt(2),
                         rs.getInt(3),
                         rs.getDate(4),
-                        rs.getInt(5)));
+                        rs.getInt(5),
+                        rs.getInt(6)));
             }
         } catch (Exception e) {
             // TODO: handle exception
         }
         return list;
     }
-    
+    public List<DonHang> listallorderbymaDH(String maDH)
+    {
+    	String query = "select * from DonHang where isDeleted=0 and MaDH=?";
+        List<DonHang> list = new ArrayList<>();
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1,maDH);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new DonHang(rs.getInt(1),
+                		 rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return list;
+    }
     public List<DonHang> listneworder()
     {
     	String query = "select top(10) * from DonHang where isDeleted=0 order by MaDH desc";
@@ -53,7 +77,32 @@ public class DonHangDAO {
                 		 rs.getInt(2),
                          rs.getInt(3),
                          rs.getDate(4),
-                         rs.getInt(5)));
+                         rs.getInt(5),
+                         rs.getInt(6)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return list;
+    }
+    public List<DonHang> listorderbymakh(String maKH)
+    {
+    	String query = "select  * from DonHang where isDeleted=0 and MaKH=? ";
+        List<DonHang> list = new ArrayList<>();
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, maKH);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new DonHang(rs.getInt(1),
+                		 rs.getInt(2),
+                         rs.getInt(3),
+                         rs.getDate(4),
+                         rs.getInt(5),
+                         rs.getInt(6)));
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -71,9 +120,68 @@ public class DonHangDAO {
         } catch (Exception e) {
         }
     }
+    public String countorderbymaKH(String maKH)
+    {
+    	String query = "select count(MaDH) from DonHang where isDeleted=0 and MaKH=?";
+    	String countorder = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query); 
+            ps.setString(1, maKH);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	countorder=rs.getString(1);
+            			
+            }
+            return countorder;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return countorder;
+    }
+    public String totalspendfororderbymaKH(String maKH)
+    {
+    	String query = "select sum(TongTien) from DonHang where isDeleted=0 and MaKH=?";
+    	String totalspend = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query); 
+            ps.setString(1, maKH);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	totalspend=rs.getString(1);
+            			
+            }
+            return totalspend;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return totalspend;
+    }
+    public String totalproduceoforderbymaKH(String maKH)
+    {
+    	String query = "select  sum(ChiTietDonHang.SoLuong)\r\n"
+    			+ "	from DonHang inner join ChiTietDonHang on DonHang.MaDH=ChiTietDonHang.MaDH \r\n"
+    			+ "	where isDeleted=0 and MaKH=? ";
+    	String totalproduce = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query); 
+            ps.setString(1, maKH);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	totalproduce=rs.getString(1);
+            			
+            }
+            return totalproduce;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return totalproduce;
+    }
     public static void main(String[] args) {
     	DonHangDAO sanPhamDAO = new DonHangDAO();
-        List<DonHang> list = sanPhamDAO.listallorder();
+        List<DonHang> list = sanPhamDAO.listorderbymakh("3");
         for (DonHang o : list) {
             System.out.println(o);
         }

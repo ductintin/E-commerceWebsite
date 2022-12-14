@@ -65,18 +65,19 @@
                                             <th>Phone</th>
                                             <th>Email</th>
                                             <th>Địa chỉ</th>
+                                            <th>Xoá</th>
                                         </tr>
                                     </thead>
                                
                                     <tbody>
                                     <c:forEach var="o" items="${listkh}">
                                         <tr>
-                                            <td>${o.maKH }</td>
+                                            <td><a href="profileuser?maKH=${o.maKH}">${o.maKH }</td>
                                             <td>${o.tenKH }</td>
                                             <td>${o.phone }</td>
                                             <td>${o.email }</td>
                                             <td>${o.diaChi }</td>
-                                            
+                                            <td ><a href="user?maKH=${o.maKH}&action=deletekh" style="color: red;">Xoá</td>
                                         </tr>
                                         </c:forEach>
                                     </tbody>

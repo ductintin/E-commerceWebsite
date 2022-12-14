@@ -9,32 +9,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.DonHangDAO;
 import DAO.KhachHangDAO;
+import DAO.ShopDAO;
+import Model.DonHang;
 import Model.KhachHang;
 import Model.Shop;
 
-@WebServlet(urlPatterns = {"/admin/user"})
-public class Ad_UserControl extends HttpServlet{
+@WebServlet(urlPatterns = {"/admin/profileseller"})
+public class Ad_ProfileSellerControl extends HttpServlet{
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        KhachHangDAO khdao =new KhachHangDAO();
-        String action = request.getParameter("action");     
-        String maKH = request.getParameter("maKH");
         
-        if (action == null) {
-            action = "";
-        }
-        if (action.equals("deletekh")) { 
-        	khdao.deleteuser(maKH);
- 
-        }           
-        List<KhachHang> listkh=khdao.listuser();
+        KhachHangDAO khdao= new KhachHangDAO();    
+        ShopDAO shopdao =new ShopDAO();
+        String maKH=request.getParameter("maSeller");     
+        List<KhachHang> listkh=khdao.getuserbymaKH(maKH);
+        List<Shop> listshop=shopdao.listshopbymaseller(maKH);
         
+        request.setAttribute("listshop", listshop);
         request.setAttribute("listkh", listkh);
-        request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
+        request.getRequestDispatcher("/admin/profileseller.jsp").forward(request, response);
 	}
 
 	@Override

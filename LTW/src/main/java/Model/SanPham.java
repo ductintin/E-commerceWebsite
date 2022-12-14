@@ -8,13 +8,12 @@ public class SanPham {
 	int GiaBanThuong;
 	int GiaKhuyenMai;
 	int SoLuong;
-	String Anh;
 	String MoTaNgan;
 	int isDeteted;
 	int SoLuongDaBan;
 	int MaShop;
 	public SanPham(int maSP, int maDM, String tenSP, String moTa, int giaBanThuong, int giaKhuyenMai, int soLuong,
-			String anh, String moTaNgan, int isDeteted, int soLuongDaBan, int maShop) {
+			 String moTaNgan, int isDeteted, int soLuongDaBan, int maShop) {
 		super();
 		MaSP = maSP;
 		MaDM = maDM;
@@ -23,7 +22,7 @@ public class SanPham {
 		GiaBanThuong = giaBanThuong;
 		GiaKhuyenMai = giaKhuyenMai;
 		SoLuong = soLuong;
-		Anh = anh;
+
 		MoTaNgan = moTaNgan;
 		this.isDeteted = isDeteted;
 		SoLuongDaBan = soLuongDaBan;
@@ -78,12 +77,6 @@ public class SanPham {
 	public void setSoLuong(int soLuong) {
 		SoLuong = soLuong;
 	}
-	public String getAnh() {
-		return Anh;
-	}
-	public void setAnh(String anh) {
-		Anh = anh;
-	}
 	public String getMoTaNgan() {
 		return MoTaNgan;
 	}
@@ -111,10 +104,10 @@ public class SanPham {
 	@Override
 	public String toString() {
 		return "SanPham [MaSP=" + MaSP + ", MaDM=" + MaDM + ", TenSP=" + TenSP + ", MoTa=" + MoTa + ", GiaBanThuong="
-				+ GiaBanThuong + ", GiaKhuyenMai=" + GiaKhuyenMai + ", SoLuong=" + SoLuong + ", Anh=" + Anh
-				+ ", MoTaNgan=" + MoTaNgan + ", isDeteted=" + isDeteted + ", SoLuongDaBan=" + SoLuongDaBan + ", MaShop="
-				+ MaShop + "]";
+				+ GiaBanThuong + ", GiaKhuyenMai=" + GiaKhuyenMai + ", SoLuong=" + SoLuong + ", MoTaNgan=" + MoTaNgan
+				+ ", isDeteted=" + isDeteted + ", SoLuongDaBan=" + SoLuongDaBan + ", MaShop=" + MaShop + "]";
 	}
+
 	
 	
 }

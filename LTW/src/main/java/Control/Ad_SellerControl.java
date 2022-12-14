@@ -24,6 +24,18 @@ public class Ad_SellerControl extends HttpServlet{
         response.setContentType("text/html; charset=UTF-8");
         
         ShopDAO shopdao=new ShopDAO();
+        String action = request.getParameter("action");     
+        String maShop = request.getParameter("maShop");
+        
+        if (action == null) {
+            action = "";
+        }
+        if (action.equals("deleteshop")) { 
+        	shopdao.deleteshop(maShop);
+ 
+        }           
+        
+        
         List<Shop> listshop=shopdao.listshop();
         request.setAttribute("listshop", listshop);
         request.getRequestDispatcher("/admin/seller.jsp").forward(request, response);

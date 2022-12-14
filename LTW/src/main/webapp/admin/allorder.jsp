@@ -72,9 +72,9 @@
                                     <tbody>
                                        <c:forEach var="o" items="${listdh}">
                                     	<tr>
-                                            <td>${o.maDH}</td>
-                                            <td>${o.maKH}</td>
-                                            <td>${o.tongTien}</td>
+                                            <td><a href="orderdetail?maDH=${o.maDH}&maKH=${o.maKH}">${o.maDH}</td>
+                                            <td><a href="profileuser?maKH=${o.maKH}">${o.maKH}</td>
+                                            <td data-type="money">${o.tongTien}</td>
                                             <td>${o.thoiGian }</td>
                                             <td>${o.maTrangThai}</td>
                                             <td ><a href="allorder?maDH=${o.maDH}&action=deletedh" style="color: red;">Xoá</td>
@@ -150,6 +150,13 @@
 
     <!-- Page level custom scripts -->
     <script src="${root}plugins/js/demo/datatables-demo.js"></script>
+    <script>
+
+    document.querySelectorAll('[data-type="money"]').forEach(item => {
+
+        item.innerHTML = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'vnd'}).format(item.innerHTML);
+    })
+</script>
 
 </body>
 

@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>New Order</title>
+    <title>Shop Detail</title>
 
     <!-- Custom fonts for this template -->
     <link href="${root}plugins/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -50,7 +50,8 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Danh sách tất cả đơn hàng mới</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Danh sách sản phẩm theo Shop: ${tenShop}</h1>
+                    
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -60,28 +61,28 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                        	<<th>Mã đơn hàng</th>
-                                            <th>Mã khách hàng</th>
-                                            <th>Tổng tiền</th>
-                                            <th>Thời gian</th>
-                                            <th>Tình trạng</th>
+                                        	<th>Mã sản phẩm</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Mã Danh Mục</th>
+                                            <th>Giá bán</th>                                         
+                                            <th>Số lượng</th>
+                                            <th>Số lượng đã bán</th>
                                             <th>Xoá</th>
-                                            
                                         </tr>
                                     </thead>
                                     
                                     <tbody>
-                                       <c:forEach var="o" items="${listdh}">
+                                    <c:forEach var="o" items="${listsp}">
                                     	<tr>
-                                            <td><a href="orderdetail?maDH=${o.maDH}&maKH=${o.maKH}">${o.maDH}</td>
-                                            <td><a href="profileuser?maKH=${o.maKH}">${o.maKH}</td>
-                                            <td data-type="money">${o.tongTien}</td>
-                                            <td>${o.thoiGian }</td>
-                                            <td>${o.maTrangThai}</td>
-                                            <td ><a href="neworder?maDH=${o.maDH}&action=deletedh" style="color: red;">Xoá</td>
+                                            <td>${o.maSP}</td>
+                                            <td>${o.tenSP}</td>
+                                            <td><a href="categorydetail?maDM=${o.maDM}">${o.maDM}</td>
+                                            <td>${o.giaBanThuong}</td>                                            
+                                            <td>${o.soLuong}</td>
+                                            <td>${o.soLuongDaBan}</td>
+                                            <td ><a href="deleteproduce?maSP=${o.maSP}&action=deletesp" style="color: red;">Xoá</td>
                                         </tr>
-                                    </c:forEach>
-                                        
+                                    </c:forEach>                                       
                                     </tbody>
                                 </table>
                             </div>
@@ -151,13 +152,6 @@
 
     <!-- Page level custom scripts -->
     <script src="${root}plugins/js/demo/datatables-demo.js"></script>
-    <script>
-
-    document.querySelectorAll('[data-type="money"]').forEach(item => {
-
-        item.innerHTML = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'vnd'}).format(item.innerHTML);
-    })
-</script>
 
 </body>
 

@@ -7,19 +7,7 @@ public class Shop {
 	String PhoneShop;
 	String DiaChiShop;
 	String EmailShop;
-	public Shop(int maShop, int maSeller, String tenShop, String phoneShop, String diaChiShop, String emailShop) {
-		super();
-		MaShop = maShop;
-		MaSeller = maSeller;
-		TenShop = tenShop;
-		PhoneShop = phoneShop;
-		DiaChiShop = diaChiShop;
-		EmailShop = emailShop;
-	}
-	public Shop() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	int isDelete;
 	public int getMaShop() {
 		return MaShop;
 	}
@@ -56,10 +44,32 @@ public class Shop {
 	public void setEmailShop(String emailShop) {
 		EmailShop = emailShop;
 	}
+	public int getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
+	}
+	public Shop() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Shop(int maShop, int maSeller, String tenShop, String phoneShop, String diaChiShop, String emailShop,
+			int isDelete) {
+		super();
+		MaShop = maShop;
+		MaSeller = maSeller;
+		TenShop = tenShop;
+		PhoneShop = phoneShop;
+		DiaChiShop = diaChiShop;
+		EmailShop = emailShop;
+		this.isDelete = isDelete;
+	}
 	@Override
 	public String toString() {
 		return "Shop [MaShop=" + MaShop + ", MaSeller=" + MaSeller + ", TenShop=" + TenShop + ", PhoneShop=" + PhoneShop
-				+ ", DiaChiShop=" + DiaChiShop + ", EmailShop=" + EmailShop + "]";
+				+ ", DiaChiShop=" + DiaChiShop + ", EmailShop=" + EmailShop + ", isDelete=" + isDelete + "]";
 	}
+	
 	
 }

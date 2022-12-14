@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>New Order</title>
+    <title>All Order</title>
 
     <!-- Custom fonts for this template -->
     <link href="${root}plugins/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -38,47 +38,85 @@
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
+         <!-- Main Content -->
             <div id="content">
 
                 <!-- Topbar -->
                 <%@include file="./ad_header.jsp"%>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Danh sách tất cả đơn hàng mới</h1>
-                    
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
+            <div class="page-content fade-in-up">
+                <div class="row">
+                <c:forEach var="o" items="${listkh}">
+                    <div class="col-lg-3 col-md-4">
+                        <div class="ibox">
+                            <div class="ibox-body text-center">
+                                <div class="m-t-20">
+                                    <img class="img-circle" src="${root}plugins/images/user1-128x128.jpg" />
+                                </div>
+                                <h5 class="font-strong m-b-10 m-t-10">${o.tenKH}</h5>
+                                <div class="m-b-20 text-muted">Phone: ${o.phone}</div>
+                                 <div class="m-b-20 text-muted">Email: ${o.email}</div>
+                                  <div class="m-b-20 text-muted">Địa chỉ: ${o.diaChi}</div>       
+                            </div>
+                        </div>
+                        
+                        <div class="ibox">
+                            <div class="ibox-body">
+                                <div class="row text-center m-b-20">
+                                    <div class="col-4">
+                                        <div class="font-24 profile-stat-count">${countorder}</div>
+                                        <div class="text-muted">Orders</div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="font-24 profile-stat-count">${totalspend}</div>
+                                        <div class="text-muted">Spends</div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="font-24 profile-stat-count">${totalproduce}</div>
+                                        <div class="text-muted">Produces</div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        
+                    </div>
+                    </c:forEach>
+                    <div class="col-lg-9 col-md-8">
+                        <div class="ibox">
+                            <div class="ibox-body">
+                                
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="tab-1">
+                                        <div class="row">
+                                            
+                                          
+                                        </div>
+                                        <h4 class="text-info m-b-20 m-t-20"><i class="fa fa-shopping-basket"></i>Orders</h4>
+                                        <div class="card shadow mb-4">
                         
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                        	<<th>Mã đơn hàng</th>
-                                            <th>Mã khách hàng</th>
+                                        	<th>Mã đơn hàng</th>
                                             <th>Tổng tiền</th>
                                             <th>Thời gian</th>
                                             <th>Tình trạng</th>
-                                            <th>Xoá</th>
                                             
                                         </tr>
                                     </thead>
                                     
                                     <tbody>
-                                       <c:forEach var="o" items="${listdh}">
+                                       <c:forEach var="i" begin="0" end="${size-1}">
                                     	<tr>
-                                            <td><a href="orderdetail?maDH=${o.maDH}&maKH=${o.maKH}">${o.maDH}</td>
-                                            <td><a href="profileuser?maKH=${o.maKH}">${o.maKH}</td>
-                                            <td data-type="money">${o.tongTien}</td>
-                                            <td>${o.thoiGian }</td>
-                                            <td>${o.maTrangThai}</td>
-                                            <td ><a href="neworder?maDH=${o.maDH}&action=deletedh" style="color: red;">Xoá</td>
+                                            <td><a href="orderdetail?maDH=${listdh[i].getMaDH()}&maKH=${listkh[i].getMaKH()}">${listdh[i].getMaDH()}</td>
+                                            <td data-type="money">${listdh[i].getTongTien()}</td>
+                                            <td>${listdh[i].getThoiGian()}</td>
+                                            <td>${listdh[i].getMaTrangThai()}</td>
+                                            
                                         </tr>
                                     </c:forEach>
                                         
@@ -87,22 +125,33 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
-                <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                                    </div>
+                                
+                                   
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
+                <style>
+                    .profile-social a {
+                        font-size: 16px;
+                        margin: 0 10px;
+                        color: #999;
+                    }
+
+                    .profile-social a:hover {
+                        color: #485b6f;
+                    }
+
+                    .profile-stat-count {
+                        font-size: 22px
+                    }
+                </style>
+               
+            </div>
+
+         
 
         </div>
         <!-- End of Content Wrapper -->

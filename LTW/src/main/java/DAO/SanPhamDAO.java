@@ -33,10 +33,100 @@ public class SanPhamDAO {
                         rs.getInt(6),
                         rs.getInt(7),
                         rs.getString(8),
-                        rs.getString(9),
+                        rs.getInt(9),
                         rs.getInt(10),
-                        rs.getInt(11),
-                        rs.getInt(12)));
+                        rs.getInt(11)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return list;
+    }
+    public List<SanPham> listproducebymaDM(String maDM)
+    {
+    	String query = "select * from SanPham where isDeleted=0 and maDM=?";
+        List<SanPham> list = new ArrayList<>();
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, maDM);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new SanPham(rs.getInt(1),
+                		 rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getInt(11)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return list;
+    }
+    public List<SanPham> listproducebymaDH(String maDH)
+    {
+    	String query = "select SanPham.MaSP,MaDM,TenSP,MoTa,GiaBanThuong,GiaKhuyenMai,SanPham.SoLuong,MoTaNgan,SanPham.isDeleted,SoLuongDaBan,MaShop \r\n"
+    			+ "from (ChiTietDonHang inner join DonHang \r\n"
+    			+ "on ChiTietDonHang.MaDH=DonHang.MaDH)\r\n"
+    			+ "inner join SanPham on SanPham.MaSP=ChiTietDonHang.MaSP\r\n"
+    			+ "where ChiTietDonHang.MaDH=?";
+        List<SanPham> list = new ArrayList<>();
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, maDH);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new SanPham(rs.getInt(1),
+                		 rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getInt(11)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return list;
+    }
+    public List<SanPham> listproducebymaShop(String maShop)
+    {
+    	String query = "select * from SanPham where isDeleted=0 and MaShop=?";
+        List<SanPham> list = new ArrayList<>();
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, maShop);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new SanPham(rs.getInt(1),
+                		 rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getInt(11)));
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -63,10 +153,9 @@ public class SanPhamDAO {
                         rs.getInt(6),
                         rs.getInt(7),
                         rs.getString(8),
-                        rs.getString(9),
+                        rs.getInt(9),
                         rs.getInt(10),
-                        rs.getInt(11),
-                        rs.getInt(12)));
+                        rs.getInt(11)));
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -87,7 +176,7 @@ public class SanPhamDAO {
     
     public static void main(String[] args) {
     	SanPhamDAO sanPhamDAO = new SanPhamDAO();
-        List<SanPham> list = sanPhamDAO.listnewproduce();
+        List<SanPham> list = sanPhamDAO.listproducebymaDH("1");
         for (SanPham o : list) {
             System.out.println(o);
         }

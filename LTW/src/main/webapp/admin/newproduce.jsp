@@ -76,9 +76,9 @@
                                     	<tr>
                                             <td>${o.maSP}</td>
                                             <td>${o.tenSP}</td>
-                                            <td>${o.maShop}</td>
+                                            <td><a href="shopdetail?maShop=${o.maShop}">${o.maShop}</td>
                                             <td>${o.giaBanThuong}</td>
-                                            <td>${o.maDM }</td>
+                                            <td><a href="categorydetail?maDM=${o.maDM}">${o.maDM }</td>
                                             <td>${o.soLuong}</td>
                                             <td>${o.soLuongDaBan}</td>
                                             <td ><a href="deleteproduce?maSP=${o.maSP}&action=deletesp" style="color: red;">Xoá</td>

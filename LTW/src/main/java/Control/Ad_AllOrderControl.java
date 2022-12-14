@@ -33,6 +33,7 @@ public class Ad_AllOrderControl extends HttpServlet{
             dhdao.deleteorder(maDH);
          //   response.sendRedirect("http://localhost:8080/LTW/admin/allproduce");
         }      
+        
         List<DonHang> listdh = dhdao.listallorder();
         
         request.setAttribute("listdh", listdh);

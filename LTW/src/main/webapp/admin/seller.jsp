@@ -66,6 +66,7 @@
                                             <th>Phone</th>
                                             <th>Email</th>
                                             <th>Địa chỉ</th>
+                                            <th>Xoá</th>
                                             
                                         </tr>
                                     </thead>
@@ -74,12 +75,13 @@
                                     <c:forEach var="o" items="${listshop}">
                                         <tr>
                                          
-                                            <td>${o.maShop}</td>
+                                            <td><a href="shopdetail?maShop=${o.maShop}">${o.maShop}</td>
                                             <td>${o.tenShop}</td>
-                                            <td>${o.maSeller }</td>
+                                            <td><a href="profileseller?maSeller=${o.maSeller}">${o.maSeller }</td>
                                             <td>${o.phoneShop}</td>
                                             <td>${o.emailShop}</td>
                                             <td>${o.diaChiShop}</td>
+                                             <td ><a href="seller?maShop=${o.maShop}&action=deleteshop" style="color: red;">Xoá</td>
                                         </tr>
                                         </c:forEach>
                                     </tbody>
