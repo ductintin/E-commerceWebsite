@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "HomeControllerCustomer", value = { "/customer/home", "/home" })
+@WebServlet(urlPatterns = { "/", "/home" })
 public class HomeControllerCustomer extends HttpServlet {
 
 	/**
@@ -19,6 +19,10 @@ public class HomeControllerCustomer extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int b = 1;
+		if (req.getSession(false) == null)
+			b = 0;
+		req.setAttribute("logged", b);
 		req.getRequestDispatcher("/views/customer/home.jsp").forward(req, resp);
 	}
 

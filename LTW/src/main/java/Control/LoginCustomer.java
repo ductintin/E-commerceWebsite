@@ -51,7 +51,7 @@ public class LoginCustomer extends HttpServlet {
 				HttpSession session = req.getSession();
 				session.setAttribute("user", KH);
 				destPage = "/views/customer/home.jsp";
-				resp.sendRedirect(req.getContextPath() + "/customer/home");
+				resp.sendRedirect(req.getContextPath() + "/home");
 			} else {
 				String msg = "Tài khoản không hợp lệ";
 				req.setAttribute("msg", msg);
