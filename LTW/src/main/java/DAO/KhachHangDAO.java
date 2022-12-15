@@ -10,7 +10,7 @@ import Connection.ConnectJDBC;
 import Model.KhachHang;
 
 
-import org.mindrot.jbcrypt.BCrypt;
+
 public class KhachHangDAO {
 	
 	Connection conn = null;
@@ -66,7 +66,7 @@ public class KhachHangDAO {
              ps.setString(5, KH.getPhone());
              ps.setString(6, KH.getDiaChi());
              ps.setInt(7, KH.getRole());
-             ps.setInt(8, KH.getIsDeleted());
+             ps.setInt(8, KH.getIsDelete());
              ps.executeUpdate();
     		
 		}catch(Exception e) {
