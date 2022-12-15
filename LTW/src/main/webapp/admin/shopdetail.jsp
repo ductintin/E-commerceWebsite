@@ -50,7 +50,45 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Danh sách sản phẩm theo Shop: ${tenShop}</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Danh sách đơn hàng của Shop: ${tenShop}</h1>
+                    <div class="card shadow mb-4">
+                        
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered"  width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                        	<th>Mã đơn hàng</th>
+                                        	<th>Tên Khách Hàng</th> 
+                                            <th>Tên Sản Phẩm</th> 
+                                            <th>Số Lượng</th>
+                                            <th>Tổng tiền</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                       <<c:forEach var="i" begin="0" end="${size-1}">
+                                    	<tr>
+                                            <td>${listctdh[i].getMaDH()}</td>
+                                            <td>${listkh[i].getTenKH()}</td>
+                                            <td>${listsp1[i].getTenSP()}</td>
+                                            <td>${listctdh[i].getSoLuong()}</td>
+                                            <td data-type="money">${listctdh[i].getTongTien()}</td>
+                                            
+                                            
+                                        </tr>
+                                    </c:forEach>
+                                        
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+					
+					<h1 class="h3 mb-2 text-gray-800">Danh sách sản phẩm theo Shop: ${tenShop}</h1>
                     
                     
                     <!-- DataTales Example -->
@@ -85,10 +123,12 @@
                                     </c:forEach>                                       
                                     </tbody>
                                 </table>
+                                
                             </div>
+                            
                         </div>
                     </div>
-
+					
                 </div>
                 <!-- /.container-fluid -->
 

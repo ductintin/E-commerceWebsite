@@ -71,6 +71,39 @@ public class SanPhamDAO {
         }
         return list;
     }
+    public List<SanPham> listproduceoforderdetailbymaShop(String maShop)
+    {
+    	String query = "select SanPham.MaSP, MaDH,TenSP,MoTa,GiaBanThuong,GiaKhuyenMai, SanPham.SoLuong,MoTaNgan,isDeleted,SoLuongDaBan,SanPham.MaShop\r\n"
+    			+ "from (ChiTietDonHang inner join SanPham \r\n"
+    			+ "on ChiTietDonHang.MaSP=SanPham.MaSP)\r\n"
+    			+ "inner join Shop on Shop.MaShop=SanPham.MaShop\r\n"
+    			+ "where Shop.MaShop=? and Shop.isDelete=0";
+        List<SanPham> list = new ArrayList<>();
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, maShop);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new SanPham(rs.getInt(1),
+                		 rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getInt(11)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return list;
+    }
     public List<SanPham> listproducebymaDH(String maDH)
     {
     	String query = "select SanPham.MaSP,MaDM,TenSP,MoTa,GiaBanThuong,GiaKhuyenMai,SanPham.SoLuong,MoTaNgan,SanPham.isDeleted,SoLuongDaBan,MaShop \r\n"

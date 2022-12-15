@@ -99,6 +99,38 @@ public class KhachHangDAO {
 
 	        return list;
 	    }
+	    public List<KhachHang> getuserbymaShop(String maShop)
+	    {
+	    	String query = "select KhachHang.MaKH, TenKH, TenTK, MK,Email,Phone,DiaChi,Role, KhachHang.isDelete\r\n"
+	    			+ "from (((ChiTietDonHang inner join SanPham \r\n"
+	    			+ "on ChiTietDonHang.MaSP=SanPham.MaSP)\r\n"
+	    			+ "inner join Shop on Shop.MaShop=SanPham.MaShop)\r\n"
+	    			+ "inner join DonHang on DonHang.MaDH =ChiTietDonHang.MaDH)\r\n"
+	    			+ "inner join KhachHang on KhachHang.MaKH= DonHang.MaKH\r\n"
+	    			+ "where Shop.MaShop=? and Shop.isDelete=0";
+	    	List<KhachHang> list = new ArrayList<>();
+	    	try {
+	            conn = new ConnectJDBC().getConnection();
+	            ps = conn.prepareStatement(query); 
+	            ps.setString(1, maShop);
+	            rs = ps.executeQuery();
+	            while (rs.next()) {
+	                 list.add(new KhachHang(rs.getInt(1),
+		                        rs.getString(2),
+	                        rs.getString(3),
+	                        rs.getString(4),
+	                        rs.getString(5),
+	                        rs.getString(6),
+	                        rs.getString(7),
+	                        rs.getInt(8),
+	                        rs.getInt(9)));
+	            }
+	        } catch (Exception e) {
+	            // TODO: handle exception
+	        }
+
+	        return list;
+	    }
 	    public void deleteuser(String maKH)
 	    {
 	    	String query = "UPDATE KhachHang set isDelete= 1 where MaKH = ?";
