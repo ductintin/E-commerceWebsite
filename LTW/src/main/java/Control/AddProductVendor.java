@@ -102,7 +102,7 @@ public class AddProductVendor extends HttpServlet{
 					AnhSanPham anh = new AnhSanPham();
 					AnhSanPhamDAO anhDao = new AnhSanPhamDAO();
 					anh.setAnh("product/" + fileName);
-					anh.createAnh();
+					//anh.createAnh();
 				}
 			}
 			
