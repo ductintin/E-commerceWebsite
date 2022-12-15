@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/vendor/home"})
+@WebServlet(urlPatterns = { "/vendor/home" })
 public class IndexController extends HttpServlet{
 	
 	/**
@@ -20,14 +20,23 @@ public class IndexController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/web/web.jsp");
+		
+		/*
+		 * String url = req.getRequestURL().toString(); if(url.contains("/store/add")) {
+		 * RequestDispatcher dispatcher =
+		 * req.getRequestDispatcher("/views/vendor/home.jsp"); dispatcher.forward(req,
+		 * resp); }
+		 */
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/vendor/home.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		 super.doPost(req, resp); 
+				
+		
 	}
 
 }

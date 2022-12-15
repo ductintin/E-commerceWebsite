@@ -1,8 +1,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="dec"%>
+	<%@ include file="/common/taglib.jsp" %>
+	<%@ page session="true" %>
 
 <!DOCTYPE html>
 <html lang="en" >
@@ -31,9 +30,9 @@
                 <h1>Tạo tài khoản bán hàng</h1>
                 
                 <span>${msg }</span>
-                <input type="text" name = "TenKH"  placeholder="Tên" />
-                <input type="text" name = "TenTK" placeholder="Tên tài khoản" />                              
-                <input type="email" name = "Email" placeholder="Email" />
+                <input type="text" name = "TenKH"  placeholder="Tên" required/>
+                <input type="text" name = "TenTK" placeholder="Tên tài khoản" required/>                              
+                <input type="email" name = "Email" placeholder="Email" required/>
                 
                 
                 <div class="password-field" style="width: 100%;" >
@@ -65,7 +64,7 @@
                 <span id ="msgCheckPw"></span>
              
                 <input type="text" name = "Phone" placeholder="Số điện thoại" pattern="[0-9]{10}" required/>
-                <input type="text" name = "DiaChi" placeholder="Địa chỉ" />
+                <input type="text" name = "DiaChi" placeholder="Địa chỉ" required />
                 
                 <span>Mật khẩu ít nhất 8 kí tự, bao gồm ít nhất 1 kí tự thường, 1 kí tự hoa, 1 chữ số, 1 kí tự đặc biệt</span>
                 <button type = "submit" value ="Đăng ký">Sign Up</button>

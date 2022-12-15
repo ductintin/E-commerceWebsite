@@ -63,7 +63,7 @@ public class Signup extends HttpServlet{
         	KH.setDiaChi(address);
         	KH.setMK(password);
         	KH.setPhone(phone);
-        	KH.setRole(3);
+        	KH.setRole(2);
         	KH.setIsDeleted(0);
         	
         	if(KHDao.findVendorByAccountName(accountName)== null) {

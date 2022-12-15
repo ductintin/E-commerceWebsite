@@ -45,8 +45,19 @@
                 
                 <span>or use your account</span>
                 <input type="text" id="accountName" name="TenTK" placeholder="Tên tài khoản" />
-                <input type="password" id="password" name="MK" placeholder="Mật khẩu" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" required/>
-                <span>${msg }</span>
+                
+                <div class="password-field" style="width: 100%;" >
+	                <input type="password" name = "MK" placeholder="Mật khẩu" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" onkeyup="checkValidation()" required/>
+	                <span>
+	                <!-- <i class="fa-solid fa-check" id="correct1" style="color: green;  " hidden="true"></i>
+                    <i class="fa-solid fa-xmark" id="wrong1" style="color: red; " hidden="true"></i>  -->
+	                <i id="toggler1"class="far fa-eye"></i>
+	                </span>
+
+                                
+
+                </div>
+                <span style="color: red;">${msg }</span>
                 <a href="#">Forgot your password?</a>
                 <button>Sign In</button>
             </form>

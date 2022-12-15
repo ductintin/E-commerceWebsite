@@ -130,4 +130,22 @@ public class KhachHangDAO {
     	
     	return null;
     }
+    
+    public int getIdVendorByAccountName(String accountName) {
+    	try {
+    		conn = new ConnectJDBC().getConnection();
+    		String sql = "Select * from KhachHang where Role = 3 and TenTK = ?";
+    		ps = conn.prepareStatement(sql);
+    		ps.setString(1, accountName);
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	return rs.getInt(1);
+            }
+    	}catch(Exception e) {
+    		System.out.print(e);
+    	}
+        
+    	return -1;
+    }
 }

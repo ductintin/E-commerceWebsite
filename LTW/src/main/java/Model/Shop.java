@@ -7,7 +7,15 @@ public class Shop {
 	String PhoneShop;
 	String DiaChiShop;
 	String EmailShop;
-	public Shop(int maShop, int maSeller, String tenShop, String phoneShop, String diaChiShop, String emailShop) {
+	int IsDeleted;
+	
+	public int getIsDeleted() {
+		return IsDeleted;
+	}
+	public void setIsDeleted(int isDeleted) {
+		IsDeleted = isDeleted;
+	}
+	public Shop(int maShop, int maSeller, String tenShop, String phoneShop, String diaChiShop, String emailShop, int isDelete) {
 		super();
 		MaShop = maShop;
 		MaSeller = maSeller;
@@ -15,6 +23,7 @@ public class Shop {
 		PhoneShop = phoneShop;
 		DiaChiShop = diaChiShop;
 		EmailShop = emailShop;
+		IsDeleted = isDelete;
 	}
 	public Shop() {
 		super();
@@ -59,7 +68,7 @@ public class Shop {
 	@Override
 	public String toString() {
 		return "Shop [MaShop=" + MaShop + ", MaSeller=" + MaSeller + ", TenShop=" + TenShop + ", PhoneShop=" + PhoneShop
-				+ ", DiaChiShop=" + DiaChiShop + ", EmailShop=" + EmailShop + "]";
+				+ ", DiaChiShop=" + DiaChiShop + ", EmailShop=" + EmailShop + ", IsDeleted=" + IsDeleted + "]";
 	}
 	
 }

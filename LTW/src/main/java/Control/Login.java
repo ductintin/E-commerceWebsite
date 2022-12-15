@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.KhachHangDAO;
+import DAO.ShopDAO;
 import Model.KhachHang;
+import Model.Shop;
 
-@WebServlet(urlPatterns = {"/vendor/login"})
+@WebServlet(urlPatterns = {"/vendor/login", "/vendor"})
 public class Login extends HttpServlet{
 
 	/**
@@ -26,8 +28,18 @@ public class Login extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/vendor/login.jsp");
-		dispatcher.forward(req, resp);
+		HttpSession session = req.getSession();
+        if (session.getAttribute("vendor") != null) {
+            resp.sendRedirect("http://localhost:8774/LTW/vendor/home");
+        } else {
+            req.getRequestDispatcher("/views/vendor/login.jsp").forward(req, resp);
+        }
+        
+		/*
+		 * RequestDispatcher dispatcher =
+		 * req.getRequestDispatcher("/views/vendor/login.jsp"); dispatcher.forward(req,
+		 * resp);
+		 */
 	}
 	
 	@Override
@@ -40,21 +52,48 @@ public class Login extends HttpServlet{
         KhachHangDAO KHDao = new KhachHangDAO();
         KhachHang KH = new KhachHang();
         
+        ShopDAO shopDao = new ShopDAO();
+        Shop shop = new Shop();
+        
         String accountName = req.getParameter("TenTK");
         String password = req.getParameter("MK");
+        
+        HttpSession session = req.getSession();
+        
+        session.setMaxInactiveInterval(10000*60);
         
         String destPage = "/views/vendor/login.jsp";
         try {
         	KH = KHDao.login(accountName, password);
         	
+        	
         	System.out.print(KH);
         	if(KH != null) {
-        		HttpSession session = req.getSession();
-        		session.setAttribute("user", KH);
-        		destPage = "/views/vendor/home.jsp";
-        		    		
+        		shop = shopDao.getShopByMaSeller(KH.getMaKH());
+        		
+        		session.setAttribute("Vendor", KH);
+        		System.out.println("kh ne" + KH);
+    			if(shop != null) {
+    				session.setAttribute("Shop", shop);
+    				System.out.println("Shop ne: "+ shop);
+    			}else {
+    				session.setAttribute("Shop", null);
+    			}
+        		
+        		//Kiểm tra role của account để chuyển đến trang phù hợp
+				/*
+				 * if(KH.getRole()==1){
+				 * 
+				 * } else if(KH.getRole()==2) { destPage = "/views/vendor/home.jsp"; }else {
+				 * 
+				 * }
+				 */
+        		
+        		//destPage = "/views/vendor/home.jsp";
+        		resp.sendRedirect(req.getContextPath()+ "/vendor/home");	
+        		
         	}else {
-        		String msg = "Tài khoản không hợp lệ";
+        		String msg = "Tài khoản không tồn tại";
         		req.setAttribute("msg", msg);
         	}
         	
@@ -62,8 +101,6 @@ public class Login extends HttpServlet{
     		dispatcher.forward(req, resp);;  
         }catch(Exception e) {       	
         	System.out.print(e);        	        	
-        }
-        
-        
+        }      
 	}
 }
