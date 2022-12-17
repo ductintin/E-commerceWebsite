@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class ConnectJDBC {
-	private final String serverName = ".";
+	private final String serverName = "localhost";
 	private final String dbName = "LTW";
 	private final String portNumber = "1433";
 	private final String instance = " ";
