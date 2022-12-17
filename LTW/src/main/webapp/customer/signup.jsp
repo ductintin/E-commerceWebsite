@@ -326,11 +326,9 @@ button.ghost {
 		<div class="overlay-container">
 			<div class="overlay">
 				<div class="overlay-panel overlay-left">
-					<h1>Welcome Back!</h1>
-					<p>To keep connected with us please login with your personal
-						info</p>
+					<p>Bạn đã có tài khoản ? Hãy đăng nhập</p>
 					<a href="<c:url value='/customer/login'/>"><button
-							class="ghost" id="signIn">Sign In</button></a>
+							class="ghost" id="signIn">Đăng nhập</button></a>
 				</div>
 
 			</div>

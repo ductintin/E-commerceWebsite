@@ -286,14 +286,14 @@ button.ghost {
 		<!-- Form đăng nhập -->
 		<div class="form-container sign-in-container">
 			<form role="form" action="login" method="POST">
-				<h1>Sign in</h1>
+				<h1>Đăng nhập với người dùng</h1>
 
-				<span>or use your account</span> <input type="text" id="accountName"
+				 <input type="text" id="accountName"
 					name="TenTK" placeholder="Tên tài khoản" /> <input type="password"
 					id="password" name="MK" placeholder="Mật khẩu"
 					pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" required />
-				<span>${msg }</span> <a href="#">Forgot your password?</a>
-				<button>Sign In</button>
+				<span>${msg }</span>
+				<button>Đăng nhập</button>
 			</form>
 		</div>
 
@@ -306,10 +306,12 @@ button.ghost {
                     <button class="ghost" id="signIn">Sign In</button>
                 </div> -->
 				<div class="overlay-panel overlay-right">
-					<h1>Hello, Friend!</h1>
-					<p>Enter your personal details and start journey with us</p>
+					<p>Bạn chưa có tài khoản ? Hãy đăng ký</p>
 					<a href="<c:url value='/customer/signup'/>"><button
-							class="ghost" id="signUp">Sign Up</button></a>
+							class="ghost" id="signUp">Đăng ký</button></a>
+					<p>Đăng nhập với người bán</p>
+					<a href="<c:url value='/vendor/login'/>"><button
+							class="ghost" id="login">Đăng nhập</button></a>
 				</div>
 			</div>
 		</div>
