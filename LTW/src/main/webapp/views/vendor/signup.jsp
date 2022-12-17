@@ -31,7 +31,7 @@
                 
                 <span style ="color: red; font-size: 18px; font-weight: 500;">${msg }</span>
                 <input type="text" name = "TenKH"  placeholder="Tên" required/>
-                <input type="text" name = "TenTK" placeholder="Tên tài khoản" required/>                              
+                <input type="text" name = "TenTK" id = "TenTK" placeholder="Tên tài khoản" pattern="^(?=.*[a-z])[a-zA-Z\d]{3,10}$" onkeyup ="checkValidAccountName()"required/>                              
                 <input type="email" name = "Email" placeholder="Email" required/>
                 
                 
@@ -123,6 +123,22 @@
  		function check() {
             let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
             if ((document.getElementById("password").value == document.getElementById("confirmPassword").value) && pattern.test(document.getElementById("password").value)) {
+                document.getElementById("msgCheckPw").innerHTML = "";
+               
+            	/* document.getElementById("correct").style.display = "";
+                document.getElementById("wrong").style.display = "none"; */
+            }
+            else {
+            	/* document.getElementById("correct").style.display = "";
+                document.getElementById("wrong").style.display = "none"; */
+            	document.getElementById("msgCheckPw").innerHTML = "Mật khẩu không trùng khớp"; 
+                document.getElementById("msgCheckPw").style.color = "red";
+            }
+        }
+ 		
+ 		function checkValidAccountName() {
+            let pattern = /^(?=.*[a-z])[a-zA-Z\d]{3,10}$/;
+            if (pattern.test(document.getElementById("TenTK").value)) {
                 document.getElementById("msgCheckPw").innerHTML = "";
                
             	/* document.getElementById("correct").style.display = "";

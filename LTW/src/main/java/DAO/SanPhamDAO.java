@@ -197,6 +197,35 @@ public class SanPhamDAO {
         return list;
     }
     
+    public List<SanPham> listProductByIdShop(int maShop){
+    	String query = "select * from SanPham where isDeleted=0 and MaShop=?";
+        List<SanPham> list = new ArrayList<>();
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, maShop);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new SanPham(rs.getInt(1),
+                		 rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getInt(11)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return list;
+    }
+    
     public List<SanPham> listnewproduce()
     {
     	String query = "select top(10) * from SanPham where isDeleted=0 order by MaSP desc";

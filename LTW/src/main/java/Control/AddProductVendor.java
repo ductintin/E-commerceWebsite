@@ -21,7 +21,9 @@ import DAO.DanhMucDAO;
 import DAO.SanPhamDAO;
 import Model.AnhSanPham;
 import Model.DanhMuc;
+import Model.KhachHang;
 import Model.SanPham;
+import Model.Shop;
 import Util.Constant;
 
 @WebServlet(urlPatterns = { "/vendor/product/add" })
@@ -53,8 +55,7 @@ public class AddProductVendor extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
 
-		SanPham sp = new SanPham();
-		SanPhamDAO spDao = new SanPhamDAO();
+		
 
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
 		ServletFileUpload servletFileUpload = new ServletFileUpload(diskFileItemFactory);
@@ -69,23 +70,35 @@ public class AddProductVendor extends HttpServlet {
 		 */
 
 		// String maShop = String.valueOf(obj);
-
+		
+		HttpSession session = req.getSession();
+		KhachHang vendor = (KhachHang) session.getAttribute("Vendor");
+		Shop shop = (Shop) session.getAttribute("Shop");
+		
 
 		try {
+			SanPham sp = new SanPham();
+			SanPhamDAO spDao = new SanPhamDAO();
+			
 			int spIndex = spDao.getLastIndexOfProduct() + 1;
 			
+			sp.setMaShop(shop.getMaShop());
 			System.out.println("Mã sản phẩm lớn nhất hiện tại" + spIndex);
 			List<FileItem> items = servletFileUpload.parseRequest(req);
 			for (FileItem item : items) {
+				
 				
 				System.out.println(item);
 				if (item.getFieldName().equals("TenSP")) {
 					sp.setTenSP(item.getString("UTF-8"));
 				} else if (item.getFieldName().equals("MoTa")) {
 					sp.setMoTa(item.getString("UTF-8"));
-				} else if (item.getFieldName().equals("shop")) {
-					sp.setMaShop(Integer.parseInt(item.getString("UTF-8")));
-					System.out.println("Mã cửa hàng nè"+Integer.parseInt(item.getString("UTF-8")));
+					/*
+					 * } else if (item.getFieldName().equals("shop")) {
+					 * sp.setMaShop(Integer.parseInt(item.getString("UTF-8")));
+					 * System.out.println("Mã cửa hàng nè"+Integer.parseInt(item.getString("UTF-8"))
+					 * );
+					 */
 				} else if (item.getFieldName().equals("maDM")) {
 					sp.setMaDM(Integer.parseInt(item.getString("UTF-8")));
 					System.out.println("Mã danh mục nè"+Integer.parseInt(item.getString("UTF-8")));

@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DAO.AnhSanPhamDAO;
 import DAO.DanhMucDAO;
 import DAO.SanPhamDAO;
+import Model.AnhSanPham;
 import Model.DanhMuc;
 import Model.KhachHang;
 import Model.SanPham;
@@ -26,7 +28,7 @@ public class ProductVendor extends HttpServlet{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	SanPhamDAO spDao = new SanPhamDAO();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -39,18 +41,38 @@ public class ProductVendor extends HttpServlet{
 		
 		Shop shop = (Shop)session.getAttribute("Shop");
 		KhachHang vendor = (KhachHang)session.getAttribute("Vendor");
+		
 		System.out.println("MaShop trong ProductVendor" + shop.getMaShop());			
 		System.out.println("Ma NG Ban trong ProductVendor" + vendor.getMaKH());
 		
 		DanhMucDAO dmdao = new DanhMucDAO();
+		SanPhamDAO spDao = new SanPhamDAO();
+		AnhSanPhamDAO anhspDao = new AnhSanPhamDAO();
 
 		List<DanhMuc> listdm = dmdao.getallDanhMuc();
 
-		
-		
 		req.setAttribute("listdm", listdm);
-		List<SanPham> spList = spDao.listproducebymaShop("x");
-		req.setAttribute("spList", spList);
+		
+		for(DanhMuc dm : listdm) {
+			List<SanPham> spList = spDao.listproducebymaDM(String.valueOf(dm.getMaDM()));
+			req.setAttribute("spList", spList);
+			
+			System.out.println("Helllooo ne nha troi oi"+spList);
+			for(SanPham sp : spList) {
+				List<AnhSanPham> anhspList = anhspDao.listProductImageByIdProduct(sp.getMaSP());
+				req.setAttribute("anhspList", anhspList);				
+			}
+		}
+		
+		/*
+		 * List<SanPham> spList = spDao.listProductByIdShop(shop.getMaShop());
+		 * req.setAttribute("spList", spList);
+		 * 
+		 * List<AnhSanPham> anhspList =
+		 * anhspDao.listProductImageByIdShop(shop.getMaShop());
+		 * 
+		 * req.setAttribute("anhspList", anhspList);
+		 */
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/vendor/list-product.jsp");
 		dispatcher.forward(req, resp);

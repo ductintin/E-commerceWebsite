@@ -17,7 +17,7 @@
 	href="<c:url value='/views/vendor/css/home.css'/>">
 </head>
 <body>
-	<%@include file="/views/vendor/sidebar.jsp"%>
+	
 	
 	<div class="container-modal">
  
@@ -36,7 +36,7 @@
 
 
 				<b>Chọn danh mục:</b> <select name="maDM" id="pet-select" required>
-					<option value="0">--Please choose an option--</option>
+					
 					<c:forEach var="o" items="${listdm}">
 
 						<option value="${o.maDM}">${o.tenDM}</option>
@@ -51,14 +51,14 @@
 				<b>Mã cửa hàng:</b>
 				<c:url value="${Shop}" var="shop"></c:url>
 				<input type="text" id=" " value="${Shop.maShop }" name="shop"
-					readonly>
+					readonly hidden = "true">
 			</div>
 
-			<div class="fomrgroup">
+			<div class="fomrgroup" hidden = "hidden">
 				<b>Mã người bán:</b>
 				<c:url value="${Vendor}" var="vendor"></c:url>
 				<input type="text" id=" " value="${Vendor.maKH }" name="vendor"
-					readonly>
+					readonly hidden = "true">
 			</div>
 
 			<div class="fomrgroup">
