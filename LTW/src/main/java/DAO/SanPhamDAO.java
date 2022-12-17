@@ -286,6 +286,33 @@ public class SanPhamDAO {
     	return 0;
     }
     
+    public void editProductByVendor(SanPham sp) {
+    	String query = "Update SanPham set TenSP = ?, MoTa = ?, GiaBanThuong = ?, GiaKhuyenMai = ?,"
+    			+"SoLuong = ?, MoTaNgan = ? "
+    			+"where MaSP = ?";
+    	
+    	try {
+			conn = new ConnectJDBC().getConnection();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, sp.getTenSP());
+			ps.setString(2, sp.getMoTa());
+			ps.setInt(3, sp.getGiaBanThuong());
+			ps.setInt(4, sp.getGiaKhuyenMai());
+			ps.setInt(5, sp.getSoLuong());
+			ps.setString(6, sp.getMoTaNgan());
+			ps.setInt(7, sp.getMaSP());
+			ps.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e);
+		}
+    	
+    	
+    }
+    
     public static void main(String[] args) {
     	SanPhamDAO sanPhamDAO = new SanPhamDAO();
         List<SanPham> list = sanPhamDAO.listproducebymaDH("1");

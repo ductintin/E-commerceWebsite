@@ -31,7 +31,25 @@ public class AnhSanPhamDAO {
 			System.out.println(e);
 		}
 	}
+	
+	public void editAnhSanPhamByVendor(AnhSanPham anh, int maSP) {
+		String query = "Update AnhSanPham set Anh = ? where MaSP = ?";
 
+		try {
+			conn = new ConnectJDBC().getConnection();
+			ps = conn.prepareStatement(query);
+
+			
+			ps.setString(1, anh.getAnh());
+			ps.setInt(2, maSP);
+
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
 	public List<AnhSanPham> listProductImageByIdProduct(int MaSp) {
 		String query = "Select * from AnhSanPham where MaSP = ?";
 		List<AnhSanPham> list = new ArrayList<>();

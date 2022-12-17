@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,17 +16,15 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import DAO.AnhSanPhamDAO;
-import DAO.DanhMucDAO;
 import DAO.SanPhamDAO;
 import Model.AnhSanPham;
-import Model.DanhMuc;
 import Model.KhachHang;
 import Model.SanPham;
 import Model.Shop;
 import Util.Constant;
 
-@WebServlet(urlPatterns = { "/vendor/product/add" })
-public class AddProductVendor extends HttpServlet {
+@WebServlet(urlPatterns = { "/vendor/product/edit" })
+public class EditProductVendor extends HttpServlet {
 
 	/**
 	 * 
@@ -37,62 +34,47 @@ public class AddProductVendor extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		/* super.doGet(req, resp); */
-
-		req.setCharacterEncoding("UTF-8");
-		resp.setCharacterEncoding("UTF-8");
-		resp.setContentType("text/html; charset=UTF-8");
-
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/vendor/add-product.jsp");
-		dispatcher.forward(req, resp);
-
+		super.doGet(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
-
-		
 
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
 		ServletFileUpload servletFileUpload = new ServletFileUpload(diskFileItemFactory);
 		servletFileUpload.setHeaderEncoding("UTF-8");
 
-		
 		HttpSession session = req.getSession();
 		KhachHang vendor = (KhachHang) session.getAttribute("Vendor");
 		Shop shop = (Shop) session.getAttribute("Shop");
 		
+		
 
 		try {
 			SanPham sp = new SanPham();
+			
 			SanPhamDAO spDao = new SanPhamDAO();
-			
+
 			int spIndex = spDao.getLastIndexOfProduct() + 1;
-			
+
 			sp.setMaShop(shop.getMaShop());
 			System.out.println("Mã sản phẩm lớn nhất hiện tại" + spIndex);
 			List<FileItem> items = servletFileUpload.parseRequest(req);
 			for (FileItem item : items) {
-				
-				
+
 				System.out.println(item);
 				if (item.getFieldName().equals("TenSP")) {
 					sp.setTenSP(item.getString("UTF-8"));
 				} else if (item.getFieldName().equals("MoTa")) {
 					sp.setMoTa(item.getString("UTF-8"));
-					/*
-					 * } else if (item.getFieldName().equals("shop")) {
-					 * sp.setMaShop(Integer.parseInt(item.getString("UTF-8")));
-					 * System.out.println("Mã cửa hàng nè"+Integer.parseInt(item.getString("UTF-8"))
-					 * );
-					 */
 				} else if (item.getFieldName().equals("maDM")) {
 					sp.setMaDM(Integer.parseInt(item.getString("UTF-8")));
-					System.out.println("Mã danh mục nè"+Integer.parseInt(item.getString("UTF-8")));
+					System.out.println("Mã danh mục nè" + Integer.parseInt(item.getString("UTF-8")));
 				} else if (item.getFieldName().equals("Gia")) {
 					sp.setGiaBanThuong(Integer.parseInt(item.getString("UTF-8")));
 				} else if (item.getFieldName().equals("KhuyenMai")) {
@@ -101,13 +83,13 @@ public class AddProductVendor extends HttpServlet {
 					sp.setSoLuong(Integer.parseInt(item.getString("UTF-8")));
 				} else if (item.getFieldName().equals("MoTaNgan")) {
 					sp.setMoTaNgan(item.getString("UTF-8"));
-				} 
+				}
 			}
-			
-			spDao.createProductByVendor(sp);
-			
+
+			//spDao.createProductByVendor(sp);
+
 			for (FileItem item : items) {
-				 if (item.getFieldName().equals("anh1")) {
+				if (item.getFieldName().equals("anh1")) {
 					String originalFileName = item.getName();
 					int index = originalFileName.lastIndexOf(".");
 					String ext = originalFileName.substring(index + 1);
@@ -117,7 +99,7 @@ public class AddProductVendor extends HttpServlet {
 
 					AnhSanPham anh = new AnhSanPham();
 					AnhSanPhamDAO anhDao = new AnhSanPhamDAO();
-					
+
 					anh.setMaSP(spIndex);
 					anh.setAnh("product/" + fileName);
 
@@ -164,7 +146,7 @@ public class AddProductVendor extends HttpServlet {
 					anh.setAnh("product/" + fileName);
 
 					anhDao.addProductImageByVendor(anh);
-					
+
 					System.out.println(anh);
 				}
 			}
@@ -173,8 +155,8 @@ public class AddProductVendor extends HttpServlet {
 
 		} catch (Exception e) {
 			System.out.println(e);
-		}
 
+		}
 	}
 
 }

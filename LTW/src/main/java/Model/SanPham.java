@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class SanPham {
 	int MaSP;
 	int MaDM;
@@ -12,6 +15,21 @@ public class SanPham {
 	int isDeteted;
 	int SoLuongDaBan;
 	int MaShop;
+	
+	public Set<AnhSanPham> productImages;
+	
+	public Set<AnhSanPham> getProductImages() {
+		return productImages;
+	}
+	public void setProductImages(Set<AnhSanPham> productImages) {
+		this.productImages = productImages;
+	}
+	public void addProductImage(AnhSanPham img)  {
+	      if(this.productImages == null)  {
+	          this.productImages= new HashSet<AnhSanPham>();
+	      }
+	      this.productImages.add(img);
+	  }
 	
 	public SanPham(int maSP, int maDM, String tenSP, String moTa, int giaBanThuong, int giaKhuyenMai, int soLuong,
 			 String moTaNgan, int isDeteted, int soLuongDaBan, int maShop) {

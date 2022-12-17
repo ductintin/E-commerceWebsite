@@ -15,6 +15,21 @@
 
 <link rel="stylesheet"
 	href="<c:url value='/views/vendor/css/home.css'/>">
+	
+	<link
+      class="jsbin"
+      href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script
+      class="jsbin"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
+    ></script>
+    <script
+      class="jsbin"
+      src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"
+    ></script>
 </head>
 <body>
 	
@@ -88,9 +103,16 @@
 			</div>
 
 			<div class="form-group">
-				<label>Ảnh đại diện</label> <input type="file" name="anh1" required/> <input
-					type="file" name="anh2" required/> <input type="file" name="anh3" required/> <input
-					type="file" name="anh4" required/>
+				<input type="file" name="anh1" onchange="readURL(this);"required/>
+				<img id="blah1" src="#" alt="your image" />
+				 <input
+					type="file" name="anh2" onchange="readURL(this);"required/> 
+					<img id="blah2" src="#" alt="your image" />
+					<input type="file" name="anh3" onchange="readURL(this);"required/> 
+					<img id="blah3" src="#" alt="your image" />
+					<input
+					type="file" name="anh4"onchange="readURL(this);" required/>
+					<img id="blah4" src="#" alt="your image" />
 			</div>
 
 
@@ -99,6 +121,8 @@
 			<button type="submit">Thêm sản phẩm</button>
 
 		</form>
+	</div>
+	
 	</div>
 	
 	</div>
@@ -120,30 +144,45 @@
 
 	<script>
     // lấy phần Modal
-    var modal = document.getElementById('myModal');
+    var modalAdd = document.getElementById('myModal');
   
     // Lấy phần button mở Modal
-    var btn = document.getElementById("myBtn");
+    var btnAdd = document.getElementById("myBtn");
   
     // Lấy phần span đóng Modal
-    var span = document.getElementsByClassName("close")[0];
+    var spanAdd = document.getElementsByClassName("close")[0];
   
     // Khi button được click thi mở Modal
-    btn.onclick = function() {
-        modal.style.display = "block";
+    btnAdd.onclick = function() {
+        modalAdd.style.display = "block";
     }
   
     // Khi span được click thì đóng Modal
-    span.onclick = function() {
-        modal.style.display = "none";
+    spanAdd.onclick = function() {
+        modalAdd.style.display = "none";
     }
   
     // Khi click ngoài Modal thì đóng Modal
     window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+        if (event.target == modalAdd) {
+            modalAdd.style.display = "none";
         }
     }
+    
+/*     function readURL(input) {
+    	  if (input.files && input.files[0]) {
+    	    var reader = new FileReader();
+
+    	    reader.onload = function (e) {
+    	    	
+    	       $('this').closest("img").attr('src', e.target.result).width(50).height(50); 
+    	    	$('img').attr('src', e.target.result).width(50).height(50);
+    	    };
+
+    	    reader.readAsDataURL(input.files[0]);
+    	  }
+    	} */
+    
 </script>
 </body>
 </html>

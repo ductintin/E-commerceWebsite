@@ -519,16 +519,20 @@ body {
 }
  
 /* The Close Button */
-.close {
+.close, .closeEdit {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
  
-.close:hover,
-.close:focus {
+.close:hover, .closeEdit:hover,
+.close:focus,.closeEdit:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+table, tr, th, td{
+	border: 1px solid gray;
 }

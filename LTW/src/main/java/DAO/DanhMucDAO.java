@@ -5,6 +5,7 @@ import java.util.*;
 
 import Connection.ConnectJDBC;
 import Model.DanhMuc;
+import Model.SanPham;
 
 public class DanhMucDAO {
 	
@@ -106,4 +107,6 @@ public class DanhMucDAO {
         String tenDM=sanPhamDAO.gettenDMbymaDM("1");
         System.out.println(tenDM);
     }
+    
+	
 }

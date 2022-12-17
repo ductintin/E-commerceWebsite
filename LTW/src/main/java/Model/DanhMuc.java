@@ -1,9 +1,28 @@
 package Model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class DanhMuc {
 	int MaDM;
     String TenDM;
     int isDeleted;
+    
+    public Set <SanPham> products;
+    
+	public Set<SanPham> getProducts() {
+		return products;
+	}
+	public void setProducts(Set<SanPham> products) {
+		this.products = products;
+	}
+	public void addProduct(SanPham product)  {
+	      if(this.products == null)  {
+	          this.products= new HashSet<SanPham>();
+	      }
+	      this.products.add(product);
+	  }
+	
 	public DanhMuc(int maDM, String tenDM, int isDeleted) {
 		super();
 		MaDM = maDM;

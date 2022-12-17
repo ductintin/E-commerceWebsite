@@ -51,19 +51,30 @@ public class ProductVendor extends HttpServlet{
 
 		List<DanhMuc> listdm = dmdao.getallDanhMuc();
 
-		req.setAttribute("listdm", listdm);
+		
+
+		
 		
 		for(DanhMuc dm : listdm) {
 			List<SanPham> spList = spDao.listproducebymaDM(String.valueOf(dm.getMaDM()));
-			req.setAttribute("spList", spList);
 			
 			System.out.println("Helllooo ne nha troi oi"+spList);
 			for(SanPham sp : spList) {
+				dm.addProduct(sp);
 				List<AnhSanPham> anhspList = anhspDao.listProductImageByIdProduct(sp.getMaSP());
-				req.setAttribute("anhspList", anhspList);				
+				for(AnhSanPham img : anhspList) {
+					sp.addProductImage(img);
+					System.out.println(img);
+					
+				}
+				
 			}
+			
 		}
 		
+		req.setAttribute("listdm", listdm);
+		
+		System.out.println(listdm);
 		/*
 		 * List<SanPham> spList = spDao.listProductByIdShop(shop.getMaShop());
 		 * req.setAttribute("spList", spList);
