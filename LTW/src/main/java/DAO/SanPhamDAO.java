@@ -237,6 +237,26 @@ public class SanPhamDAO {
         }
     }
     
+    
+    public int getLastIndexOfProduct() {
+    	String query = "SELECT TOP 1 MaSP FROM SanPham ORDER BY MaSP DESC";
+    	
+    	try {
+    		conn = new ConnectJDBC().getConnection();
+    		ps = conn.prepareStatement(query);
+    		
+    		rs = ps.executeQuery();
+    		
+    		while(rs.next()) {
+    			return rs.getInt(1);
+    		}
+    	}catch(Exception e) {
+    		System.out.println(e);
+    	}
+    	
+    	return 0;
+    }
+    
     public static void main(String[] args) {
     	SanPhamDAO sanPhamDAO = new SanPhamDAO();
         List<SanPham> list = sanPhamDAO.listproducebymaDH("1");

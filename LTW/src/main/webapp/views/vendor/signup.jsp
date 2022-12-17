@@ -29,7 +29,7 @@
             <form role="form" action="signup" method="POST">
                 <h1>Tạo tài khoản bán hàng</h1>
                 
-                <span>${msg }</span>
+                <span style ="color: red; font-size: 18px; font-weight: 500;">${msg }</span>
                 <input type="text" name = "TenKH"  placeholder="Tên" required/>
                 <input type="text" name = "TenTK" placeholder="Tên tài khoản" required/>                              
                 <input type="email" name = "Email" placeholder="Email" required/>

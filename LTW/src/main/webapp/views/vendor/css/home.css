@@ -499,7 +499,7 @@ body {
     display: none; /* mặc định được ẩn đi */
     position: fixed; /* vị trí cố định */
     z-index: 1; /* Ưu tiên hiển thị trên cùng */
-    padding-top: 100px; 
+    padding: 40px 0 40px 0; 
     left: 0;
     top: 0;
     width: 100%;

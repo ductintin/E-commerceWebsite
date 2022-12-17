@@ -23,7 +23,7 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="vendor/home">
                         <span class="icon">
                             <ion-icon name="logo-apple"></ion-icon>
                         </span>
@@ -32,7 +32,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="<c:url value='/vendor/home'/>">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -50,7 +50,7 @@
                 </li>
 
                 <li>
-                    <a href="product/add">
+                    <a href="<c:url value='/vendor/product/list'/>">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
@@ -86,7 +86,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="<c:url value='/vendor/logout'/>">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

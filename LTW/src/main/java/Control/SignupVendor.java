@@ -14,7 +14,7 @@ import DAO.KhachHangDAO;
 import Model.KhachHang;
 
 @WebServlet(urlPatterns = {"/vendor/signup"})
-public class Signup extends HttpServlet{
+public class SignupVendor extends HttpServlet{
 	
 	
 	/**
@@ -67,8 +67,18 @@ public class Signup extends HttpServlet{
         	KH.setIsDeleted(0);
         	
         	if(KHDao.findVendorByAccountName(accountName)== null) {
-        		destPage = "/views/vendor/login.jsp";
-        		KHDao.createVendor(KH);
+        		//destPage = "/views/vendor/login.jsp";
+        		
+        		
+        		KhachHang vendor = KHDao.createVendor(KH);
+        		
+        		if(vendor != null) {
+        			resp.sendRedirect(req.getContextPath() + "/vendor/login");
+        		}
+        		else {
+        			msg = "Tạo tài khoản thất bại";
+            		req.setAttribute("msg", msg);
+        		}
         	}
         	else {
         		msg = "Tài khoản đã tồn tại";

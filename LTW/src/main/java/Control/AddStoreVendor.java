@@ -46,8 +46,10 @@ public class AddStoreVendor extends HttpServlet{
         
         String TenShop = req.getParameter("TenShop");
         //int MaSeller = KHDao.getIdVendorByAccountName(obj.get("MaKH").toString());
-        
-        int MaSeller = Integer.parseInt(req.getParameter("vendor"));
+        HttpSession session = req.getSession();
+        KhachHang vendor = (KhachHang)session.getAttribute("Vendor");
+        		
+        int MaSeller = vendor.getMaKH();
         String PhoneShop = req.getParameter("SDT");
         String DiaChi = req.getParameter("DiaChi");
         String EmailShop = req.getParameter("Email");
@@ -63,7 +65,7 @@ public class AddStoreVendor extends HttpServlet{
 			  shop.setIsDeleted(0);
 			  
 			  shopDao.createShop(shop, MaSeller);
-			  HttpSession session = req.getSession();
+			  shop = shopDao.getShopByMaSeller(MaSeller);
 	    	  session.setAttribute("Shop", shop);
 	    	  
 	    	  System.out.println(shop);

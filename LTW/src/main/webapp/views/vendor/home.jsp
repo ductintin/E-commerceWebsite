@@ -44,6 +44,8 @@
             	<span> ${Vendor.tenKH }</span>
             	
             	<span> ${Shop.tenShop }</span>
+            	
+            	<span> ${Shop.maShop }</span>
             </div>
             
             
@@ -265,10 +267,10 @@
 		      <c:if test = "${empty shop }">
 		        <div class="container-modal">
  
-			    <h2>Freetuts.net hướng dẫn tạo Modal Box</h2>
+			    <h2>Chào bạn. Hãy bắt đầu tọa cửa hàng cho riêng mình nào!</h2>
 			 
 			    <!-- Button đăng nhập để mở form đăng nhập -->
-			    <button id="myBtn">Đăng Nhập</button>
+			    <button id="myBtn">Tạo cửa hàng</button>
 			 
 			    <!-- The Modal -->
 			    <div id="myModal" class="modal">
@@ -283,9 +285,9 @@
 			                </div>
 			                
 			                <div class="fomrgroup">
-			                	<b>Mã người bán:</b>
+			                	<b>Tên người bán:</b>
 			                	<c:url value="${Vendor}" var="vendor"></c:url>
-			                   	<input type = "text" id=" " value="${vendor }" name="vendor" readonly>
+			                   	<input type = "text" id=" " value="${Vendor.tenKH }" name="vendor" readonly>
 			                </div>
 			                
 			                <div class="fomrgroup">

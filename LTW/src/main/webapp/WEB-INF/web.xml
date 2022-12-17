@@ -9,6 +9,6 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 </welcome-file-list>
 <session-config>
 <tracking-mode>COOKIE</tracking-mode>
- <session-timeout>-1</session-timeout>
+ <session-timeout>900</session-timeout>
 </session-config>
 </web-app>

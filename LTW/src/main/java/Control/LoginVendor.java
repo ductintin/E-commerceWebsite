@@ -16,7 +16,7 @@ import Model.KhachHang;
 import Model.Shop;
 
 @WebServlet(urlPatterns = {"/vendor/login", "/vendor"})
-public class Login extends HttpServlet{
+public class LoginVendor extends HttpServlet{
 
 	/**
 	 * 
@@ -28,18 +28,17 @@ public class Login extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		HttpSession session = req.getSession();
-        if (session.getAttribute("vendor") != null) {
-            resp.sendRedirect("http://localhost:8774/LTW/vendor/home");
-        } else {
-            req.getRequestDispatcher("/views/vendor/login.jsp").forward(req, resp);
-        }
-        
 		/*
-		 * RequestDispatcher dispatcher =
-		 * req.getRequestDispatcher("/views/vendor/login.jsp"); dispatcher.forward(req,
-		 * resp);
+		 * HttpSession session = req.getSession(); if (session.getAttribute("Vendor") !=
+		 * null) { resp.sendRedirect(req.getContextPath() + "/vendor/home"); } else {
+		 * req.getRequestDispatcher("/views/vendor/login.jsp").forward(req, resp); }
 		 */
+        
+		
+		  RequestDispatcher dispatcher =
+		  req.getRequestDispatcher("/views/vendor/login.jsp"); dispatcher.forward(req,
+		  resp);
+		 
 	}
 	
 	@Override

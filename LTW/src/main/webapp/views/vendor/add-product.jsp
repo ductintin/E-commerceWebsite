@@ -18,33 +18,47 @@
 </head>
 <body>
 	<%@include file="/views/vendor/sidebar.jsp"%>
+	
+	<div class="container-modal">
+ 
+			    <h2>Thêm sản phẩm</h2>
+			 
+			    <!-- Button đăng nhập để mở form đăng nhập -->
+			    <button id="myBtn">Thêm</button>
+			    
+	 <div id="myModal" class="modal">
 	<div class="modal-content">
 		<form action="add" method="POST" enctype="multipart/form-data">
 			<span class="close">&times;</span>
 			<h2>Đăng kí sản phẩm</h2>
 			<div class="fomrgroup">
 
-				
 
-					<b>Chọn danh mục:</b>
 
-					<select name="pets" id="pet-select">
-					<option value="">--Please choose an option--</option>
+				<b>Chọn danh mục:</b> <select name="maDM" id="pet-select" required>
+					<option value="0">--Please choose an option--</option>
 					<c:forEach var="o" items="${listdm}">
-						
-						<option id = "maDM" value="${o.maDM}">${o.tenDM}</option>
-						
+
+						<option value="${o.maDM}">${o.tenDM}</option>
+
 					</c:forEach>
-					</select>
-					
-				
+				</select>
+
+
 			</div>
 
+			<div class="fomrgroup">
+				<b>Mã cửa hàng:</b>
+				<c:url value="${Shop}" var="shop"></c:url>
+				<input type="text" id=" " value="${Shop.maShop }" name="shop"
+					readonly>
+			</div>
 
 			<div class="fomrgroup">
 				<b>Mã người bán:</b>
 				<c:url value="${Vendor}" var="vendor"></c:url>
-				<input type="text" id=" " value="${vendor }" name="vendor" readonly>
+				<input type="text" id=" " value="${Vendor.maKH }" name="vendor"
+					readonly>
 			</div>
 
 			<div class="fomrgroup">
@@ -69,22 +83,24 @@
 			</div>
 
 			<div class="fomrgroup">
-				<b>Mô tả ngắn:</b> <input type="text" id=" " name="SoLuongKho"
+				<b>Mô tả ngắn:</b> <input type="text" id=" " name="MoTaNgan"
 					required>
 			</div>
 
 			<div class="form-group">
-				<label>Ảnh đại diện</label> <input type="file" name="anh1" /> <input
-					type="file" name="anh2" /> <input type="file" name="anh3" /> <input
-					type="file" name="anh4" />
+				<label>Ảnh đại diện</label> <input type="file" name="anh1" required/> <input
+					type="file" name="anh2" required/> <input type="file" name="anh3" required/> <input
+					type="file" name="anh4" required/>
 			</div>
 
 
 
 
-			<button type="submit">Đăng ký</button>
+			<button type="submit">Thêm sản phẩm</button>
 
 		</form>
+	</div>
+	
 	</div>
 
 	<!-- =========== Scripts =========  -->
