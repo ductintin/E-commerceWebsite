@@ -64,7 +64,7 @@
                                             <th>Mã khách hàng</th>
                                             <th>Tổng tiền</th>
                                             <th>Thời gian</th>
-                                            <th>Tình trạng</th>
+                                           
                                             <th>Xoá</th>
                                             
                                         </tr>
@@ -77,7 +77,7 @@
                                             <td><a href="profileuser?maKH=${o.maKH}">${o.maKH}</td>
                                             <td data-type="money">${o.tongTien}</td>
                                             <td>${o.thoiGian }</td>
-                                            <td>${o.maTrangThai}</td>
+                                            
                                             <td ><a href="neworder?maDH=${o.maDH}&action=deletedh" style="color: red;">Xoá</td>
                                         </tr>
                                     </c:forEach>

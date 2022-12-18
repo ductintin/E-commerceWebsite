@@ -29,9 +29,8 @@ public class DonHangDAO {
                  list.add(new DonHang(rs.getInt(1),
                 		 rs.getInt(2),
                         rs.getInt(3),
-                        rs.getDate(4),
-                        rs.getInt(5),
-                        rs.getInt(6)));
+                        rs.getDate(4),   
+                        rs.getInt(5)));
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -53,9 +52,8 @@ public class DonHangDAO {
                  list.add(new DonHang(rs.getInt(1),
                 		 rs.getInt(2),
                         rs.getInt(3),
-                        rs.getDate(4),
-                        rs.getInt(5),
-                        rs.getInt(6)));
+                        rs.getDate(4),   
+                        rs.getInt(5)));
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -76,9 +74,8 @@ public class DonHangDAO {
                  list.add(new DonHang(rs.getInt(1),
                 		 rs.getInt(2),
                          rs.getInt(3),
-                         rs.getDate(4),
-                         rs.getInt(5),
-                         rs.getInt(6)));
+                         rs.getDate(4),   
+                         rs.getInt(5)));
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -100,9 +97,8 @@ public class DonHangDAO {
                  list.add(new DonHang(rs.getInt(1),
                 		 rs.getInt(2),
                          rs.getInt(3),
-                         rs.getDate(4),
-                         rs.getInt(5),
-                         rs.getInt(6)));
+                         rs.getDate(4),   
+                         rs.getInt(5)));
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -139,6 +135,7 @@ public class DonHangDAO {
         }
 		return countorder;
     }
+    
     public String totalspendfororderbymaKH(String maKH)
     {
     	String query = "select sum(TongTien) from DonHang where isDeleted=0 and MaKH=?";
@@ -178,6 +175,43 @@ public class DonHangDAO {
             // TODO: handle exception
         }
 		return totalproduce;
+    }
+    public String countorderbymounth()
+    {
+    	String query = "select COUNT(MaDH) from DonHang where isDeleted=0 and MONTH(ThoiGian)=MONTH(GETDATE())";
+    	String countorder = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	countorder=rs.getString(1);
+            			
+            }
+            return countorder;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return countorder;
+    }
+    public String countOrderByMonth(int month) {
+        String querry = "select  count(MaDH) from DonHang where MONTH(ThoiGian)=? ";
+        String countorder = null;
+        
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(querry);
+            ps.setInt(1, month);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	countorder=rs.getString(1);
+            			
+            }
+            return countorder;
+
+        } catch (Exception e) {
+        }
+        return countorder;
     }
     public static void main(String[] args) {
     	DonHangDAO sanPhamDAO = new DonHangDAO();

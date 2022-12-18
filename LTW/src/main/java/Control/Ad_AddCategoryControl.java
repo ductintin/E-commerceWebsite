@@ -31,7 +31,7 @@ public class Ad_AddCategoryControl extends HttpServlet{
         }
         if (action.equals("delete")) { 
             dmdao.deletecategory(maDM);
-            response.sendRedirect("http://localhost:8080/LTW/admin/category");
+          //  response.sendRedirect("http://localhost:8080/LTW/admin/category");
         }      
         request.getRequestDispatcher("/admin/addcategory.jsp").forward(request, response);
 	}

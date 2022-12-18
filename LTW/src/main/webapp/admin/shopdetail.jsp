@@ -68,17 +68,16 @@
                                     </thead>
                                     
                                     <tbody>
-                                       <<c:forEach var="i" begin="0" end="${size-1}">
+                                        <c:forEach var="i" begin="0" end="${size-1}">
                                     	<tr>
                                             <td>${listctdh[i].getMaDH()}</td>
                                             <td>${listkh[i].getTenKH()}</td>
                                             <td>${listsp1[i].getTenSP()}</td>
                                             <td>${listctdh[i].getSoLuong()}</td>
                                             <td data-type="money">${listctdh[i].getTongTien()}</td>
-                                            
-                                            
+  
                                         </tr>
-                                    </c:forEach>
+                                   </c:forEach>
                                         
                                     </tbody>
                                 </table>

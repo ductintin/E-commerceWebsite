@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.DonHangDAO;
 import DAO.SanPhamDAO;
+import DAO.TrangThaiDAO;
 import Model.DonHang;
 import Model.SanPham;
+import Model.TrangThai;
 
 @WebServlet(urlPatterns = {"/admin/allorder"})
 public class Ad_AllOrderControl extends HttpServlet{
@@ -25,6 +27,7 @@ public class Ad_AllOrderControl extends HttpServlet{
         String action = request.getParameter("action");            
         String maDH = request.getParameter("maDH");       
         DonHangDAO dhdao=new DonHangDAO();
+        TrangThaiDAO ttdao=new TrangThaiDAO();
             
         if (action == null) {
             action = "";
@@ -35,8 +38,13 @@ public class Ad_AllOrderControl extends HttpServlet{
         }      
         
         List<DonHang> listdh = dhdao.listallorder();
+        List<TrangThai> listtt =ttdao.listtrangthai();
+       
         
         request.setAttribute("listdh", listdh);
+        
+        request.setAttribute("listtt", listtt);
+        request.setAttribute("size", listdh.size());
         request.getRequestDispatcher("/admin/allorder.jsp").forward(request, response);
 	}
 

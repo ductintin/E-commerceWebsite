@@ -14,11 +14,13 @@ import DAO.DonHangDAO;
 import DAO.KhachHangDAO;
 import DAO.SanPhamDAO;
 import DAO.ShopDAO;
+import DAO.TrangThaiDAO;
 import Model.ChiTietDonHang;
 import Model.DonHang;
 import Model.KhachHang;
 import Model.SanPham;
 import Model.Shop;
+import Model.TrangThai;
 
 @WebServlet(urlPatterns = {"/admin/orderdetail"})
 public class Ad_OrderDetailControl extends HttpServlet{
@@ -35,13 +37,16 @@ public class Ad_OrderDetailControl extends HttpServlet{
         KhachHangDAO khdao= new KhachHangDAO();
         SanPhamDAO spdao=new SanPhamDAO();
         ShopDAO shopdao=new ShopDAO();
+        TrangThaiDAO ttdao=new TrangThaiDAO();
         
         List<Shop> listshop=shopdao.listshopbymaDH(maDH);
         List<SanPham> listsp=spdao.listproducebymaDH(maDH);
         List<KhachHang> listkh=khdao.getuserbymaKH(maKH);
         List<ChiTietDonHang> listctdh=ctdhdao.getorderdetailbymaDH(maDH);
         List<DonHang> listdh = dhdao.listallorderbymaDH(maDH);
+        List<TrangThai> listtt =ttdao.listtrangthai();
         
+        request.setAttribute("listtt", listtt);
         request.setAttribute("listctdh", listctdh);
         request.setAttribute("listshop", listshop);
         request.setAttribute("listsp", listsp);

@@ -46,11 +46,12 @@ public class LoginAdControl extends HttpServlet{
         } else {
             HttpSession session = request.getSession();
             int user = a.getRole();
-            if (user == 1 ) {
+            if (user == 1) {
                 session.setAttribute("accad", a);
                 response.sendRedirect("http://localhost:8080/LTW/admin/");
             } else {
                 request.setAttribute("mess", "Bạn phải là Admin");
+                
                 request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
             }
             

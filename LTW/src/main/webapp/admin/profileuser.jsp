@@ -69,7 +69,7 @@
                                         <div class="text-muted">Orders</div>
                                     </div>
                                     <div class="col-4">
-                                        <div class="font-24 profile-stat-count">${totalspend}</div>
+                                        <div class="font-24 profile-stat-count" data-type="money">${totalspend}</div>
                                         <div class="text-muted">Spends</div>
                                     </div>
                                     <div class="col-4">
@@ -104,7 +104,7 @@
                                         	<th>Mã đơn hàng</th>
                                             <th>Tổng tiền</th>
                                             <th>Thời gian</th>
-                                            <th>Tình trạng</th>
+                                            
                                             
                                         </tr>
                                     </thead>
@@ -115,7 +115,7 @@
                                             <td><a href="orderdetail?maDH=${listdh[i].getMaDH()}&maKH=${listkh[i].getMaKH()}">${listdh[i].getMaDH()}</td>
                                             <td data-type="money">${listdh[i].getTongTien()}</td>
                                             <td>${listdh[i].getThoiGian()}</td>
-                                            <td>${listdh[i].getMaTrangThai()}</td>
+                                            
                                             
                                         </tr>
                                     </c:forEach>

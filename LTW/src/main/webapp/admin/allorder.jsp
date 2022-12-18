@@ -50,7 +50,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Danh sách tất cả đơn hàng</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Danh sách tất cả đơn hàng </h1>
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -64,20 +64,22 @@
                                             <th>Mã khách hàng</th>
                                             <th>Tổng tiền</th>
                                             <th>Thời gian</th>
-                                            <th>Tình trạng</th>
+                                           
                                             <th>Xoá</th>
                                         </tr>
                                     </thead>
                                     
                                     <tbody>
-                                       <c:forEach var="o" items="${listdh}">
+                                  
+                                       <c:forEach var="i" begin="0" end="${size-1}">
                                     	<tr>
-                                            <td><a href="orderdetail?maDH=${o.maDH}&maKH=${o.maKH}">${o.maDH}</td>
-                                            <td><a href="profileuser?maKH=${o.maKH}">${o.maKH}</td>
-                                            <td data-type="money">${o.tongTien}</td>
-                                            <td>${o.thoiGian }</td>
-                                            <td>${o.maTrangThai}</td>
-                                            <td ><a href="allorder?maDH=${o.maDH}&action=deletedh" style="color: red;">Xoá</td>
+                                            <td><a href="orderdetail?maDH=${listdh[i].getMaDH()}&maKH=${listdh[i].getMaKH()}">${listdh[i].getMaDH()}</td>
+                                            <td><a href="profileuser?maKH=${listdh[i].getMaKH()}">${listdh[i].getMaKH()}</td>
+                                            <td data-type="money">${listdh[i].getTongTien()}</td>
+                                            <td>${listdh[i].getThoiGian()}</td>
+                                           
+                                            
+                                            <td ><a href="allorder?maDH=${listdh[i].getMaDH()}&action=deletedh" style="color: red;">Xoá</td>
                                         </tr>
                                     </c:forEach>
                                         

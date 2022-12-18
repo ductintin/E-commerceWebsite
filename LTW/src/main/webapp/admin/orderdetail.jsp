@@ -95,34 +95,55 @@
                             <!-- /.row -->
 
                             <!-- Table row -->
-                            <div class="row">
-                                <div class="col-12 table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
+                             <div class="card shadow mb-4">
+                        
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
                                         <tr>
-                                            <th>Mã sản phẩm </th>
+                                        	<th>Mã sản phẩm </th>
                                             <th>Tên sản phẩm</th>         
                                              <th>Tên shop</th>                                 
                                             <th>Số lượng</th>
                                             <th>Thành tiền</th>
+                                            <th>Trạng thái</th>
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                         <c:forEach var="i" begin="0" end="${size-1}">
+                                    </thead>
+                                    
+                                    <tbody>
+                                       <c:forEach var="i" begin="0" end="${size-1}">
                                             <tr>
                                                 <td>${listsp[i].getMaSP()}</td>
                                                 <td>${listsp[i].getTenSP()}</td>
-                                                <td>${listshop[i].getTenShop()}<td>
-                                                <td >${listctdh[i].getSoLuong()}</td>
-                                                <td >${listctdh[i].getTongTien()}</td>
+                                                <td>${listshop[i].getTenShop()}</td>
+                                                <td>${listctdh[i].getSoLuong()}</td>
+                                                <td>${listctdh[i].getTongTien()}</td>
+                                                <c:forEach items="${listtt}" var="tt">
+                                                <c:if test="${tt.maTrangThai == listctdh[i].getMaTrangThai()}">
+                                                    <c:if test="${listctdh[i].getMaTrangThai() == 1}">
+                                                        <td><span class="badge badge-success"
+                                                        style="background : red">${tt.tenTrangThai}</span>
+                                                        </td>
+                                                    </c:if>
+                                                    <c:if test="${listctdh[i].getMaTrangThai() == 2}">
+                                                        <td><span class="badge badge-success"
+                                                                  style="background : blue">${tt.tenTrangThai}</span>
+                                                        </td>
+                                                    </c:if>
+                                                    
+                                                </c:if>
+
+                                            </c:forEach>
                                             </tr>
                                         </c:forEach>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.col -->
+                                        
+                                    </tbody>
+                                </table>
                             </div>
+                        </div>
+                    </div>
+                            
                             <!-- /.row -->
 
                             <div class="row">
