@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
-<link rel="stylesheet" href="<c:url value='/bootstrap/css/login.css'/>">
 <style>
 @charset "UTF-8";
 
@@ -333,7 +332,6 @@ button.ghost {
 		</div>
 	</div>
 	<!-- partial -->
-	<script src="<c:url value='/bootstrap/js/login.js'/>"></script>
 
 </body>
 </html>

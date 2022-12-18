@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url value="/" var="root" />
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <!-- Site meta -->
 <meta charset="utf-8">
@@ -19,7 +19,6 @@
 	rel="stylesheet" type="text/css">
 <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600"
 	rel="stylesheet" type="text/css">
-<link href="css/style.css" rel="stylesheet" type="text/css">
 <style>
 h1 {
 	text-align: center;
