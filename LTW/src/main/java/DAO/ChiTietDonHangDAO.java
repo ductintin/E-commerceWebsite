@@ -31,7 +31,8 @@ public class ChiTietDonHangDAO {
                 		 rs.getInt(2),
                         rs.getInt(3),
                         rs.getInt(4),
-                        rs.getInt(5)));
+                        rs.getInt(5),
+                        rs.getInt(6)));
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -58,11 +59,33 @@ public class ChiTietDonHangDAO {
                 		 rs.getInt(2),
                         rs.getInt(3),
                         rs.getInt(4),
-                        rs.getInt(5)));
+                        rs.getInt(5),
+                        rs.getInt(6)));
             }
         } catch (Exception e) {
             // TODO: handle exception
         }
         return list;
+    }
+    public float countProduceByMonth(int month) {
+        String querry = "select  sum(SoLuong) from ChiTietDonHang \r\n"
+        		+ "inner join DonHang on DonHang.MaDH=ChiTietDonHang.MaDH\r\n"
+        		+ "where MONTH(ThoiGian)=? and isDeleted=0 ";
+        float sumproduce = 0;
+        
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(querry);
+            ps.setInt(1, month);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	sumproduce=rs.getInt(1);
+            			
+            }
+            return sumproduce;
+
+        } catch (Exception e) {
+        }
+        return sumproduce;
     }
 }

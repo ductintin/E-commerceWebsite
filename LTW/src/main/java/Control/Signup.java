@@ -64,7 +64,7 @@ public class Signup extends HttpServlet{
         	KH.setMK(password);
         	KH.setPhone(phone);
         	KH.setRole(3);
-        	KH.setIsDeleted(0);
+        	KH.setIsDelete(0);
         	
         	if(KHDao.findVendorByAccountName(accountName)== null) {
         		destPage = "/views/vendor/login.jsp";

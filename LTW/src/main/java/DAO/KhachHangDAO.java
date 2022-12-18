@@ -227,6 +227,52 @@ public class KhachHangDAO {
         } catch (Exception e) {
         }
     }
+    public String userofmounth()
+    {
+    	String query = "select top(1) TenKH, count(MaDH) as TongDH\r\n"
+    			+ "from KhachHang \r\n"
+    			+ "inner join DonHang on DonHang.MaKH=KhachHang.MaKH\r\n"
+    			+ "where DonHang.isDeleted=0 and MONTH(ThoiGian)=MONTH(GETDATE())\r\n"
+    			+ "group by TenKH\r\n"
+    			+ "order by TongDH DESC";
+    	String tenkh = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	tenkh=rs.getString(1);
+            			
+            }
+            return tenkh;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return tenkh;
+    }
+    public String orderofuserbymounth()
+    {
+    	String query = "select top(1) TenKH, count(MaDH) as TongDH\r\n"
+    			+ "from KhachHang \r\n"
+    			+ "inner join DonHang on DonHang.MaKH=KhachHang.MaKH\r\n"
+    			+ "where DonHang.isDeleted=0 and MONTH(ThoiGian)=MONTH(GETDATE())\r\n"
+    			+ "group by TenKH\r\n"
+    			+ "order by TongDH DESC";
+    	String tongdh = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	tongdh=rs.getString(2);
+            			
+            }
+            return tongdh;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return tongdh;
+    }
     public static void main(String[] args) {
     	KhachHangDAO sanPhamDAO = new KhachHangDAO();
         List<KhachHang> list = sanPhamDAO.listuser();

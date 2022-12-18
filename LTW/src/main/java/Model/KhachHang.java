@@ -8,8 +8,8 @@ public class KhachHang {
 	private String Email;
 	private String Phone;
 	private String DiaChi;
-	private int isDelete;
 	private int Role;
+	private int isDelete;
 	public int getMaKH() {
 		return MaKH;
 	}
@@ -52,24 +52,20 @@ public class KhachHang {
 	public void setDiaChi(String diaChi) {
 		DiaChi = diaChi;
 	}
-	public int getIsDelete() {
-		return isDelete;
-	}
-	public void setIsDelete(int isDelete) {
-		this.isDelete = isDelete;
-	}
 	public int getRole() {
 		return Role;
 	}
 	public void setRole(int role) {
 		Role = role;
 	}
-	public KhachHang() {
-		super();
-		// TODO Auto-generated constructor stub
+	public int getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
 	}
 	public KhachHang(int maKH, String tenKH, String tenTK, String mK, String email, String phone, String diaChi,
-			int isDelete, int role) {
+			int role, int isDelete) {
 		super();
 		MaKH = maKH;
 		TenKH = tenKH;
@@ -78,14 +74,19 @@ public class KhachHang {
 		Email = email;
 		Phone = phone;
 		DiaChi = diaChi;
-		this.isDelete = isDelete;
 		Role = role;
+		this.isDelete = isDelete;
+	}
+	public KhachHang() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public String toString() {
 		return "KhachHang [MaKH=" + MaKH + ", TenKH=" + TenKH + ", TenTK=" + TenTK + ", MK=" + MK + ", Email=" + Email
-				+ ", Phone=" + Phone + ", DiaChi=" + DiaChi + ", isDelete=" + isDelete + ", Role=" + Role + "]";
+				+ ", Phone=" + Phone + ", DiaChi=" + DiaChi + ", Role=" + Role + ", isDelete=" + isDelete + "]";
 	}
+	
 	
 
 }

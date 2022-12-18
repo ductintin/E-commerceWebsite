@@ -7,7 +7,6 @@ public class DonHang {
     int MaKH;
     int TongTien;
     Date ThoiGian;
-    int MaTrangThai;
     int isDelete;
 	public int getMaDH() {
 		return MaDH;
@@ -33,12 +32,7 @@ public class DonHang {
 	public void setThoiGian(Date thoiGian) {
 		ThoiGian = thoiGian;
 	}
-	public int getMaTrangThai() {
-		return MaTrangThai;
-	}
-	public void setMaTrangThai(int maTrangThai) {
-		MaTrangThai = maTrangThai;
-	}
+	
 	public int getIsDelete() {
 		return isDelete;
 	}
@@ -49,19 +43,18 @@ public class DonHang {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public DonHang(int maDH, int maKH, int tongTien, Date thoiGian, int maTrangThai, int isDelete) {
+	public DonHang(int maDH, int maKH, int tongTien, Date thoiGian, int isDelete) {
 		super();
 		MaDH = maDH;
 		MaKH = maKH;
 		TongTien = tongTien;
-		ThoiGian = thoiGian;
-		MaTrangThai = maTrangThai;
+		ThoiGian = thoiGian;		
 		this.isDelete = isDelete;
 	}
 	@Override
 	public String toString() {
 		return "DonHang [MaDH=" + MaDH + ", MaKH=" + MaKH + ", TongTien=" + TongTien + ", ThoiGian=" + ThoiGian
-				+ ", MaTrangThai=" + MaTrangThai + ", isDelete=" + isDelete + "]";
+				+ ", isDelete=" + isDelete + "]";
 	}
 	
 }

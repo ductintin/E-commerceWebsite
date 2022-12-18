@@ -134,6 +134,77 @@ public class ShopDAO {
         } catch (Exception e) {
         }
     }
+    public String countorderofshopbymounth()
+    {
+    	String query = "select top(1) count(DonHang.MaDH) as TongDH, sum(ChiTietDonHang.SoLuong) from SanPham\r\n"
+    			+ "inner join ChiTietDonHang on ChiTietDonHang.MaSP =SanPham.MaSP\r\n"
+    			+ "inner join Shop on Shop.MaShop = SanPham.MaShop\r\n"
+    			+ "inner join DonHang on DonHang.MaDH=ChiTietDonHang.MaDH\r\n"
+    			+ "where DonHang.isDeleted=0 and MONTH(ThoiGian)=MONTH(GETDATE())\r\n"
+    			+ "ORDER BY TongDH DESC ";
+    	String countorderofshop = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	countorderofshop=rs.getString(1);
+            			
+            }
+            return countorderofshop;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return countorderofshop;
+    }
+    public String countproduceofshopbymounth()
+    {
+    	String query = "select top(1) count(DonHang.MaDH) as TongDH, sum(ChiTietDonHang.SoLuong) from SanPham\r\n"
+    			+ "inner join ChiTietDonHang on ChiTietDonHang.MaSP =SanPham.MaSP\r\n"
+    			+ "inner join Shop on Shop.MaShop = SanPham.MaShop\r\n"
+    			+ "inner join DonHang on DonHang.MaDH=ChiTietDonHang.MaDH\r\n"
+    			+ "where DonHang.isDeleted=0 and MONTH(ThoiGian)=MONTH(GETDATE())\r\n"
+    			+ "ORDER BY TongDH DESC ";
+    	String countproduceofshop = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	countproduceofshop=rs.getString(2);
+            			
+            }
+            return countproduceofshop;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return countproduceofshop;
+    }
+    public String tenshopofshopbymounth()
+    {
+    	String query = "select top(1) TenShop,count(DonHang.MaDH) as TongDH from SanPham\r\n"
+    			+ "inner join ChiTietDonHang on ChiTietDonHang.MaSP =SanPham.MaSP\r\n"
+    			+ "inner join Shop on Shop.MaShop = SanPham.MaShop\r\n"
+    			+ "inner join DonHang on DonHang.MaDH=ChiTietDonHang.MaDH\r\n"
+    			+ "where DonHang.isDeleted=0 and MONTH(ThoiGian)=MONTH(GETDATE())\r\n"
+    			+ "Group by TenShop\r\n"
+    			+ "ORDER BY TongDH DESC\r\n"
+    			+ " ";
+    	String tenshopofshop = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	tenshopofshop=rs.getString(1);
+            			
+            }
+            return tenshopofshop;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return tenshopofshop;
+    }
     public static void main(String[] args) {
     	ShopDAO sanPhamDAO = new ShopDAO();
         List<Shop> list = sanPhamDAO.listshopbymaDH("2");
