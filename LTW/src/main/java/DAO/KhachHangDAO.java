@@ -282,7 +282,79 @@ public class KhachHangDAO {
 		} catch (Exception e) {
 		}
 	}
+	public String userofmounth()
+    {
+    	String query = "select top(1) TenKH, count(MaDH) as TongDH\r\n"
+    			+ "from KhachHang \r\n"
+    			+ "inner join DonHang on DonHang.MaKH=KhachHang.MaKH\r\n"
+    			+ "where DonHang.isDeleted=0 and MONTH(ThoiGian)=MONTH(GETDATE())\r\n"
+    			+ "group by TenKH\r\n"
+    			+ "order by TongDH DESC";
+    	String tenkh = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	tenkh=rs.getString(1);
+            			
+            }
+            return tenkh;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return tenkh;
+    }
+    public String orderofuserbymounth()
+    {
+    	String query = "select top(1) TenKH, count(MaDH) as TongDH\r\n"
+    			+ "from KhachHang \r\n"
+    			+ "inner join DonHang on DonHang.MaKH=KhachHang.MaKH\r\n"
+    			+ "where DonHang.isDeleted=0 and MONTH(ThoiGian)=MONTH(GETDATE())\r\n"
+    			+ "group by TenKH\r\n"
+    			+ "order by TongDH DESC";
+    	String tongdh = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	tongdh=rs.getString(2);
+            			
+            }
+            return tongdh;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return tongdh;
+    } public List<KhachHang> listuser()
+    {
+    	String query = "select * from KhachHang where (Role=4 or Role=3) and isDelete = 0";
+        List<KhachHang> list = new ArrayList<>();
 
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new KhachHang(rs.getInt(1),
+	                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return list;
+    
+    }
 	public void EditProfile(KhachHang KH) {
 		String query = "UPDATE KhachHang set TenKH = ?, Email = ?, Phone = ?, DiaChi = ? WHERE MaKH = ?";
 		try {

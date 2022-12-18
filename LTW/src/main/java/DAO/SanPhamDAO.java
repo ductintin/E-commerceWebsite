@@ -343,7 +343,26 @@ public class SanPhamDAO {
     	
     	
     }
-    
+    public String countuserbymounth()
+    {
+    	String query = "select  sum(SoLuong) from ChiTietDonHang \r\n"
+    			+ "inner join DonHang on DonHang.MaDH=ChiTietDonHang.MaDH\r\n"
+    			+ "where MONTH(ThoiGian)=MONTH(GETDATE()) and isDeleted=0";
+    	String countproduce = null;
+    	try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	countproduce=rs.getString(1);
+            			
+            }
+            return countproduce;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+		return countproduce;
+    }
     public static void main(String[] args) {
     	SanPhamDAO sanPhamDAO = new SanPhamDAO();
         List<SanPham> list = sanPhamDAO.listproducebymaDH("1");
