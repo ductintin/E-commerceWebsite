@@ -20,6 +20,11 @@
 <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600"
 	rel="stylesheet" type="text/css">
 <link href="css/style.css" rel="stylesheet" type="text/css">
+<style>
+h1 {
+	text-align: center;
+}
+</style>
 </head>
 <body>
 
@@ -43,17 +48,19 @@
 			</div>
 		</div>
 	</nav>
-	<h3 style="color:green">${msg }</h3>
-	<div>
+	<h1>Thông tin người dùng</h1>
+	<h3 style="color:green">${msg}</h3>
+	<div style="border-style: solid; border-width: 1px;">
 		<p>Tên khách hàng : ${KH.getTenKH()}</p>
 		<p>Email : ${KH.getEmail()}</p>
 		<p>Điện thoại : ${KH.getPhone()}</p>
 		<p>Địa chỉ : ${KH.getDiaChi()}</p>
 	</div>
-	
+
 	<a href="<c:url value='/customer/changepassword' />">Đổi mật khẩu</a>
 	<br>
-	<a href="<c:url value='/customer/profile/edit' />">Thay đổi thông tin</a>
+	<a href="<c:url value='/customer/profile/edit' />">Thay đổi thông
+		tin cá nhân</a>
 	<!-- JS -->
 	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"
 		type="text/javascript"></script>

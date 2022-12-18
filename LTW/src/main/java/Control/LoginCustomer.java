@@ -49,6 +49,7 @@ public class LoginCustomer extends HttpServlet {
 			System.out.print(KH);
 			if (KH.equals(null) == false && KH.getRole() == 3) {
 				HttpSession session = req.getSession();
+				req.setAttribute("msg", "");
 				session.setAttribute("user", KH);
 				resp.sendRedirect(req.getContextPath() + "/");
 			} else {

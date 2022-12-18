@@ -19,6 +19,9 @@ public class ProfileCustomer extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		KhachHang KH = (KhachHang) session.getAttribute("user");
+		String msg = (String) session.getAttribute("msg");
+		req.setAttribute("msg", msg);
+		session.setAttribute("msg", "");
 		req.setAttribute("KH", KH);
 		req.getRequestDispatcher("/customer/profile.jsp").forward(req, resp);
 	}

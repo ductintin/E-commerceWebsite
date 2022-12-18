@@ -44,6 +44,7 @@ public class UpdateProfileCustomer extends HttpServlet {
 		KHDao.EditProfile(KH);
 		HttpSession session = req.getSession();
 		session.setAttribute("user", KH);
+		session.setAttribute("msg", "Thay đổi thông tin thành công");
 		resp.sendRedirect(req.getContextPath() + "/customer/profile");
 	}
 

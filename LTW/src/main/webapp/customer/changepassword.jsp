@@ -20,6 +20,11 @@
 <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600"
 	rel="stylesheet" type="text/css">
 <link href="css/style.css" rel="stylesheet" type="text/css">
+<style>
+h1 {
+	text-align: center;
+}
+</style>
 </head>
 <body>
 
@@ -45,6 +50,7 @@
 			</div>
 		</div>
 	</nav>
+	<h1>Đổi mật khẩu</h1>
 	<h3 style="color:red">${msg}</h3>
 	<form role="form" action="changepassword" method="POST">
 		<div class="password-field" style="width: 100%;">
