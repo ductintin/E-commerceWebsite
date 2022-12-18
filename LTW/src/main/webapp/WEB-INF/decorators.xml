@@ -6,9 +6,9 @@
 	</decorator>
 	
 
-	<decorator name="web" page="web.jsp">
+	<!-- <decorator name="web" page="web.jsp">
 		<pattern>/*</pattern>
-	</decorator>
+	</decorator> -->
 
 
 	<decorator name="seller" page="seller.jsp">

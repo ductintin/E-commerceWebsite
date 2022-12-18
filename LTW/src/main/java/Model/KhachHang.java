@@ -9,13 +9,13 @@ public class KhachHang {
 	private String DiaChi;
 	private String MK;
 	private int Role;
-	private int IsDeleted;
+	private int IsDelete;
 	
-	public int getIsDeleted() {
-		return IsDeleted;
+	public int getIsDelete() {
+		return IsDelete;
 	}
-	public void setIsDeleted(int isDeleted) {
-		IsDeleted = isDeleted;
+	public void setIsDelete(int isDelete) {
+		IsDelete = isDelete;
 	}
 	public int getMaKH() {
 		return MaKH;
@@ -36,7 +36,8 @@ public class KhachHang {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public KhachHang(int maKH, String tenKH, String tenTK, String email, String phone, String diaChi, String mK, int role, int isDelete) {
+	public KhachHang(int maKH, String tenKH, String tenTK, String mK, String email, String phone, String diaChi,
+			int role, int isDelete) {
 		super();
 		MaKH = maKH;
 		TenKH = tenKH;
@@ -46,7 +47,7 @@ public class KhachHang {
 		DiaChi = diaChi;
 		MK = mK;
 		Role = role;
-		IsDeleted = isDelete;
+		IsDelete = isDelete;
 	}
 	public void setTenTK(String tenTK) {
 		TenTK = tenTK;
@@ -85,7 +86,7 @@ public class KhachHang {
 	public String toString() {
 		return "KhachHang [MaKH=" + MaKH + ", TenKH=" + TenKH + ", TenTK=" + TenTK + ", Email=" + Email + ", Phone="
 				+ Phone + ", DiaChi=" + DiaChi + ", MK=" + MK + ", Role="
-				+ Role + ", IsDeleted=" + IsDeleted + "]";
+				+ Role + ", IsDeleted=" + IsDelete + "]";
 	}
 	
 }
