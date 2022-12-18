@@ -54,9 +54,6 @@ public class AddStoreVendor extends HttpServlet{
         String DiaChi = req.getParameter("DiaChi");
         String EmailShop = req.getParameter("Email");
         
-        System.out.print(req.getParameter("vendor"));
-        System.out.print(PhoneShop);
-        
         try {
 	        	
 			  shop.setTenShop(TenShop); shop.setMaSeller(MaSeller);
@@ -68,7 +65,6 @@ public class AddStoreVendor extends HttpServlet{
 			  shop = shopDao.getShopByMaSeller(MaSeller);
 	    	  session.setAttribute("Shop", shop);
 	    	  
-	    	  System.out.println(shop);
 			  
 			  resp.sendRedirect(req.getContextPath()+ "/vendor/home");
 			 

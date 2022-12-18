@@ -43,6 +43,37 @@ public class SanPhamDAO {
     	}
     }
     
+    public SanPham getProductById(int maSP) {
+    	String query = "Select * from SanPham where MaSP = ?";
+    	
+    	try {
+    		conn = new ConnectJDBC().getConnection();
+    		ps = conn.prepareStatement(query);
+    		
+    		ps.setInt(1, maSP);
+    		
+    		rs = ps.executeQuery();
+    		
+    		while(rs.next()) {
+    			return new SanPham(rs.getInt(1),
+               		 rs.getInt(2),
+                     rs.getString(3),
+                     rs.getString(4),
+                     rs.getInt(5),
+                     rs.getInt(6),
+                     rs.getInt(7),
+                     rs.getString(8),
+                     rs.getInt(9),
+                     rs.getInt(10),
+                     rs.getInt(11));
+    		}
+    		
+    	}catch(Exception e) {
+    		System.out.println(e);
+    	}
+    	return null;
+    }
+    
     
     public List<SanPham> listallproduce()
     {

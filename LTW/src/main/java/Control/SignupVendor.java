@@ -47,11 +47,6 @@ public class SignupVendor extends HttpServlet{
         String phone = req.getParameter("Phone");
         String address = req.getParameter("DiaChi");
 
-        System.out.print(userName);
-        System.out.print(accountName);
-        System.out.print(password);
-        System.out.print(email);
-        System.out.print(phone);
         KhachHangDAO KHDao = new KhachHangDAO();
         KhachHang KH = new KhachHang();
         String msg = "";
@@ -87,7 +82,6 @@ public class SignupVendor extends HttpServlet{
         	}       	
         	RequestDispatcher dispatcher = req.getRequestDispatcher(destPage);
     		dispatcher.forward(req, resp);
-        	System.out.print(msg);
         	
         }catch(Exception e) {
         	e.printStackTrace();

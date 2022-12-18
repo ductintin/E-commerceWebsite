@@ -13,8 +13,8 @@
 
 <link rel="stylesheet"
 	href="<c:url value='/views/vendor/css/home.css'/>">
-	
-	
+
+
 </head>
 <body>
 	<%@include file="/views/vendor/sidebar.jsp"%>
@@ -53,109 +53,137 @@
 
 						<c:forEach items="${sp.productImages}" var="img">
 							<c:url value="/image?fname=${img.anh}" var="imgUrl"></c:url>
-							<td><img height="50" width="50" src="${imgUrl}"
+							<c:if test="${not empty img.anh }">
+								<td><img height="50" width="50" src="${imgUrl}"
 								alt="chưa thêm ảnh" /></td>
+							</c:if>
+							
+							<c:if test="${empty img.anh }">
+								<td>hello</td>						
+							</c:if>
+							
 						</c:forEach>
-						
+
 						<td>
-						<div class="container-modal">
+							<div class="container-modal">
 
-						<!-- Button đăng nhập để mở form đăng nhập -->
-						<button id="myBtnEdit" href="#myModaleidt${sp.maSP}">Chỉnh sửa</button>
+								<!-- Button đăng nhập để mở form đăng nhập -->
+								<button id="myBtnEdit" href="#myModaleidt${sp.maSP}">Chỉnh
+									sửa</button>
 
-						<div id="myModaleidt${sp.maSP}" class="modal">
-							<div class="modal-content">
-								<form action="edit" method="POST" enctype="multipart/form-data">
-									<span class="closeEdit">&times;</span>
-									<h2>${sp.tenSP}</h2>
-									<div class="fomrgroup">
+								<div id="myModaleidt${sp.maSP}" class="modal">
+									<div class="modal-content">
+
+										<form action="edit" method="POST"
+											enctype="multipart/form-data">
+											<span class="closeEdit">&times;</span>
+											<h2>${sp.tenSP}</h2>
+											<div class="fomrgroup">
 
 
 
-										<b>Chọn danh mục:</b> <select name="maDM" id="pet-select"
-											required>
-											
-											<c:if test="${not empty sp.maDM }">
-											<option value="${sp.maDM}">${o.tenDM}</option>
-											
-											</c:if>
-											<%-- <c:forEach var="o" items="${listdm}">
+												<b>Chọn danh mục:</b> <select name="maDM" id="pet-select"
+													required>
+
+													<c:if test="${not empty sp.maDM }">
+														<option value="${sp.maDM}">${o.tenDM}</option>
+
+													</c:if>
+													<%-- <c:forEach var="o" items="${listdm}">
 
 												<option value="${o.maDM}">${o.tenDM}</option>
 
 											</c:forEach> --%>
-										</select>
+												</select>
 
 
+											</div>
+
+											<div class="fomrgroup">
+												<b>Mã cửa hàng:</b>
+												<c:url value="${Shop}" var="shop"></c:url>
+												<input type="text" id=" " value="${Shop.maShop }"
+													name="shop" readonly>
+											</div>
+
+											<div class="fomrgroup">
+												<b>Mã người bán:</b>
+												<c:url value="${Vendor}" var="vendor"></c:url>
+												<input type="text" id=" " value="${Vendor.maKH }"
+													name="vendor" readonly>
+											</div>
+
+											<div class="fomrgroup">
+												<b>Tên sản phẩm:</b> <input type="text" id=" "
+													value="${sp.tenSP }" name="TenSP" required>
+											</div>
+
+											<div class="fomrgroup">
+												<b>Mã sản phẩm:</b> <input type="text" id=" "
+													value="${sp.maSP }" name="MaSP" required>
+											</div>
+											<div class="fomrgroup">
+												<b>Mô Tả:</b> <input type="text" id=" " value="${sp.moTa }"
+													name="MoTa" required>
+											</div>
+
+											<div class="fomrgroup">
+												<b>Giá bán:</b> <input type="text" id=" "
+													value="${sp.giaBanThuong }" name="Gia" required>
+											</div>
+
+											<div class="fomrgroup">
+												<b>Giá khuyến mãi:</b> <input type="text" id=" "
+													value="${sp.giaKhuyenMai }" name="KhuyenMai" required>
+											</div>
+
+											<div class="fomrgroup">
+												<b>Số lượng kho:</b> <input type="text" id=" "
+													value="${sp.soLuong }" name="SoLuongKho" required>
+											</div>
+
+											<div class="fomrgroup">
+												<b>Mô tả ngắn:</b> <input type="text" id=" "
+													value="${sp.moTaNgan }" name="MoTaNgan" required>
+											</div>
+
+
+											
+											<div class="form-group">
+											<c:forEach items="${sp.productImages}" var="img" varStatus="STT">
+												<c:url value="/image?fname=${img.anh}" var="imgUrl"></c:url>
+												<c:if test="${not empty imgUrl}">
+													<input type="file" name="anh${STT.index+1 }" value="${img.anh }"/>
+												<img height="50" width="50" src="${imgUrl}"
+													alt="chưa thêm ảnh" />
+												</c:if>
+												
+												<c:if test="${imgUrl == null}">
+												<input type="file" name="anh${STT.index+1 }"/>
+												</c:if>
+											</c:forEach>
+											
+											</div>
+
+
+
+
+											<button type="submit">Chỉnh sửa sản phẩm</button>
+											<button type="reset" class="">Hủy</button>
+
+										</form>
 									</div>
 
-									<div class="fomrgroup">
-										<b>Mã cửa hàng:</b>
-										<c:url value="${Shop}" var="shop"></c:url>
-										<input type="text" id=" " value="${Shop.maShop }" name="shop"
-											readonly >
-									</div>
-
-									<div class="fomrgroup" >
-										<b>Mã người bán:</b>
-										<c:url value="${Vendor}" var="vendor"></c:url>
-										<input type="text" id=" " value="${Vendor.maKH }"
-											name="vendor" readonly>
-									</div>
-
-									<div class="fomrgroup">
-										<b>Tên sản phẩm:</b> <input type="text" id=" " value="${sp.tenSP }" name="TenSP"
-											required>
-									</div>
-									<div class="fomrgroup">
-										<b>Mô Tả:</b> <input type="text" id=" " value="${sp.moTa } }"name="MoTa" required>
-									</div>
-
-									<div class="fomrgroup">
-										<b>Giá bán:</b> <input type="text" id=" " value="${sp.giaBanThuong }"name="Gia" required>
-									</div>
-
-									<div class="fomrgroup">
-										<b>Giá khuyến mãi:</b> <input type="text" id=" " value="${sp.giaKhuyenMai }"
-											name="KhuyenMai" required>
-									</div>
-
-									<div class="fomrgroup">
-										<b>Số lượng kho:</b> <input type="text" id=" " value="${sp.soLuong }"
-											name="SoLuongKho" required>
-									</div>
-
-									<div class="fomrgroup">
-										<b>Mô tả ngắn:</b> <input type="text" id=" " value="${sp.moTaNgan }"name="MoTaNgan"
-											required>
-									</div>
-
-									<div class="form-group">
-										<label>Ảnh sản phẩm</label> <input type="file" name="anh1"
-											required /> <input type="file" name="anh2" required /> <input
-											type="file" name="anh3" required /> <input type="file"
-											name="anh4" required />
-									</div>
-
-
-
-
-									<button type="submit">Chỉnh sửa sản phẩm</button>
-									<button type="reset" class="">Thoát</button>
-
-								</form>
+								</div>
 							</div>
 
-						</div>
-						</div>
-						
-						
+
 						</td>
 
 					</tr>
 
-					
-						
+
+
 				</c:forEach>
 
 
@@ -167,7 +195,7 @@
 	</div>
 
 	<!-- =========== Scripts =========  -->
-	
+
 
 	<!-- ====== ionicons ======= -->
 	<script type="module"
@@ -216,48 +244,46 @@
 			}
 			
 		} */
-		
-		
+
 		// Get the button that opens the modal
 		var btn = document.querySelectorAll("#myBtnEdit");
 
 		// All page modals
 		var modals = document.querySelectorAll(".modal");
-		
-		
 
 		// Get the <span> element that closes the modal
 		var spans = document.querySelectorAll(".closeEdit");
-		
 
 		// When the user clicks the button, open the modal
 		for (var i = 0; i < btn.length; i++) {
-		 btn[i].onclick = function(e) {
-		    e.preventDefault();
-		    modal = document.querySelector(e.target.getAttribute("href"));
-		    modal.style.display = "block";
-		    console.log(modal);
-		 }
+			btn[i].onclick = function(e) {
+				e.preventDefault();
+				modal = document.querySelector(e.target.getAttribute("href"));
+				modal.style.display = "block";
+				console.log(modal);
+			}
 		}
 
 		// When the user clicks on <span> (x), close the modal
 		for (var i = 0; i < spans.length; i++) {
-		 spans[i].onclick = function() {
-		    for (var index in modals) {
-		    	console.log(modals[index]);
-		      if (typeof modals[index].style !== 'undefined')  modals[index].style.display = "none";    
-		    }
-		    
-		 }
+			spans[i].onclick = function() {
+				for ( var index in modals) {
+					console.log(modals[index]);
+					if (typeof modals[index].style !== 'undefined')
+						modals[index].style.display = "none";
+				}
+
+			}
 		}
 
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
-		    if (event.target.classList.contains('modal')) {
-		     for (var index in modals) {
-		      if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
-		     }
-		    }
+			if (event.target.classList.contains('modal')) {
+				for ( var index in modals) {
+					if (typeof modals[index].style !== 'undefined')
+						modals[index].style.display = "none";
+				}
+			}
 		}
 	</script>
 </body>

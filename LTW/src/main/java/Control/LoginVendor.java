@@ -57,15 +57,15 @@ public class LoginVendor extends HttpServlet{
         String accountName = req.getParameter("TenTK");
         String password = req.getParameter("MK");
         
-        HttpSession session = req.getSession();
         
-        session.setMaxInactiveInterval(10000*60);
         
         String destPage = "/views/vendor/login.jsp";
         try {
         	KH = KHDao.login(accountName, password);
         	
-        	
+        	HttpSession session = req.getSession();
+            
+            session.setMaxInactiveInterval(10000*60);
         	System.out.print(KH);
         	if(KH != null) {
         		shop = shopDao.getShopByMaSeller(KH.getMaKH());

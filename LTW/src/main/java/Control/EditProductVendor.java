@@ -2,6 +2,7 @@ package Control;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -53,17 +54,18 @@ public class EditProductVendor extends HttpServlet {
 		KhachHang vendor = (KhachHang) session.getAttribute("Vendor");
 		Shop shop = (Shop) session.getAttribute("Shop");
 		
-		
-
+		/*
+		 * int maSHop = Integer.parseInt(req.getParameter("shop"));
+		 * 
+		 * System.out.println("AAAAAAAAAA"+maSHop+"AAAAAA");
+		 */
 		try {
 			SanPham sp = new SanPham();
-			
+
 			SanPhamDAO spDao = new SanPhamDAO();
 
-			int spIndex = spDao.getLastIndexOfProduct() + 1;
-
 			sp.setMaShop(shop.getMaShop());
-			System.out.println("Mã sản phẩm lớn nhất hiện tại" + spIndex);
+
 			List<FileItem> items = servletFileUpload.parseRequest(req);
 			for (FileItem item : items) {
 
@@ -74,7 +76,8 @@ public class EditProductVendor extends HttpServlet {
 					sp.setMoTa(item.getString("UTF-8"));
 				} else if (item.getFieldName().equals("maDM")) {
 					sp.setMaDM(Integer.parseInt(item.getString("UTF-8")));
-					System.out.println("Mã danh mục nè" + Integer.parseInt(item.getString("UTF-8")));
+				} else if (item.getFieldName().equals("MaSP")) {
+					sp.setMaSP(Integer.parseInt(item.getString("UTF-8")));
 				} else if (item.getFieldName().equals("Gia")) {
 					sp.setGiaBanThuong(Integer.parseInt(item.getString("UTF-8")));
 				} else if (item.getFieldName().equals("KhuyenMai")) {
@@ -85,9 +88,13 @@ public class EditProductVendor extends HttpServlet {
 					sp.setMoTaNgan(item.getString("UTF-8"));
 				}
 			}
-
-			//spDao.createProductByVendor(sp);
-
+			
+			spDao.editProductByVendor(sp);
+			 
+			AnhSanPhamDAO anhDao = new AnhSanPhamDAO();
+			List<AnhSanPham> images = new ArrayList<>();
+			
+			
 			for (FileItem item : items) {
 				if (item.getFieldName().equals("anh1")) {
 					String originalFileName = item.getName();
@@ -98,12 +105,14 @@ public class EditProductVendor extends HttpServlet {
 					item.write(file);
 
 					AnhSanPham anh = new AnhSanPham();
-					AnhSanPhamDAO anhDao = new AnhSanPhamDAO();
+					
 
-					anh.setMaSP(spIndex);
 					anh.setAnh("product/" + fileName);
-
-					anhDao.addProductImageByVendor(anh);
+					anh.setMaSP(sp.getMaSP());
+					System.out.println("Anh ne:" + anh.getAnh());
+					
+					images.add(anh);
+					
 				} else if (item.getFieldName().equals("anh2")) {
 					String originalFileName = item.getName();
 					int index = originalFileName.lastIndexOf(".");
@@ -113,11 +122,11 @@ public class EditProductVendor extends HttpServlet {
 					item.write(file);
 
 					AnhSanPham anh = new AnhSanPham();
-					AnhSanPhamDAO anhDao = new AnhSanPhamDAO();
-					anh.setMaSP(spIndex);
 					anh.setAnh("product/" + fileName);
-
-					anhDao.addProductImageByVendor(anh);
+					anh.setMaSP(sp.getMaSP());
+					System.out.println("Anh ne:" + anh.getAnh());
+					
+					images.add(anh);
 				} else if (item.getFieldName().equals("anh3")) {
 					String originalFileName = item.getName();
 					int index = originalFileName.lastIndexOf(".");
@@ -127,11 +136,15 @@ public class EditProductVendor extends HttpServlet {
 					item.write(file);
 
 					AnhSanPham anh = new AnhSanPham();
-					AnhSanPhamDAO anhDao = new AnhSanPhamDAO();
-					anh.setMaSP(spIndex);
-					anh.setAnh("product/" + fileName);
+					
 
-					anhDao.addProductImageByVendor(anh);
+					anh.setAnh("product/" + fileName);
+					anh.setMaSP(sp.getMaSP());
+					System.out.println("Anh ne:" + anh.getAnh());
+					
+					images.add(anh);
+
+					
 				} else if (item.getFieldName().equals("anh4")) {
 					String originalFileName = item.getName();
 					int index = originalFileName.lastIndexOf(".");
@@ -141,20 +154,26 @@ public class EditProductVendor extends HttpServlet {
 					item.write(file);
 
 					AnhSanPham anh = new AnhSanPham();
-					AnhSanPhamDAO anhDao = new AnhSanPhamDAO();
-					anh.setMaSP(spIndex);
+					
 					anh.setAnh("product/" + fileName);
+					
+					System.out.println("Anh ne:" + anh.getAnh());
+					anh.setMaSP(sp.getMaSP());
+					
+					images.add(anh);
 
-					anhDao.addProductImageByVendor(anh);
 
-					System.out.println(anh);
 				}
+				
+				
 			}
+			
+			anhDao.edit(images, sp.getMaSP());
 
 			resp.sendRedirect(req.getContextPath() + "/vendor/product/list");
 
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("Lỗi trong EditVendor:"+e);
 
 		}
 	}

@@ -74,7 +74,6 @@ public class AddProductVendor extends HttpServlet {
 			int spIndex = spDao.getLastIndexOfProduct() + 1;
 			
 			sp.setMaShop(shop.getMaShop());
-			System.out.println("Mã sản phẩm lớn nhất hiện tại" + spIndex);
 			List<FileItem> items = servletFileUpload.parseRequest(req);
 			for (FileItem item : items) {
 				

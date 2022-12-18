@@ -42,8 +42,6 @@ public class ProductVendor extends HttpServlet{
 		Shop shop = (Shop)session.getAttribute("Shop");
 		KhachHang vendor = (KhachHang)session.getAttribute("Vendor");
 		
-		System.out.println("MaShop trong ProductVendor" + shop.getMaShop());			
-		System.out.println("Ma NG Ban trong ProductVendor" + vendor.getMaKH());
 		
 		DanhMucDAO dmdao = new DanhMucDAO();
 		SanPhamDAO spDao = new SanPhamDAO();
@@ -58,13 +56,11 @@ public class ProductVendor extends HttpServlet{
 		for(DanhMuc dm : listdm) {
 			List<SanPham> spList = spDao.listproducebymaDM(String.valueOf(dm.getMaDM()));
 			
-			System.out.println("Helllooo ne nha troi oi"+spList);
 			for(SanPham sp : spList) {
 				dm.addProduct(sp);
 				List<AnhSanPham> anhspList = anhspDao.listProductImageByIdProduct(sp.getMaSP());
 				for(AnhSanPham img : anhspList) {
 					sp.addProductImage(img);
-					System.out.println(img);
 					
 				}
 				
@@ -74,7 +70,6 @@ public class ProductVendor extends HttpServlet{
 		
 		req.setAttribute("listdm", listdm);
 		
-		System.out.println(listdm);
 		/*
 		 * List<SanPham> spList = spDao.listProductByIdShop(shop.getMaShop());
 		 * req.setAttribute("spList", spList);
