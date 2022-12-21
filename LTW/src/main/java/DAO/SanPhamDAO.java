@@ -132,6 +132,37 @@ public class SanPhamDAO {
         }
         return list;
     }
+    
+    public List<SanPham> listproducebymaDMandMaShop(String maDM, int MaShop)
+    {
+    	String query = "select * from SanPham where isDeleted=0 and maDM=? and MaShop =?";
+        List<SanPham> list = new ArrayList<>();
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, maDM);
+            ps.setInt(2, MaShop);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new SanPham(rs.getInt(1),
+                		 rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getInt(11)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return list;
+    }
     public List<SanPham> listproduceoforderdetailbymaShop(String maShop)
     {
     	String query = "select SanPham.MaSP, MaDH,TenSP,MoTa,GiaBanThuong,GiaKhuyenMai, SanPham.SoLuong,MoTaNgan,isDeleted,SoLuongDaBan,SanPham.MaShop\r\n"

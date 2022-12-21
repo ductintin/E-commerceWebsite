@@ -8,7 +8,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Sliding Sign In Sign Up Page</title>
+  <title>Đăng nhập</title>
     <link rel="stylesheet" href="<c:url value='/views/vendor/css/login.css'/>">
 
 </head>

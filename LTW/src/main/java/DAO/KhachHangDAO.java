@@ -68,6 +68,7 @@ public class KhachHangDAO {
              ps.setInt(7, KH.getRole());
              ps.setInt(8, KH.getIsDelete());
              ps.executeUpdate();
+             
     		
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -104,6 +105,34 @@ public class KhachHangDAO {
         return list;
     
     }
+    
+    //Moi
+    public KhachHang findVendorById(int maKH) {
+    	try {
+    		conn = new ConnectJDBC().getConnection();
+    		String sql = "Select * from KhachHang where Role = 2 and MaKH = ?";
+    		ps = conn.prepareStatement(sql);
+    		ps.setInt(1, maKH);
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	return new KhachHang(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9));
+            }
+    	}catch(Exception e) {
+    		
+    	}
+    	
+    	return null;
+    }
+    //end
     
     public KhachHang findVendorByAccountName(String accountName) {
     	try {
@@ -148,6 +177,14 @@ public class KhachHangDAO {
         
     	return -1;
     }
+    
+	/*
+	 * public void ChangePasswordVendor(String accountName, String password) {
+	 * String query = "UPDATE KhachHang set MK = ? where TenTK = ?"; try { conn =
+	 * new ConnectJDBC().getConnection(); ps = conn.prepareStatement(query);
+	 * ps.setString(1, password); ps.setString(2, accountName); ps.executeUpdate();
+	 * } catch (Exception e) { } }
+	 */
     
     public List<KhachHang> getuserbymaKH(String maKH)
     {

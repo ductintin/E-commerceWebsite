@@ -7,7 +7,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Sliding Sign In Sign Up Page</title>
+  <title>Đăng kí</title>
     <link rel="stylesheet" href="<c:url value='/views/vendor/css/signup.css'/>">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

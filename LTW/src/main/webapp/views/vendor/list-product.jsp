@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Danh sách sản phẩm</title>
 
 <link rel="stylesheet"
 	href="<c:url value='/views/vendor/css/home.css'/>">
@@ -22,6 +22,7 @@
 	<div>
 
 		<c:forEach var="o" items="${listdm}" varStatus="STT">
+		<c:if test="${not empty o.products}">
 			<h2>Tên danh mục : ${o.tenDM }</h2>
 			<table style="width: 100%">
 
@@ -55,14 +56,16 @@
 							<c:url value="/image?fname=${img.anh}" var="imgUrl"></c:url>
 							<c:if test="${not empty img.anh }">
 								<td><img height="50" width="50" src="${imgUrl}"
-								alt="chưa thêm ảnh" /></td>
+									alt="chưa thêm ảnh" /></td>
 							</c:if>
-							
+
 							<c:if test="${empty img.anh }">
-								<td>hello</td>						
+								<td>hello</td>
 							</c:if>
-							
+
 						</c:forEach>
+
+
 
 						<td>
 							<div class="container-modal">
@@ -148,21 +151,23 @@
 											</div>
 
 
-											
+
 											<div class="form-group">
-											<c:forEach items="${sp.productImages}" var="img" varStatus="STT">
-												<c:url value="/image?fname=${img.anh}" var="imgUrl"></c:url>
-												<c:if test="${not empty imgUrl}">
-													<input type="file" name="anh${STT.index+1 }" value="${img.anh }"/>
-												<img height="50" width="50" src="${imgUrl}"
-													alt="chưa thêm ảnh" />
-												</c:if>
-												
-												<c:if test="${imgUrl == null}">
-												<input type="file" name="anh${STT.index+1 }"/>
-												</c:if>
-											</c:forEach>
-											
+												<c:forEach items="${sp.productImages}" var="img"
+													varStatus="STT">
+													<c:url value="/image?fname=${img.anh}" var="imgUrl"></c:url>
+													<c:if test="${not empty imgUrl}">
+														<input type="file" name="anh${STT.index+1 }"
+															value="${img.anh }" />
+														<img height="50" width="50" src="${imgUrl}"
+															alt="chưa thêm ảnh" />
+													</c:if>
+
+													<c:if test="${imgUrl == null}">
+														<input type="file" name="anh${STT.index+1 }" />
+													</c:if>
+												</c:forEach>
+
 											</div>
 
 
@@ -180,6 +185,12 @@
 
 						</td>
 
+					
+
+						<td><a
+							href="<c:url value='/vendor/product/delete?id=${sp.maSP}'/>"
+							class="center">Xóa</a></td>
+
 					</tr>
 
 
@@ -189,6 +200,8 @@
 
 
 			</table>
+			
+			</c:if>
 		</c:forEach>
 
 

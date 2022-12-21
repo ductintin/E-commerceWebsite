@@ -67,13 +67,13 @@ public class SignupVendor extends HttpServlet{
         		
         		KhachHang vendor = KHDao.createVendor(KH);
         		
-        		if(vendor != null) {
-        			resp.sendRedirect(req.getContextPath() + "/vendor/login");
-        		}
-        		else {
-        			msg = "Tạo tài khoản thất bại";
-            		req.setAttribute("msg", msg);
-        		}
+        		System.out.println("vendor ne" + vendor);
+        		resp.sendRedirect(req.getContextPath() + "/vendor/login");
+				/*
+				 * if(vendor != null) {
+				 * 
+				 * } else { msg = "Tạo tài khoản thất bại"; req.setAttribute("msg", msg); }
+				 */
         	}
         	else {
         		msg = "Tài khoản đã tồn tại";

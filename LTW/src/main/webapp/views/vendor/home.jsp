@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
+    <title>Trang chủ</title>
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="<c:url value='/views/vendor/css/home.css'/>">
     
@@ -36,17 +36,8 @@
             
             </a> --%>
             
-            <div id ="addStore">
-            		<ion-icon name="add-circle-outline"></ion-icon>
-            </div>
             
-             <div>
-            	<span> ${Vendor.tenKH }</span>
-            	
-            	<span> ${Shop.tenShop }</span>
-            	
-            	<span> ${Shop.maShop }</span>
-            </div>
+
             
             
             <!-- ======================= Cards ================== -->
@@ -267,7 +258,7 @@
 		      <c:if test = "${empty shop }">
 		        <div class="container-modal">
  
-			    <h2>Chào bạn. Hãy bắt đầu tọa cửa hàng cho riêng mình nào!</h2>
+			    <h2>Chào bạn. Hãy bắt đầu tạo cửa hàng cho riêng mình nào!</h2>
 			 
 			    <!-- Button đăng nhập để mở form đăng nhập -->
 			    <button id="myBtn">Tạo cửa hàng</button>

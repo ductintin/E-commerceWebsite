@@ -41,7 +41,7 @@ public class ProductVendor extends HttpServlet{
 		
 		Shop shop = (Shop)session.getAttribute("Shop");
 		KhachHang vendor = (KhachHang)session.getAttribute("Vendor");
-		
+		System.out.println("Ma shop o day ne"+shop.getMaShop());
 		
 		DanhMucDAO dmdao = new DanhMucDAO();
 		SanPhamDAO spDao = new SanPhamDAO();
@@ -54,7 +54,7 @@ public class ProductVendor extends HttpServlet{
 		
 		
 		for(DanhMuc dm : listdm) {
-			List<SanPham> spList = spDao.listproducebymaDM(String.valueOf(dm.getMaDM()));
+			List<SanPham> spList = spDao.listproducebymaDMandMaShop(String.valueOf(dm.getMaDM()),shop.getMaShop());
 			
 			for(SanPham sp : spList) {
 				dm.addProduct(sp);

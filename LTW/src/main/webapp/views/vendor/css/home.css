@@ -199,6 +199,16 @@ body {
   height: 100%;
   overflow: hidden;
   cursor: pointer;
+  padding: 20px;
+}
+
+.user a:link{
+	text-decoration: none;
+	
+	color: black;
+	font-size: 20px;
+	font-weight: 800;
+	
 }
 
 .user img {

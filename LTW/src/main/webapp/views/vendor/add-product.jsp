@@ -66,14 +66,14 @@
 				<b>Mã cửa hàng:</b>
 				<c:url value="${Shop}" var="shop"></c:url>
 				<input type="text" id=" " value="${Shop.maShop }" name="shop"
-					readonly hidden = "true">
+					readonly >
 			</div>
 
-			<div class="fomrgroup" hidden = "hidden">
+			<div class="fomrgroup" >
 				<b>Mã người bán:</b>
 				<c:url value="${Vendor}" var="vendor"></c:url>
 				<input type="text" id=" " value="${Vendor.maKH }" name="vendor"
-					readonly hidden = "true">
+					readonly >
 			</div>
 
 			<div class="fomrgroup">
