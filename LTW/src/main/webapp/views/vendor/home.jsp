@@ -86,6 +86,8 @@
                     </div>
                 </div>
             </div>
+            
+             <%@include file="/views/vendor/chart.jsp" %>  
 
             <!-- ================ Order Details List ================= -->
             <div class="details">

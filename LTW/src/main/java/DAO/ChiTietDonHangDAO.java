@@ -136,4 +136,30 @@ public class ChiTietDonHangDAO {
     	
     }
     
+    public float countProduceByMonthOfShop(int maShop, int month) {
+    	String query = "SELECT sum(ChiTietDonHang.SoLuong) as SLSP FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop)\r\n"+
+    			" where Shop.MaShop = ? and MONTH(ThoiGian)= ? group by Shop.MaShop";
+    	float sumproduce = 0;
+    	try {
+    		conn=new ConnectJDBC().getConnection();
+    		ps = conn.prepareStatement(query);
+    		
+    		ps.setInt(1, maShop);
+    		
+    		ps.setInt(2, month);
+    		
+    		rs = ps.executeQuery();
+    		
+    		while(rs.next()) {
+    			sumproduce = rs.getInt(1);
+    		}
+    		return sumproduce;
+    	}catch(Exception e) {
+    		System.out.println(e);
+    	}
+    	
+    	return sumproduce;
+    	
+    }
+    
 }

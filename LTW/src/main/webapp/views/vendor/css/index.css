@@ -37,6 +37,7 @@ body {
   border-left: 10px solid var(--blue);
   transition: 0.5s;
   overflow: hidden;
+  left: -10px;
 }
 .navigation.active {
   width: 80px;
@@ -133,7 +134,7 @@ body {
 /* ===================== Main ===================== */
 .main {
   position: absolute;
-  width: calc(100% - 300px);
+  width: calc(100% - 200px);
   left: 300px;
   min-height: 100vh;
   background: var(--white);

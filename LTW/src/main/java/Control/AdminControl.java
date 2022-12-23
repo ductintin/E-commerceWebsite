@@ -49,6 +49,7 @@ public class AdminControl extends HttpServlet{
     		String countorderofuser = khdao.orderofuserbymounth();
     		String countorder = dhdao.countorderbymounth();
     		String tenshopofshop=shopdao.tenshopofshopbymounth();
+    		
     		for (int j = 1; j <= 12; j++) {
     			orderbymonth.add(dhdao.countOrderByMonth(j));
     		}

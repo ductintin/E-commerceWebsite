@@ -339,4 +339,50 @@ public class DonHangDAO {
     	
     	return "0";
     }
+    
+    //Số lượng đơn hàng bán ra trong 1 tháng của shop
+    public String countOrderOfShopByMonth(int month, int MaShop) {
+        String querry = "SELECT count(DonHang.MaDH) SLDH FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? and DonHang.isDeleted = 0 and MONTH(ThoiGian)= ? group by Shop.MaShop ";
+        String countorder = null;
+        
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(querry);
+            ps.setInt(1, MaShop);
+            ps.setInt(2, month);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	countorder=rs.getString(1);
+            			
+            }
+            return countorder;
+
+        } catch (Exception e) {
+        }
+        return countorder;
+    }
+    
+    //Số lượng sản phẩm bán ra trong 1 tháng của shop
+    public String totalProductOrderofShopbyMonth(int month, int MaShop) {
+    	String query = "SELECT sum(ChiTietDonHang.SoLuong) as SLSP FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? and MONTH(ThoiGian) = ? group by Shop.MaShop";
+    	try {
+    		conn = new ConnectJDBC().getConnection();
+    		ps = conn.prepareStatement(query);
+    		
+    		ps.setInt(1, MaShop);
+    		ps.setInt(2, month);
+    		
+    		rs = ps.executeQuery();
+    		
+    		while(rs.next()) {
+    			return rs.getString(1);
+    		}
+    		
+    	}
+    	catch(Exception e){
+    		System.out.println(e);
+    	}
+    	
+    	return null;
+    }
 }
