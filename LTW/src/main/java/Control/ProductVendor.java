@@ -43,19 +43,27 @@ public class ProductVendor extends HttpServlet{
 		KhachHang vendor = (KhachHang)session.getAttribute("Vendor");
 		System.out.println("Ma shop o day ne"+shop.getMaShop());
 		
+		String maSP = req.getParameter("maSP");
+		String action = req.getParameter("action");
+		
+		
+		
 		DanhMucDAO dmdao = new DanhMucDAO();
 		SanPhamDAO spDao = new SanPhamDAO();
 		AnhSanPhamDAO anhspDao = new AnhSanPhamDAO();
-
+		
+		if(action !=null) {
+			if(action.equals("restore")) {
+				spDao.restoreProduct(maSP);
+			}
+		}
 		List<DanhMuc> listdm = dmdao.getallDanhMuc();
 
-		
-
-		
 		
 		for(DanhMuc dm : listdm) {
 			List<SanPham> spList = spDao.listproducebymaDMandMaShop(String.valueOf(dm.getMaDM()),shop.getMaShop());
 			
+			System.out.println("Sp list lay ne" +spList +"splist");
 			for(SanPham sp : spList) {
 				dm.addProduct(sp);
 				List<AnhSanPham> anhspList = anhspDao.listProductImageByIdProduct(sp.getMaSP());
@@ -65,20 +73,11 @@ public class ProductVendor extends HttpServlet{
 				}
 				
 			}
-			
+			System.out.println(dm.getProducts());
 		}
 		
 		req.setAttribute("listdm", listdm);
 		
-		/*
-		 * List<SanPham> spList = spDao.listProductByIdShop(shop.getMaShop());
-		 * req.setAttribute("spList", spList);
-		 * 
-		 * List<AnhSanPham> anhspList =
-		 * anhspDao.listProductImageByIdShop(shop.getMaShop());
-		 * 
-		 * req.setAttribute("anhspList", anhspList);
-		 */
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/vendor/list-product.jsp");
 		dispatcher.forward(req, resp);

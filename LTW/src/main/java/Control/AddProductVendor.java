@@ -83,15 +83,9 @@ public class AddProductVendor extends HttpServlet {
 					sp.setTenSP(item.getString("UTF-8"));
 				} else if (item.getFieldName().equals("MoTa")) {
 					sp.setMoTa(item.getString("UTF-8"));
-					/*
-					 * } else if (item.getFieldName().equals("shop")) {
-					 * sp.setMaShop(Integer.parseInt(item.getString("UTF-8")));
-					 * System.out.println("Mã cửa hàng nè"+Integer.parseInt(item.getString("UTF-8"))
-					 * );
-					 */
+
 				} else if (item.getFieldName().equals("maDM")) {
 					sp.setMaDM(Integer.parseInt(item.getString("UTF-8")));
-					System.out.println("Mã danh mục nè"+Integer.parseInt(item.getString("UTF-8")));
 				} else if (item.getFieldName().equals("Gia")) {
 					sp.setGiaBanThuong(Integer.parseInt(item.getString("UTF-8")));
 				} else if (item.getFieldName().equals("KhuyenMai")) {
@@ -108,6 +102,7 @@ public class AddProductVendor extends HttpServlet {
 			for (FileItem item : items) {
 				 if (item.getFieldName().equals("anh1")) {
 					String originalFileName = item.getName();
+					
 					int index = originalFileName.lastIndexOf(".");
 					String ext = originalFileName.substring(index + 1);
 					String fileName = System.currentTimeMillis() + "." + ext;
@@ -164,7 +159,6 @@ public class AddProductVendor extends HttpServlet {
 
 					anhDao.addProductImageByVendor(anh);
 					
-					System.out.println(anh);
 				}
 			}
 

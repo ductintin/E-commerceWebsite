@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
     <!-- ======= Styles ====== -->
-    <link rel="stylesheet" href="<c:url value='/views/vendor/css/home.css'/>">
+    <link rel="stylesheet" href="<c:url value='/views/vendor/css/index.css'/>">
     
     
     
@@ -44,8 +44,8 @@
             <div class="cardBox">
                 <div class="card">
                     <div>
-                        <div class="numbers">1,504</div>
-                        <div class="cardName">Daily Views</div>
+                        <div class="numbers" data-type="money">${SLKH }</div>
+                        <div class="cardName">Số lượng khách hàng</div>
                     </div>
 
                     <div class="iconBx">
@@ -55,8 +55,8 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">80</div>
-                        <div class="cardName">Sales</div>
+                        <div class="numbers" >${SLDH }</div>
+                        <div class="cardName">Tổng số đơn hàng</div>
                     </div>
 
                     <div class="iconBx">
@@ -66,8 +66,8 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">284</div>
-                        <div class="cardName">Comments</div>
+                        <div class="numbers">${SLSP }</div>
+                        <div class="cardName">Số sản phẩm bán ra</div>
                     </div>
 
                     <div class="iconBx">
@@ -77,8 +77,8 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">$7,842</div>
-                        <div class="cardName">Earning</div>
+                        <div class="numbers" data-type="money">${totalMoney }</div>
+                        <div class="cardName">Doanh thu</div>
                     </div>
 
                     <div class="iconBx">
@@ -122,7 +122,7 @@
 
                             <tr>
                                 <td>Apple Watch</td>
-                                <td>$1200</td>
+                                <td data-type="money">1200</td>
                                 <td>Paid</td>
                                 <td><span class="status return">Return</span></td>
                             </tr>
@@ -246,9 +246,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-    </div>
-    
    
            
 		      </c:if>
@@ -314,11 +311,15 @@
     <script src="<c:url value='/views/vendor/js/home.js'/>"></script>
 
     <!-- ====== ionicons ======= -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="module"
+		src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule
+		src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
   
   <script>
@@ -347,6 +348,11 @@
             modal.style.display = "none";
         }
     }
+    
+    document.querySelectorAll('[data-type="money"]').forEach(item => {
+
+        item.innerHTML = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'vnd'}).format(item.innerHTML);
+    })
 </script>
   
   

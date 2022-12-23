@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DAO.DonHangDAO;
+import Model.KhachHang;
+import Model.Shop;
+
 @WebServlet(urlPatterns = { "/vendor/home" })
 public class IndexController extends HttpServlet{
 	
@@ -22,18 +26,27 @@ public class IndexController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		/*
-		 * String url = req.getRequestURL().toString(); if(url.contains("/store/add")) {
-		 * RequestDispatcher dispatcher =
-		 * req.getRequestDispatcher("/views/vendor/home.jsp"); dispatcher.forward(req,
-		 * resp); }
-		 */
 		HttpSession session = req.getSession();
 		Object obj = session.getAttribute("Vendor");
 		if(obj == null) {
 			resp.sendRedirect(req.getContextPath() + "/vendor/login");
 		}
 		else {
+			KhachHang vendor = (KhachHang) session.getAttribute("Vendor");
+			Shop shop = (Shop) session.getAttribute("Shop");
+			DonHangDAO dhDao = new DonHangDAO();
+			String SLDH = dhDao.countOrderofShop(shop.getMaShop());
+			
+			String totalMoney = dhDao.totalMoneyOrderofShop(shop.getMaShop());
+			String SLSP = dhDao.totalProductOrderofShop(shop.getMaShop());
+			String SLKH = dhDao.countCustomerofShop(shop.getMaShop());
+			
+			req.setAttribute("SLDH", SLDH);
+			req.setAttribute("totalMoney", totalMoney);
+			req.setAttribute("SLSP", SLSP);
+			req.setAttribute("SLKH", SLKH);
+			
+			System.out.println(totalMoney);
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/views/vendor/home.jsp");
 			dispatcher.forward(req, resp);
 		}

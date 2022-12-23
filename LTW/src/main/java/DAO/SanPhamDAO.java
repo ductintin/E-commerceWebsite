@@ -135,7 +135,7 @@ public class SanPhamDAO {
     
     public List<SanPham> listproducebymaDMandMaShop(String maDM, int MaShop)
     {
-    	String query = "select * from SanPham where isDeleted=0 and maDM=? and MaShop =?";
+    	String query = "select * from SanPham where maDM=? and MaShop =? ";
         List<SanPham> list = new ArrayList<>();
 
         try {
@@ -401,5 +401,26 @@ public class SanPhamDAO {
             System.out.println(o);
         }
     }
-
+    
+    //22/12
+    
+    public void restoreProduct(String maSP) {
+    	String query = "Update SanPham set isDeleted = 0 where MaSP = ?";
+    	
+    	try {
+    		conn = new ConnectJDBC().getConnection();
+    		
+    		ps = conn.prepareStatement(query);
+    		
+    		ps.setString(1, maSP);
+    		
+    		ps.executeUpdate();
+    		
+    	}catch(Exception e) {
+    		e.printStackTrace();
+			System.out.println(e);
+    	}
+    }
+    
+    
 }

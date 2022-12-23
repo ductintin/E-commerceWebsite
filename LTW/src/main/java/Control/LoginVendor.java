@@ -66,29 +66,16 @@ public class LoginVendor extends HttpServlet{
         	HttpSession session = req.getSession();
             
             session.setMaxInactiveInterval(10000*60);
-        	System.out.print(KH);
         	if(KH != null) {
         		shop = shopDao.getShopByMaSeller(KH.getMaKH());
         		
         		session.setAttribute("Vendor", KH);
-        		System.out.println("kh ne" + KH);
     			if(shop != null) {
     				session.setAttribute("Shop", shop);
-    				System.out.println("Shop ne: "+ shop);
     			}else {
     				session.setAttribute("Shop", null);
     			}
         		
-        		//Kiểm tra role của account để chuyển đến trang phù hợp
-				/*
-				 * if(KH.getRole()==1){
-				 * 
-				 * } else if(KH.getRole()==2) { destPage = "/views/vendor/home.jsp"; }else {
-				 * 
-				 * }
-				 */
-        		
-        		//destPage = "/views/vendor/home.jsp";
         		resp.sendRedirect(req.getContextPath()+ "/vendor/home");	
         		
         	}else {

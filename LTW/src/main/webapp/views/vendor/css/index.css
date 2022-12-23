@@ -12,7 +12,6 @@
 
 :root {
   --blue: #2a2185;
-  --blue1: #91D8E4;
   --white: #fff;
   --gray: #f5f5f5;
   --black1: #222;
@@ -282,7 +281,6 @@ body {
 
 .details .recentOrders {
   position: relative;
-  width: 1000px;
   display: grid;
   min-height: 500px;
   background: var(--white);
@@ -325,8 +323,8 @@ body {
   border-bottom: none;
 }
 .details .recentOrders table tbody tr:hover {
-  background: var(--blue1);
-  color: var(--black1);
+  background: var(--blue);
+  color: var(--white);
 }
 .details .recentOrders table tr td {
   padding: 10px;

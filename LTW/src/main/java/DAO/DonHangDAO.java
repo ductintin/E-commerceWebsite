@@ -220,4 +220,123 @@ public class DonHangDAO {
             System.out.println(o);
         }
     }
+    
+    //22/12
+    
+    public List<DonHang> listallorderbyMaShop(int MaShop)
+    {
+    	String query = "SELECT DISTINCT B.MaDH,DonHang.MaKH, B.total, DonHang.ThoiGian, DonHang.isDeleted  FROM DonHang inner join ((select MaDH, sum(TongTien) as total from ChiTietDonHang group by MaDH) AS B inner join ChiTietDonHang on B.MaDH = ChiTietDonHang.MaDH)inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP on DonHang.MaDH = B.MaDH where SanPham.MaShop = ?\r\n"
+    			+ "";
+        List<DonHang> list = new ArrayList<>();
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, MaShop);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new DonHang(rs.getInt(1),
+                		 rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getDate(4),   
+                        rs.getInt(5)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return list;
+    }
+    
+    public String countOrderofShop(int MaShop) {
+    	String query = "SELECT count(DonHang.MaDH) as SLDH FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? group by Shop.MaShop";
+    	
+    	try {
+    		conn = new ConnectJDBC().getConnection();
+    		ps = conn.prepareStatement(query);
+    		
+    		ps.setInt(1, MaShop);
+    		
+    		rs = ps.executeQuery();
+    		
+    		while(rs.next()) {
+    			return rs.getString(1);
+    		}
+    		
+    	}
+    	catch(Exception e){
+    		System.out.println(e);
+    	}
+    	
+    	return "0";
+    }
+    
+    public String totalMoneyOrderofShop(int MaShop) {
+    	String query = "SELECT sum(DonHang.TongTien) as TOTAL FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? group by Shop.MaShop";
+    	
+    	try {
+    		conn = new ConnectJDBC().getConnection();
+    		ps = conn.prepareStatement(query);
+    		
+    		ps.setInt(1, MaShop);
+    		
+    		rs = ps.executeQuery();
+    		
+    		while(rs.next()) {
+    			return rs.getString(1);
+    		}
+    		
+    	}
+    	catch(Exception e){
+    		System.out.println(e);
+    	}
+    	
+    	return "0";
+    }
+    
+    public String totalProductOrderofShop(int MaShop) {
+    	String query = "SELECT sum(ChiTietDonHang.SoLuong) as SLSP FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? group by Shop.MaShop";
+    	
+    	try {
+    		conn = new ConnectJDBC().getConnection();
+    		ps = conn.prepareStatement(query);
+    		
+    		ps.setInt(1, MaShop);
+    		
+    		rs = ps.executeQuery();
+    		
+    		while(rs.next()) {
+    			return rs.getString(1);
+    		}
+    		
+    	}
+    	catch(Exception e){
+    		System.out.println(e);
+    	}
+    	
+    	return "0";
+    }
+    
+    public String countCustomerofShop(int MaShop) {
+    	String query = "SELECT count(DISTINCT  DonHang.MaKH) as SLKH FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? group by Shop.MaShop";
+    	
+    	try {
+    		conn = new ConnectJDBC().getConnection();
+    		ps = conn.prepareStatement(query);
+    		
+    		ps.setInt(1, MaShop);
+    		
+    		rs = ps.executeQuery();
+    		
+    		while(rs.next()) {
+    			return rs.getString(1);
+    		}
+    		
+    	}
+    	catch(Exception e){
+    		System.out.println(e);
+    	}
+    	
+    	return "0";
+    }
 }

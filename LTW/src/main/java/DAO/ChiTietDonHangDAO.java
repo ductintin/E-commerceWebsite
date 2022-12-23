@@ -114,4 +114,26 @@ public class ChiTietDonHangDAO {
         }
 		
     }
+    
+    //22/12
+    
+    public void confirmCTDH(String maCTDH, int status) {
+    	String query = "Update ChiTietDonHang set MaTrangThai = ? where MaCTDH = ?";
+    	
+    	try {
+    		conn = new ConnectJDBC().getConnection();
+    		
+    		ps = conn.prepareStatement(query);
+    		ps.setInt(1, status);
+    		ps.setString(2, maCTDH);
+    		
+    		ps.executeUpdate();
+    		  
+    	}catch(Exception e){
+    		System.out.println(e);
+    	}
+    	
+    	
+    }
+    
 }

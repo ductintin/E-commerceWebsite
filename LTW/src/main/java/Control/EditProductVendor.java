@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -51,14 +52,8 @@ public class EditProductVendor extends HttpServlet {
 		servletFileUpload.setHeaderEncoding("UTF-8");
 
 		HttpSession session = req.getSession();
-		KhachHang vendor = (KhachHang) session.getAttribute("Vendor");
 		Shop shop = (Shop) session.getAttribute("Shop");
-		
-		/*
-		 * int maSHop = Integer.parseInt(req.getParameter("shop"));
-		 * 
-		 * System.out.println("AAAAAAAAAA"+maSHop+"AAAAAA");
-		 */
+
 		try {
 			SanPham sp = new SanPham();
 
@@ -97,69 +92,87 @@ public class EditProductVendor extends HttpServlet {
 			
 			for (FileItem item : items) {
 				if (item.getFieldName().equals("anh1")) {
-					String originalFileName = item.getName();
-					int index = originalFileName.lastIndexOf(".");
-					String ext = originalFileName.substring(index + 1);
-					String fileName = System.currentTimeMillis() + "." + ext;
-					File file = new File(Constant.DIR + "/product/" + fileName);
-					item.write(file);
-
 					AnhSanPham anh = new AnhSanPham();
-					
+					if(item.getSize()>0) {
+						String originalFileName = item.getName();				
+						int index = originalFileName.lastIndexOf(".");
+						String ext = originalFileName.substring(index + 1);
+						String fileName = System.currentTimeMillis() + "." + ext;
+						File file = new File(Constant.DIR + "/product/" + fileName);
+						item.write(file);
 
-					anh.setAnh("product/" + fileName);
-					anh.setMaSP(sp.getMaSP());
-					System.out.println("Anh ne:" + anh.getAnh());
-					
+						anh.setAnh("product/" + fileName);
+						
+
+					}else {
+						anh.setAnh(null);
+						anh.setMaSP(sp.getMaSP());
+					}
 					images.add(anh);
 					
 				} else if (item.getFieldName().equals("anh2")) {
-					String originalFileName = item.getName();
-					int index = originalFileName.lastIndexOf(".");
-					String ext = originalFileName.substring(index + 1);
-					String fileName = System.currentTimeMillis() + "." + ext;
-					File file = new File(Constant.DIR + "/product/" + fileName);
-					item.write(file);
-
 					AnhSanPham anh = new AnhSanPham();
-					anh.setAnh("product/" + fileName);
-					anh.setMaSP(sp.getMaSP());
-					System.out.println("Anh ne:" + anh.getAnh());
-					
+					if(item.getSize()>0) {
+						String originalFileName = item.getName();						
+						
+						int index = originalFileName.lastIndexOf(".");
+						String ext = originalFileName.substring(index + 1);
+						String fileName = System.currentTimeMillis() + "." + ext;
+						File file = new File(Constant.DIR + "/product/" + fileName);
+						item.write(file);
+
+						anh.setAnh("product/" + fileName);
+						anh.setMaSP(sp.getMaSP());
+						
+
+					}else {
+						anh.setAnh(null);
+						anh.setMaSP(sp.getMaSP());
+					}
 					images.add(anh);
 				} else if (item.getFieldName().equals("anh3")) {
-					String originalFileName = item.getName();
-					int index = originalFileName.lastIndexOf(".");
-					String ext = originalFileName.substring(index + 1);
-					String fileName = System.currentTimeMillis() + "." + ext;
-					File file = new File(Constant.DIR + "/product/" + fileName);
-					item.write(file);
-
 					AnhSanPham anh = new AnhSanPham();
-					
+					if(item.getSize()>0) {
+						String originalFileName = item.getName();
 
-					anh.setAnh("product/" + fileName);
-					anh.setMaSP(sp.getMaSP());
-					System.out.println("Anh ne:" + anh.getAnh());
-					
+						
+						int index = originalFileName.lastIndexOf(".");
+						String ext = originalFileName.substring(index + 1);
+						String fileName = System.currentTimeMillis() + "." + ext;
+						File file = new File(Constant.DIR + "/product/" + fileName);
+						item.write(file);
+
+
+						anh.setAnh("product/" + fileName);
+						anh.setMaSP(sp.getMaSP());
+						
+
+					}else {
+						anh.setAnh(null);
+						anh.setMaSP(sp.getMaSP());
+					}
 					images.add(anh);
 
 					
 				} else if (item.getFieldName().equals("anh4")) {
-					String originalFileName = item.getName();
-					int index = originalFileName.lastIndexOf(".");
-					String ext = originalFileName.substring(index + 1);
-					String fileName = System.currentTimeMillis() + "." + ext;
-					File file = new File(Constant.DIR + "/product/" + fileName);
-					item.write(file);
-
 					AnhSanPham anh = new AnhSanPham();
-					
-					anh.setAnh("product/" + fileName);
-					
-					System.out.println("Anh ne:" + anh.getAnh());
-					anh.setMaSP(sp.getMaSP());
-					
+					if(item.getSize()>0) {
+						String originalFileName = item.getName();				
+						
+						int index = originalFileName.lastIndexOf(".");
+						String ext = originalFileName.substring(index + 1);
+						String fileName = System.currentTimeMillis() + "." + ext;
+						File file = new File(Constant.DIR + "/product/" + fileName);
+						item.write(file);
+
+						anh.setAnh("product/" + fileName);
+						anh.setMaSP(sp.getMaSP());
+						
+
+					}else {
+						anh.setAnh(null);
+						anh.setMaSP(sp.getMaSP());
+					}
 					images.add(anh);
 
 
@@ -168,11 +181,16 @@ public class EditProductVendor extends HttpServlet {
 				
 			}
 			
+			System.out.println(images);
+			
 			anhDao.edit(images, sp.getMaSP());
 
 			resp.sendRedirect(req.getContextPath() + "/vendor/product/list");
 
-		} catch (Exception e) {
+		}
+		catch (FileUploadException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
 			System.out.println("Lỗi trong EditVendor:"+e);
 
 		}

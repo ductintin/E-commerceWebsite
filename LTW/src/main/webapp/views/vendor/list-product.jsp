@@ -19,55 +19,56 @@
 <body>
 	<%@include file="/views/vendor/sidebar.jsp"%>
 	<%@include file="/views/vendor/add-product.jsp"%>
-	<div>
 
-		<c:forEach var="o" items="${listdm}" varStatus="STT">
+	
+	
+	
+	<!-- ================ Products List ================= -->
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Recent Orders</h2>
+                        <a href="#" class="btn">View All</a>
+                    </div>
+                    
+                    <c:forEach var="o" items="${listdm}" varStatus="STT">
 		<c:if test="${not empty o.products}">
 			<h2>Tên danh mục : ${o.tenDM }</h2>
-			<table style="width: 100%">
-
-
-
-				<tr>
-
-					<th>Tên sản phẩm</th>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Tên sản phẩm</td>
+                                <td>Mô tả</td>
+                                <td>Giá bán thường</td>
+                                <td>Giá khuyến mãi</td>
+                                <td>Số lượng kho</td>
+                                <td>Số lượng đã bán</td>
+                                <td>Thao tác</td>
+                                <td>Trạng thái</td>
+                                
+                                <!-- <th>Tên sản phẩm</th>
 					<th>Mô tả</th>
 					<th>Giá bán thường</th>
 					<th>Giá khuyến mãi</th>
 					<th>Số lượng kho</th>
 					<th>Số lượng đã bán</th>
-					<th>Ảnh 1</th>
-					<th>Ảnh 2</th>
-					<th>Ảnh 3</th>
-					<th>Ảnh 4</th>
-					<th>Thao tác</th>
 
-				</tr>
-				<c:forEach items="${o.products}" var="sp">
-					<tr>
-						<td>${sp.tenSP}</td>
+					<th>Thao tác</th>
+					<th>Trạng thái</th> -->
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        <c:forEach items="${o.products}" var="sp">
+                            <tr>
+                               <td>${sp.tenSP}</td>
 						<td>${sp.moTa}</td>
-						<td>${sp.giaBanThuong}</td>
-						<td>${sp.giaKhuyenMai}</td>
+						<td data-type="money">${sp.giaBanThuong}</td>
+						<td data-type="money">${sp.giaKhuyenMai}</td>
 						<td>${sp.soLuong}</td>
 						<td>${sp.soLuongDaBan}</td>
-
-						<c:forEach items="${sp.productImages}" var="img">
-							<c:url value="/image?fname=${img.anh}" var="imgUrl"></c:url>
-							<c:if test="${not empty img.anh }">
-								<td><img height="50" width="50" src="${imgUrl}"
-									alt="chưa thêm ảnh" /></td>
-							</c:if>
-
-							<c:if test="${empty img.anh }">
-								<td>hello</td>
-							</c:if>
-
-						</c:forEach>
-
-
-
-						<td>
+                                
+                                <td>
 							<div class="container-modal">
 
 								<!-- Button đăng nhập để mở form đăng nhập -->
@@ -92,11 +93,6 @@
 														<option value="${sp.maDM}">${o.tenDM}</option>
 
 													</c:if>
-													<%-- <c:forEach var="o" items="${listdm}">
-
-												<option value="${o.maDM}">${o.tenDM}</option>
-
-											</c:forEach> --%>
 												</select>
 
 
@@ -149,24 +145,25 @@
 												<b>Mô tả ngắn:</b> <input type="text" id=" "
 													value="${sp.moTaNgan }" name="MoTaNgan" required>
 											</div>
-
-
-
+											
 											<div class="form-group">
 												<c:forEach items="${sp.productImages}" var="img"
 													varStatus="STT">
 													<c:url value="/image?fname=${img.anh}" var="imgUrl"></c:url>
-													<c:if test="${not empty imgUrl}">
 														<input type="file" name="anh${STT.index+1 }"
 															value="${img.anh }" />
 														<img height="50" width="50" src="${imgUrl}"
 															alt="chưa thêm ảnh" />
-													</c:if>
-
-													<c:if test="${imgUrl == null}">
-														<input type="file" name="anh${STT.index+1 }" />
-													</c:if>
+	
 												</c:forEach>
+												
+												<c:if test="${sp.productImages eq null}">
+												
+												 <c:forEach var="i" begin="0" end="3">
+												 	<input type="file" name="anh${i+1 }"
+															 />
+												</c:forEach>
+												</c:if>
 
 											</div>
 
@@ -184,28 +181,46 @@
 
 
 						</td>
-
-					
-
-						<td><a
+						
+						
+						
+						<c:if test="${sp.isDeteted eq 0}">
+							<td>
+								<span style="color: green; font-weight: 600;">Active</span>
+							</td>
+							
+							<td><a
 							href="<c:url value='/vendor/product/delete?id=${sp.maSP}'/>"
-							class="center">Xóa</a></td>
+							class="center" style="text-decoration: none; color: black; font-weight: 600;">Xóa</a></td>
+							
+						</c:if>
+						
+						<c:if test="${sp.isDeteted eq 1}">
+							<td>
+								<span style="color: red; font-weight: 600;">Deleted</span>
+							</td>
+							
+							<td><a
+							href="<c:url value='/vendor/product/list?maSP=${sp.maSP}&action=restore'/>"
+							class="center" style="text-decoration: none; color: black; font-weight: 600;">Kích hoạt</a></td>
+						</c:if>
+						
+                            </tr>
 
-					</tr>
-
-
-
-				</c:forEach>
-
-
-
-			</table>
-			
-			</c:if>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    
+                    			</c:if>
 		</c:forEach>
-
-
-	</div>
+                    
+                </div>
+                
+                </div>
+                
+                
+       
+	
 
 	<!-- =========== Scripts =========  -->
 
@@ -298,6 +313,11 @@
 				}
 			}
 		}
+		
+		document.querySelectorAll('[data-type="money"]').forEach(item => {
+
+	        item.innerHTML = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'vnd'}).format(item.innerHTML);
+	    })
 	</script>
 </body>
 </html>

@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     <!-- ======= Styles ====== -->
-    <link rel="stylesheet" href="<c:url value='/views/vendor/css/home.css'/>">
+    <link rel="stylesheet" href="<c:url value='/views/vendor/css/index.css'/>">
     
     
     
@@ -68,7 +68,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="<c:url value='/vendor/order/list'/>">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
