@@ -111,7 +111,6 @@ public class ProductVendor extends HttpServlet{
 						}
 						
 					}
-					System.out.println(dm.getProducts());
 				}
 				
 				req.setAttribute("listdm", listdm);

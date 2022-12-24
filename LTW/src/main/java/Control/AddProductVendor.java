@@ -77,7 +77,6 @@ public class AddProductVendor extends HttpServlet {
 			for (FileItem item : items) {
 				
 				
-				System.out.println(item);
 				if (item.getFieldName().equals("TenSP")) {
 					sp.setTenSP(item.getString("UTF-8"));
 				} else if (item.getFieldName().equals("MoTa")) {
