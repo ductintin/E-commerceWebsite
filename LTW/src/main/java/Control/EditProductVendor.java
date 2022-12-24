@@ -182,8 +182,6 @@ public class EditProductVendor extends HttpServlet {
 				
 			}
 			
-			System.out.println(images);
-			
 			anhDao.edit(images, sp.getMaSP());
 
 			resp.sendRedirect(req.getContextPath() + "/vendor/product/list");

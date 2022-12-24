@@ -102,7 +102,6 @@ public class ProductVendor extends HttpServlet{
 				for(DanhMuc dm : listdm) {
 					List<SanPham> spList = spDao.listproducebymaDMandMaShop(String.valueOf(dm.getMaDM()),shop.getMaShop());
 					
-					System.out.println("Sp list lay ne" +spList +"splist");
 					for(SanPham sp : spList) {
 						dm.addProduct(sp);
 						List<AnhSanPham> anhspList = anhspDao.listProductImageByIdProduct(sp.getMaSP());

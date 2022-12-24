@@ -38,17 +38,15 @@ public class AddStoreVendor extends HttpServlet{
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
         
-		/* JSONObject obj = new JSONObject(req.getParameter("Vendor")); */
         
         
+        
+        HttpSession session = req.getSession();
+        KhachHang vendor = (KhachHang)session.getAttribute("Vendor");
         ShopDAO shopDao = new ShopDAO();
         Shop shop = new Shop();
         
         String TenShop = req.getParameter("TenShop");
-        //int MaSeller = KHDao.getIdVendorByAccountName(obj.get("MaKH").toString());
-        HttpSession session = req.getSession();
-        KhachHang vendor = (KhachHang)session.getAttribute("Vendor");
-        		
         int MaSeller = vendor.getMaKH();
         String PhoneShop = req.getParameter("SDT");
         String DiaChi = req.getParameter("DiaChi");

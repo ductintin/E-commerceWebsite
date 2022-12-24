@@ -36,7 +36,7 @@ public class ChangePasswordVendor extends HttpServlet{
 		String old_password = req.getParameter("oldpw");
 		String new_password = req.getParameter("newpw");
 		String confirm_password = req.getParameter("confirmnewpw"); 
-		System.out.println("KhachHang doi mk"+ vendor);
+
 		try {
 			if (!vendor.getMK().equals(old_password)) {
 				session.setAttribute("msg", "Mật khẩu cũ không đúng!!!");
