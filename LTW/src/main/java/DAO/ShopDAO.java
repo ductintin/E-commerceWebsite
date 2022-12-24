@@ -340,6 +340,33 @@ public class ShopDAO {
     
     //23/12
     
+    public List<Integer> selectMaKhachHangofShop(int maShop){
+    	String query = "SELECT DISTINCT DonHang.MaKH FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH and DonHang.isDeleted = 0 "
+    +" inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4" 
+    			+" inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? ";
+    	
+    	List<Integer> listMaKH = new ArrayList<Integer>();
+    	
+    	try {
+			conn = new ConnectJDBC().getConnection();
+			ps = conn.prepareStatement(query);
+			
+			ps.setInt(1, maShop);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				listMaKH.add(rs.getInt(1));
+			}
+			
+			return listMaKH;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
+    	
+    	return listMaKH;
+    }
     
     
 }

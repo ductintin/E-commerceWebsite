@@ -47,6 +47,8 @@ public class KhachHangDAO {
         return null;
     }
     
+    
+    
     public KhachHang createVendor(KhachHang KH) {
     	
     	try {
@@ -406,4 +408,56 @@ public class KhachHangDAO {
 		} catch (Exception e) {
 		}
 	}
+	
+	//23/12
+	public KhachHang getKHbyId(int maKH) {
+		String query = "Select * from KhachHang where MaKH = ?";
+		
+		try {
+			conn = new ConnectJDBC().getConnection();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, maKH);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				return new KhachHang(rs.getInt(1), rs.getString(2),
+						rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9));
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+			// TODO: handle exception
+		}
+		
+		return null;
+	}
+	
+	public KhachHang loginVendor(String username, String password) {
+        String query = "select * from KhachHang\r\n"
+                + "where TenTK=? and MK = ? and Role = 2 and isDelete = 0";
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return new KhachHang(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return null;
+    }
 }

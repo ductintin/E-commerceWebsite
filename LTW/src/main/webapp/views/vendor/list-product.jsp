@@ -27,8 +27,13 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Recent Orders</h2>
-                        <a href="#" class="btn">View All</a>
+                        <h2>Tất cả sản phẩm</h2>
+                        <c:if test="${deleted eq 1}">
+                        <a href="<c:url value='/vendor/product/list?action=get-alldeletedproduct'/>" class="btn">Danh sách lưu trữ</a>
+                        </c:if>
+                        <c:if test="${empty deleted }">
+                        <a href="<c:url value='/vendor/product/list'/>" class="btn">Danh sách đang bán</a>
+                        </c:if>
                     </div>
                     
                     <c:forEach var="o" items="${listdm}" varStatus="STT">
@@ -43,18 +48,9 @@
                                 <td>Giá khuyến mãi</td>
                                 <td>Số lượng kho</td>
                                 <td>Số lượng đã bán</td>
-                                <td>Thao tác</td>
+                                <td>Chi tiết</td>
                                 <td>Trạng thái</td>
-                                
-                                <!-- <th>Tên sản phẩm</th>
-					<th>Mô tả</th>
-					<th>Giá bán thường</th>
-					<th>Giá khuyến mãi</th>
-					<th>Số lượng kho</th>
-					<th>Số lượng đã bán</th>
-
-					<th>Thao tác</th>
-					<th>Trạng thái</th> -->
+                                <td>Thao tác</td>
                             </tr>
                         </thead>
 
@@ -72,8 +68,7 @@
 							<div class="container-modal">
 
 								<!-- Button đăng nhập để mở form đăng nhập -->
-								<button id="myBtnEdit" href="#myModaleidt${sp.maSP}">Chỉnh
-									sửa</button>
+								<button id="myBtnEdit" href="#myModaleidt${sp.maSP}" style="border: none; background-color: #fff;">Chi tiết</button>
 
 								<div id="myModaleidt${sp.maSP}" class="modal">
 									<div class="modal-content">
@@ -86,7 +81,7 @@
 
 
 
-												<b>Chọn danh mục:</b> <select name="maDM" id="pet-select"
+												<b>Danh mục:</b> <select name="maDM" id="pet-select"
 													required>
 
 													<c:if test="${not empty sp.maDM }">
@@ -119,7 +114,7 @@
 
 											<div class="fomrgroup">
 												<b>Mã sản phẩm:</b> <input type="text" id=" "
-													value="${sp.maSP }" name="MaSP" required>
+													value="${sp.maSP }" name="MaSP"  readonly>
 											</div>
 											<div class="fomrgroup">
 												<b>Mô Tả:</b> <input type="text" id=" " value="${sp.moTa }"
@@ -191,7 +186,7 @@
 							
 							<td><a
 							href="<c:url value='/vendor/product/delete?id=${sp.maSP}'/>"
-							class="center" style="text-decoration: none; color: black; font-weight: 600;">Xóa</a></td>
+							class="center" style="text-decoration: none; color: red; font-weight: 600;">Lưu trữ</a></td>
 							
 						</c:if>
 						
@@ -202,7 +197,7 @@
 							
 							<td><a
 							href="<c:url value='/vendor/product/list?maSP=${sp.maSP}&action=restore'/>"
-							class="center" style="text-decoration: none; color: black; font-weight: 600;">Kích hoạt</a></td>
+							class="center" style="text-decoration: none; color: green; font-weight: 600;">Khôi phục</a></td>
 						</c:if>
 						
                             </tr>

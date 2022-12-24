@@ -52,7 +52,8 @@ public class EditProductVendor extends HttpServlet {
 		servletFileUpload.setHeaderEncoding("UTF-8");
 
 		HttpSession session = req.getSession();
-		Shop shop = (Shop) session.getAttribute("Shop");
+		KhachHang vendor = (KhachHang)session.getAttribute("Vendor");
+		Shop shop = (Shop)session.getAttribute("Shop");
 
 		try {
 			SanPham sp = new SanPham();

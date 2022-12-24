@@ -24,13 +24,6 @@ public class ProfileVendor extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		/*
-		 * HttpSession session = req.getSession(); KhachHang vendor = (KhachHang)
-		 * session.getAttribute("Vendor");
-		 * 
-		 * req.setAttribute("Vendor", vendor);
-		 * 
-		 */
 		
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
@@ -49,9 +42,8 @@ public class ProfileVendor extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		KhachHangDAO khDao = new KhachHangDAO();
-		String x = req.getParameter("TenTK");
-		System.out.println("Ten nnnnee"+x);
-		KhachHang vendor = khDao.findVendorByAccountName(x) ;
+		String accountname = req.getParameter("TenTK");
+		KhachHang vendor = khDao.findVendorByAccountName(accountname) ;
 		
 		String accountName = req.getParameter("TenKH");
 		String email = req.getParameter("Email");

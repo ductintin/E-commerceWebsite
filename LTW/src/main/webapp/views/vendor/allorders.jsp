@@ -40,7 +40,8 @@
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody> 
+                         <c:if test="${size > 0}">
                          <c:forEach var="i" begin="0" end="${size-1}">
                             <tr>
                                 <td>${listdh[i].getMaDH()}</td>
@@ -67,8 +68,10 @@
                                 <td><a href='<c:url value='/vendor/order/detail?maDH=${listdh[i].getMaDH()}'></c:url>' style="text-decoration: none; color: black; font-weight: 600;">Chi tiết</a></td>
                             </tr>
                           </c:forEach>
+                         </c:if>
                         </tbody>
                     </table>
+                </div>
                 </div>
 
 

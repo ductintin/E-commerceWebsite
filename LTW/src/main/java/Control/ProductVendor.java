@@ -41,7 +41,6 @@ public class ProductVendor extends HttpServlet{
 		
 		Shop shop = (Shop)session.getAttribute("Shop");
 		KhachHang vendor = (KhachHang)session.getAttribute("Vendor");
-		System.out.println("Ma shop o day ne"+shop.getMaShop());
 		
 		String maSP = req.getParameter("maSP");
 		String action = req.getParameter("action");
@@ -52,35 +51,80 @@ public class ProductVendor extends HttpServlet{
 		SanPhamDAO spDao = new SanPhamDAO();
 		AnhSanPhamDAO anhspDao = new AnhSanPhamDAO();
 		
-		if(action !=null) {
-			if(action.equals("restore")) {
-				spDao.restoreProduct(maSP);
-			}
-		}
 		List<DanhMuc> listdm = dmdao.getallDanhMuc();
 
-		
-		for(DanhMuc dm : listdm) {
-			List<SanPham> spList = spDao.listproducebymaDMandMaShop(String.valueOf(dm.getMaDM()),shop.getMaShop());
-			
-			System.out.println("Sp list lay ne" +spList +"splist");
-			for(SanPham sp : spList) {
-				dm.addProduct(sp);
-				List<AnhSanPham> anhspList = anhspDao.listProductImageByIdProduct(sp.getMaSP());
-				for(AnhSanPham img : anhspList) {
-					sp.addProductImage(img);
+		if(vendor!=null&&shop!=null) {
+			if(action != null) {
+				if(action.equals("restore")) {
+					spDao.restoreProduct(maSP);
+					
+					for(DanhMuc dm : listdm) {
+						List<SanPham> spList = spDao.listdeletedproductbymaDMandMaShop(String.valueOf(dm.getMaDM()),shop.getMaShop());
+
+						for(SanPham sp : spList) {
+							dm.addProduct(sp);
+							List<AnhSanPham> anhspList = anhspDao.listProductImageByIdProduct(sp.getMaSP());
+							for(AnhSanPham img : anhspList) {
+								sp.addProductImage(img);  
+							}
+							
+						}
+					}
+					
+					req.removeAttribute("deleted");
+					req.setAttribute("listdm", listdm);
 					
 				}
+				if(action.equals("get-alldeletedproduct")) {
+					for(DanhMuc dm : listdm) {
+						List<SanPham> spList = spDao.listdeletedproductbymaDMandMaShop(String.valueOf(dm.getMaDM()),shop.getMaShop());
+						
+						for(SanPham sp : spList) {
+							dm.addProduct(sp);
+							List<AnhSanPham> anhspList = anhspDao.listProductImageByIdProduct(sp.getMaSP());
+							for(AnhSanPham img : anhspList) {
+								sp.addProductImage(img);  
+							}
+							
+						}
+					}
+					
+					req.removeAttribute("deleted");
+					req.setAttribute("listdm", listdm);
+				}
 				
+				RequestDispatcher dispatcher = req.getRequestDispatcher("/views/vendor/list-product.jsp");
+				dispatcher.forward(req, resp);
 			}
-			System.out.println(dm.getProducts());
+			
+			if(action==null) {
+				req.setAttribute("deleted", 1);
+				for(DanhMuc dm : listdm) {
+					List<SanPham> spList = spDao.listproducebymaDMandMaShop(String.valueOf(dm.getMaDM()),shop.getMaShop());
+					
+					System.out.println("Sp list lay ne" +spList +"splist");
+					for(SanPham sp : spList) {
+						dm.addProduct(sp);
+						List<AnhSanPham> anhspList = anhspDao.listProductImageByIdProduct(sp.getMaSP());
+						for(AnhSanPham img : anhspList) {
+							sp.addProductImage(img);
+							
+						}
+						
+					}
+					System.out.println(dm.getProducts());
+				}
+				
+				req.setAttribute("listdm", listdm);
+				
+				
+				RequestDispatcher dispatcher = req.getRequestDispatcher("/views/vendor/list-product.jsp");
+				dispatcher.forward(req, resp);
+			}
 		}
-		
-		req.setAttribute("listdm", listdm);
-		
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/vendor/list-product.jsp");
-		dispatcher.forward(req, resp);
+		else {
+			resp.sendRedirect(req.getContextPath() + "/vendor/login");
+		}
 	}
 
 }

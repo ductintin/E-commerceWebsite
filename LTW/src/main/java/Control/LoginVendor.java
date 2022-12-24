@@ -61,7 +61,7 @@ public class LoginVendor extends HttpServlet{
         
         String destPage = "/views/vendor/login.jsp";
         try {
-        	KH = KHDao.login(accountName, password);
+        	KH = KHDao.loginVendor(accountName, password);
         	
         	HttpSession session = req.getSession();
             
@@ -79,7 +79,7 @@ public class LoginVendor extends HttpServlet{
         		resp.sendRedirect(req.getContextPath()+ "/vendor/home");	
         		
         	}else {
-        		String msg = "Tài khoản không tồn tại";
+        		String msg = "Tên đăng nhập hoặc mật khẩu không đúng!";
         		req.setAttribute("msg", msg);
         	}
         	

@@ -155,6 +155,8 @@ public class DonHangDAO {
         }
 		return totalspend;
     }
+    
+    
     public String totalproduceoforderbymaKH(String maKH)
     {
     	String query = "select  sum(ChiTietDonHang.SoLuong)\r\n"
@@ -225,7 +227,7 @@ public class DonHangDAO {
     
     public List<DonHang> listallorderbyMaShop(int MaShop)
     {
-    	String query = "SELECT DISTINCT B.MaDH,DonHang.MaKH, B.total, DonHang.ThoiGian, DonHang.isDeleted  FROM DonHang inner join ((select MaDH, sum(TongTien) as total from ChiTietDonHang group by MaDH) AS B inner join ChiTietDonHang on B.MaDH = ChiTietDonHang.MaDH)inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP on DonHang.MaDH = B.MaDH where SanPham.MaShop = ?\r\n"
+    	String query = "SELECT DISTINCT B.MaDH,DonHang.MaKH, B.total, DonHang.ThoiGian, DonHang.isDeleted  FROM DonHang inner join ((select MaDH, sum(TongTien) as total from ChiTietDonHang group by MaDH) AS B inner join ChiTietDonHang on B.MaDH = ChiTietDonHang.MaDH)inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP on DonHang.MaDH = B.MaDH and DonHang.isDeleted = 0 where SanPham.MaShop = ?\r\n"
     			+ "";
         List<DonHang> list = new ArrayList<>();
 
@@ -248,8 +250,10 @@ public class DonHangDAO {
         return list;
     }
     
+    //Tổng số đơn hàng đã mua
     public String countOrderofShop(int MaShop) {
-    	String query = "SELECT count(DonHang.MaDH) as SLDH FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? group by Shop.MaShop";
+    	String query = "SELECT count(DISTINCT DonHang.MaDH) as SLDH FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH and DonHang.isDeleted = 0 inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop)"+
+    " where Shop.MaShop = ? group by Shop.MaShop";
     	
     	try {
     		conn = new ConnectJDBC().getConnection();
@@ -271,9 +275,10 @@ public class DonHangDAO {
     	return "0";
     }
     
-    public String totalMoneyOrderofShop(int MaShop) {
-    	String query = "SELECT sum(DonHang.TongTien) as TOTAL FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? group by Shop.MaShop";
-    	
+    public long totalMoneyOrderofShop(int MaShop) {
+    	String query = "SELECT DISTINCT DonHang.MaDH, DonHang.TongTien FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH and DonHang.isDeleted = 0 inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop)\r\n"
+    			+ "   where Shop.MaShop = ?";
+    	long totalMoney = 0;
     	try {
     		conn = new ConnectJDBC().getConnection();
     		ps = conn.prepareStatement(query);
@@ -283,19 +288,23 @@ public class DonHangDAO {
     		rs = ps.executeQuery();
     		
     		while(rs.next()) {
-    			return rs.getString(1);
+    			totalMoney += rs.getInt(2);
     		}
+
+    		return totalMoney;
+    		
     		
     	}
     	catch(Exception e){
     		System.out.println(e);
     	}
     	
-    	return "0";
+    	return totalMoney;
     }
     
     public String totalProductOrderofShop(int MaShop) {
-    	String query = "SELECT sum(ChiTietDonHang.SoLuong) as SLSP FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? group by Shop.MaShop";
+    	String query = "SELECT sum(ChiTietDonHang.SoLuong) as SLSP FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH and DonHang.isDeleted = 0 inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop)"
+    +" where Shop.MaShop = ? group by Shop.MaShop";
     	
     	try {
     		conn = new ConnectJDBC().getConnection();
@@ -318,7 +327,8 @@ public class DonHangDAO {
     }
     
     public String countCustomerofShop(int MaShop) {
-    	String query = "SELECT count(DISTINCT  DonHang.MaKH) as SLKH FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? group by Shop.MaShop";
+    	String query = "SELECT count(DISTINCT  DonHang.MaKH) as SLKH FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH and DonHang.isDeleted = 0 inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop)"
+    +" where Shop.MaShop = ? group by Shop.MaShop";
     	
     	try {
     		conn = new ConnectJDBC().getConnection();
@@ -342,7 +352,8 @@ public class DonHangDAO {
     
     //Số lượng đơn hàng bán ra trong 1 tháng của shop
     public String countOrderOfShopByMonth(int month, int MaShop) {
-        String querry = "SELECT count(DonHang.MaDH) SLDH FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? and DonHang.isDeleted = 0 and MONTH(ThoiGian)= ? group by Shop.MaShop ";
+        String querry = "SELECT count(DonHang.MaDH) SLDH FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH and DonHang.isDeleted = 0 inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop)"
+        		+"where Shop.MaShop = ? and DonHang.isDeleted = 0 and MONTH(ThoiGian)= ? group by Shop.MaShop ";
         String countorder = null;
         
         try {
@@ -364,7 +375,7 @@ public class DonHangDAO {
     
     //Số lượng sản phẩm bán ra trong 1 tháng của shop
     public String totalProductOrderofShopbyMonth(int month, int MaShop) {
-    	String query = "SELECT sum(ChiTietDonHang.SoLuong) as SLSP FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? and MONTH(ThoiGian) = ? group by Shop.MaShop";
+    	String query = "SELECT sum(ChiTietDonHang.SoLuong) as SLSP FROM (DonHang inner join ChiTietDonHang on DonHang.MaDH = ChiTietDonHang.MaDH and DonHang.isDeleted = 0 inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and ChiTietDonHang.MaTrangThai = 4 inner join Shop on SanPham.MaShop = Shop.MaShop) where Shop.MaShop = ? and MONTH(ThoiGian) = ? group by Shop.MaShop";
     	try {
     		conn = new ConnectJDBC().getConnection();
     		ps = conn.prepareStatement(query);
@@ -384,5 +395,33 @@ public class DonHangDAO {
     	}
     	
     	return null;
+    }
+    
+    //order cua kh
+    
+    public List<DonHang> listallorderofCustomerbyMaShop(String maKH, int MaShop)
+    {
+    	String query = "SELECT DISTINCT B.MaDH,DonHang.MaKH, B.total, DonHang.ThoiGian, DonHang.isDeleted  FROM DonHang inner join ((select MaDH, sum(TongTien) as total from ChiTietDonHang group by MaDH) AS B inner join ChiTietDonHang on B.MaDH = ChiTietDonHang.MaDH)inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP on DonHang.MaDH = B.MaDH and DonHang.isDeleted = 0 where DonHang.MaKH = ? and SanPham.MaShop = ?\r\n"
+    			+ "";
+        List<DonHang> list = new ArrayList<>();
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, maKH);
+            ps.setInt(2, MaShop);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new DonHang(rs.getInt(1),
+                		 rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getDate(4),   
+                        rs.getInt(5)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return list;
     }
 }

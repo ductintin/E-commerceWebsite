@@ -135,7 +135,7 @@ public class SanPhamDAO {
     
     public List<SanPham> listproducebymaDMandMaShop(String maDM, int MaShop)
     {
-    	String query = "select * from SanPham where maDM=? and MaShop =? ";
+    	String query = "select * from SanPham where maDM=? and MaShop =? and isDeleted = 0";
         List<SanPham> list = new ArrayList<>();
 
         try {
@@ -422,5 +422,63 @@ public class SanPhamDAO {
     	}
     }
     
+    public List<SanPham> listdeletedproductbymaDMandMaShop(String maDM, int MaShop)
+    {
+    	String query = "select * from SanPham where maDM=? and MaShop =? and isDeleted = 1";
+        List<SanPham> list = new ArrayList<>();
+
+        try {
+            conn = new ConnectJDBC().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, maDM);
+            ps.setInt(2, MaShop);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                 list.add(new SanPham(rs.getInt(1),
+                		 rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getInt(11)));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return list;
+    }
+    
+    //SP BAN CHAY NHAT
+    
+    public List<Integer> TopSaleProduct(int maShop){
+    	List<Integer> list = new ArrayList<>();
+    	
+    	String query = "SELECT TOP 1 * FROM (select SanPham.MaSP,sum(ChiTietDonHang.SoLuong)as SLDB  from ChiTietDonHang inner join SanPham on ChiTietDonHang.MaSP = SanPham.MaSP and SanPham.MaShop = ? and ChiTietDonHang.MaTrangThai = 4 group by SanPham.MaSP) AS C ORDER BY C.SLDB desc;\r\n"
+    			+ "";
+    	
+    	try {
+			conn = new ConnectJDBC().getConnection();
+			
+			ps = conn.prepareStatement(query);
+			
+			ps.setInt(1, maShop);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getInt(1));
+				list.add(rs.getInt(2));
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	return list;
+    }
     
 }

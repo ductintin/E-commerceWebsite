@@ -25,7 +25,7 @@
                 <li>
                     <a href="vendor/home">
                         <span class="icon">
-                            <ion-icon name="logo-apple"></ion-icon>
+                            <ion-icon name="storefront-outline"></ion-icon>
                         </span>
                         <span class="title">${Shop.tenShop}</span>
                     </a>
@@ -41,11 +41,11 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="<c:url value='/vendor/customer/list'/>">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
-                        <span class="title">Customers</span>
+                        <span class="title">Khách hàng</span>
                     </a>
                 </li>
 
@@ -58,19 +58,11 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="help-outline"></ion-icon>
-                        </span>
-                        <span class="title">Cửa hàng</span>
-                    </a>
-                </li>
 
                 <li>
                     <a href="<c:url value='/vendor/order/list'/>">
                         <span class="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
+                            <ion-icon name="albums-outline"></ion-icon>
                         </span>
                         <span class="title">Đơn hàng</span>
                     </a>
@@ -90,7 +82,7 @@
                         <span class="icon">
                             <ion-icon name="lock-closed-outline"></ion-icon>
                         </span>
-                        <span class="title">Password</span>
+                        <span class="title">Mật khẩu</span>
                     </a>
                 </li>
 
@@ -124,7 +116,7 @@
                 </div>
 
                 <div class="user">
-                	<a href='<c:url value='/vendor/profile?idKH=${Vendor.maKH}'></c:url>'>
+                	<a style="color: black; font-size: 20px;font-weight: 800; font-family: Georgia, Helvetica, sans-serif;" href='<c:url value='/vendor/profile?idKH=${Vendor.maKH}'></c:url>'>
                 	${Vendor.tenKH}
                 	</a>
                     
