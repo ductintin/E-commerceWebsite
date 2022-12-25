@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CodePen - Sliding Sign In Sign Up Page</title>
+<title>Đăng ký</title>
 <style>
 @charset "UTF-8";
 

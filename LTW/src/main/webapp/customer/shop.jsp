@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:url value="/" var="root" />
+
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-<!-- Site meta -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Profile</title>
-<!-- CSS -->
+<meta charset="UTF-8">
+<title>Shop</title>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	rel="stylesheet" type="text/css">
@@ -20,13 +16,24 @@
 <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600"
 	rel="stylesheet" type="text/css">
 <style>
-h1 {
-	text-align: center;
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
 }
 </style>
 </head>
 <body>
-
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 		<div class="container">
 			<div class="collapse navbar-collapse justify-content-end"
@@ -42,33 +49,37 @@ h1 {
 						class="fa fa-shopping-cart"></i>Cart <span
 						class="badge badge-light">@</span>
 					</a>
-					<li><a href="<c:url value='/customer/logout' />">Đăng xuất</a></li>
+					<c:choose>
+						<c:when test="${logged == 0}">
+							<li><a href="<c:url value='/customer/login'/>">Đăng nhập</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="<c:url value='/customer/profile' />">Tài
+									khoản</a></li>
+							<li><a href="<c:url value='/customer/logout' />">Đăng
+									xuất</a></li>
+						</c:otherwise>
+					</c:choose>
 				</form>
 			</div>
 		</div>
 	</nav>
-	<h1>Thông tin người dùng</h1>
-	<h3 style="color:green">${msg}</h3>
-	<div style="border-style: solid; border-width: 1px;">
-		<p>Tên khách hàng : ${KH.getTenKH()}</p>
-		<p>Email : ${KH.getEmail()}</p>
-		<p>Điện thoại : ${KH.getPhone()}</p>
-		<p>Địa chỉ : ${KH.getDiaChi()}</p>
-	</div>
-
-	<a href="<c:url value='/customer/changepassword' />">Đổi mật khẩu</a>
-	<br>
-	<a href="<c:url value='/customer/profile/edit' />">Thay đổi thông
-		tin cá nhân</a>
-	<!-- JS -->
-	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"
-		type="text/javascript"></script>
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		type="text/javascript"></script>
-	<script
-		src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		type="text/javascript"></script>
-
+	<table>
+		<tr>
+			<th>Tên shop : </th>
+			<th>Mã shop : </th>
+			<th>Phone : </th>
+			<th>Địa chỉ : </th>
+		</tr>
+		<c:forEach items="${shopList}" var="shop" varStatus="STT">
+			<tr class="odd gradeX">
+				<td><a
+					href="<c:url value='/shop/viewshop?id=${shop.getMaShop()}' />">${shop.getTenShop()}</a></td>
+				<td>${shop.getMaShop() }</td>
+				<td>${shop.getPhoneShop() }</td>
+				<td>${shop.getDiaChiShop() }</td>
+			</tr>
+		</c:forEach>
+	</table>
 </body>
 </html>

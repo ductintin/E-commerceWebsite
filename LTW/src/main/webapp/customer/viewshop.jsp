@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:url value="/" var="root" />
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<!-- Site meta -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Home</title>
-<!-- CSS -->
+<meta charset="UTF-8">
+<title>Shop</title>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	rel="stylesheet" type="text/css">
@@ -38,7 +34,6 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
-
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 		<div class="container">
 			<div class="collapse navbar-collapse justify-content-end"
@@ -47,8 +42,8 @@ tr:nth-child(even) {
 					<li class="nav-item active"><a class="nav-link"
 						href="<c:url value='/home'/>">Home<span class="sr-only">(current)</span></a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="<c:url value='/shop'/>">Shop</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="<c:url value='/shop'/>">Shop</a></li>
 				</ul>
 
 				<form class="form-inline my-2 my-lg-0">
@@ -71,35 +66,23 @@ tr:nth-child(even) {
 			</div>
 		</div>
 	</nav>
-	<c:forEach var="danhmuc" items="${danhmucList}" varStatus="STT">
-		<h2>Tên danh mục : ${ danhmuc.tenDM }</h2>
-		<table>
-			<tr>
-				<th>Tên sản phẩm</th>
-				<th>Mô tả</th>
-				<th>Giá bán thường</th>
-				<th>Giá khuyến mãi</th>
+	<h1>${nameShop }</h1>
+	<table>
+		<tr>
+			<th>Tên sản phẩm</th>
+			<th>Mô tả</th>
+			<th>Giá bán thường</th>
+			<th>Giá khuyến mãi</th>
+		</tr>
+		<c:forEach items="${productList}" var="product" varStatus="STT">
+			<tr class="odd gradeX">
+				<td><a
+					href="<c:url value='/product?id=${product.getMaSP()}' />">${product.getTenSP()}</a></td>
+				<td>${product.getMoTa() }</td>
+				<td>${product.getGiaBanThuong() }</td>
+				<td>${product.getGiaKhuyenMai() }</td>
 			</tr>
-			<c:forEach items="${danhmuc.products}" var="product" varStatus="STT">
-				<tr class="odd gradeX">
-					<td><a
-						href="<c:url value='/product?id=${product.getMaSP()}' />">${product.getTenSP()}</a></td>
-					<td>${product.getMoTa() }</td>
-					<td>${product.getGiaBanThuong() }</td>
-					<td>${product.getGiaKhuyenMai() }</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</c:forEach>
-
-	<!-- JS -->
-	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js"
-		type="text/javascript"></script>
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		type="text/javascript"></script>
-	<script
-		src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		type="text/javascript"></script>
+		</c:forEach>
+	</table>
 </body>
 </html>

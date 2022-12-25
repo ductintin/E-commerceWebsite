@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>Đăng nhập</title>
 <style>
 @charset "UTF-8";
 
